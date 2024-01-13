@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7wvg8wqah0uo"
-path="res://.godot/imported/Run-Sheet-Idle-Weapons.png-e2b02a1a95ca95372502d44618801338.ctex"
+uid="uid://bny3gf3oo45e7"
+path="res://.godot/imported/Run-Sheet.png-e61dda3943cc79ba3ae0f186206bc8ee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Rogue/Idle/Run-Sheet-Idle-Weapons.png"
-dest_files=["res://.godot/imported/Run-Sheet-Idle-Weapons.png-e2b02a1a95ca95372502d44618801338.ctex"]
+source_file="res://sprites/Rogue/Run/Run-Sheet.png"
+dest_files=["res://.godot/imported/Run-Sheet.png-e61dda3943cc79ba3ae0f186206bc8ee.ctex"]
 
 [params]
 

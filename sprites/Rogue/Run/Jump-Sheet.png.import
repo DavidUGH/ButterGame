@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlu18rvwboukh"
-path="res://.godot/imported/Death-Sheet.png-4918802c2096c2823da5a2bf2190125b.ctex"
+uid="uid://cu315vblf8ax8"
+path="res://.godot/imported/Jump-Sheet.png-b93264d4a1e8e123dde97fa305108850.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Rogue/Death/Death-Sheet.png"
-dest_files=["res://.godot/imported/Death-Sheet.png-4918802c2096c2823da5a2bf2190125b.ctex"]
+source_file="res://sprites/Rogue/Run/Jump-Sheet.png"
+dest_files=["res://.godot/imported/Jump-Sheet.png-b93264d4a1e8e123dde97fa305108850.ctex"]
 
 [params]
 

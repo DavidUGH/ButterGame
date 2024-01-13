@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnue4wh2avv4s"
-path="res://.godot/imported/Run-Sheet-Weapons.png-2fb84f6a528d69d3c5ab34d80f6e994f.ctex"
+uid="uid://dlu18rvwboukh"
+path="res://.godot/imported/Death-Sheet.png-d81bdd24bc98cb24deb4977506a2f1f8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Rogue/Run/Run-Sheet-Weapons.png"
-dest_files=["res://.godot/imported/Run-Sheet-Weapons.png-2fb84f6a528d69d3c5ab34d80f6e994f.ctex"]
+source_file="res://sprites/Rogue/Death/Death-Sheet.png"
+dest_files=["res://.godot/imported/Death-Sheet.png-d81bdd24bc98cb24deb4977506a2f1f8.ctex"]
 
 [params]
 

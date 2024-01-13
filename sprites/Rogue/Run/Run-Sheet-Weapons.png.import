@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxlq2mltj60h3"
-path="res://.godot/imported/Run-Sheet-Jump.png-33080ca8d36f28a74e2ceac3798cf8f4.ctex"
+uid="uid://dnue4wh2avv4s"
+path="res://.godot/imported/Run-Sheet-Weapons.png-aaa2b3c36f02df4d822b1364c1ce5d11.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Rogue/Run/Run-Sheet-Jump.png"
-dest_files=["res://.godot/imported/Run-Sheet-Jump.png-33080ca8d36f28a74e2ceac3798cf8f4.ctex"]
+source_file="res://sprites/Rogue/Run/Run-Sheet-Weapons.png"
+dest_files=["res://.godot/imported/Run-Sheet-Weapons.png-aaa2b3c36f02df4d822b1364c1ce5d11.ctex"]
 
 [params]
 
