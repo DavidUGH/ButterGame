@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bejrxysfvqjgd"]
+[gd_scene load_steps=10 format=3 uid="uid://dye7un7bwbjih"]
 
 [ext_resource type="Texture2D" uid="uid://dcyrdkfercaxp" path="res://sprites/enemies/butterboi-hort.png" id="1_0rrga"]
 [ext_resource type="Script" path="res://scripts/butterboy.gd" id="1_owlft"]
@@ -21,15 +21,15 @@ region = Rect2(32, 0, 32, 32)
 [sub_resource type="SpriteFrames" id="SpriteFrames_g86t6"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 5.0,
 "texture": SubResource("AtlasTexture_bdl0i")
 }],
-"loop": true,
+"loop": false,
 "name": &"hurt",
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 0.2,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ayt52")
 }, {
 "duration": 1.0,
@@ -40,7 +40,10 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_08nmv"]
+
 [node name="Butterboy" type="CharacterBody2D"]
+collision_mask = 3
 script = ExtResource("1_owlft")
 
 [node name="ButterboyCollision" type="CollisionShape2D" parent="."]
@@ -49,3 +52,12 @@ shape = SubResource("RectangleShape2D_admgk")
 [node name="ButterboySprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_g86t6")
 animation = &"moving"
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_08nmv")
+
+[connection signal="animation_finished" from="ButterboySprite" to="." method="_on_butterboy_sprite_animation_finished"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
