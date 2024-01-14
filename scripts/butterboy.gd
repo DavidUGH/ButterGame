@@ -6,7 +6,7 @@ var _sprite: AnimatedSprite2D
 var player #El nivel tiene que inicializar al jugador
 
 func _ready():
-	speed = 60
+	speed = 120
 	life = 2
 	_sprite = $ButterboySprite
 	
@@ -17,14 +17,8 @@ func _process(delta):
 	
 func _follow_player():
 	var player_position = player.position
-	var the_vector = Vector2()
-	the_vector.x = player_position.x - position.x
-	the_vector.y = player_position.y - position.y
-	velocity = Vector2()
-	velocity.x += tanh(the_vector.x) #tanh maps real numbers to 1 or -1
-	velocity.y += tanh(the_vector.y)
-	print(the_vector)
-	velocity = velocity * speed
+	var direction = (player_position - position).normalized()
+	velocity = direction * speed
 
 func _handle_animations():
 	_sprite.play("moving")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dye7un7bwbjih"]
+[gd_scene load_steps=9 format=3 uid="uid://bejrxysfvqjgd"]
 
 [ext_resource type="Texture2D" uid="uid://dcyrdkfercaxp" path="res://sprites/enemies/butterboi-hort.png" id="1_0rrga"]
 [ext_resource type="Script" path="res://scripts/butterboy.gd" id="1_owlft"]
