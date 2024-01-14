@@ -1,11 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://cu0v74505stil"]
+[gd_scene load_steps=5 format=3 uid="uid://cu0v74505stil"]
 
 [ext_resource type="Script" path="res://scripts/lvl0.gd" id="1_8cq0s"]
 [ext_resource type="PackedScene" uid="uid://s6bmsorcy044" path="res://player.tscn" id="1_25avk"]
 [ext_resource type="PackedScene" uid="uid://dye7un7bwbjih" path="res://butterboy.tscn" id="2_14g4j"]
+[ext_resource type="PackedScene" uid="uid://bs7gr3h8tldn5" path="res://scenes/GUI.tscn" id="2_v7qqs"]
 
 [node name="Node" type="Node"]
 script = ExtResource("1_8cq0s")
+
+[node name="GUI" parent="." instance=ExtResource("2_v7qqs")]
 
 [node name="Player" parent="." instance=ExtResource("1_25avk")]
 
