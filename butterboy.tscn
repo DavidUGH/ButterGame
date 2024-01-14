@@ -43,7 +43,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_08nmv"]
 
 [node name="Butterboy" type="CharacterBody2D"]
-collision_mask = 3
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_owlft")
 
 [node name="ButterboyCollision" type="CollisionShape2D" parent="."]
@@ -54,7 +55,8 @@ sprite_frames = SubResource("SpriteFrames_g86t6")
 animation = &"moving"
 
 [node name="Hurtbox" type="Area2D" parent="."]
-collision_mask = 2
+collision_layer = 2
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("RectangleShape2D_08nmv")

@@ -22,7 +22,7 @@ var _collision_box: CollisionShape2D
 var _sprite: AnimatedSprite2D
 var _player_hitbox: Area2D
 var _player_hitbox_shape: CollisionShape2D
-
+var _animation_player: AnimationPlayer
 
 func _ready():
 	#Instantiating child nodes
@@ -31,10 +31,11 @@ func _ready():
 	_player_hitbox = $PlayerHitbox
 	_player_hitbox_shape = $PlayerHitbox/PlayerHitboxShape
 	_weapon_sprite = $KnifeSprite
+	_animation_player = $AnimationPlayer
 	
-	#Attribute initialization (placeholer values)
+	#Attribute initialization
 	speed = 200
-	life = -1
+	life = 100
 	cadence = -1.0
 	damage = 1
 	weapon_kit = WEAPON.knife
@@ -53,6 +54,11 @@ func _input(event):
 		if _weapon_sprite.get_children().is_empty(): 
 			#If the knife has no children we know the attack is finished
 			_attack()
+
+func get_hurt(damage):
+	life -= damage
+	_animation_player.play("hurt")
+	print(life)
 
 func _move():
 	velocity = Vector2()
@@ -88,4 +94,3 @@ func _attack():
 	_weapon_sprite.add_child(weapon_swing_spawn)
 	weapon_swing_spawn.position = Vector2(weapon_pos.x+20, 0)
 	weapon_swing_spawn.play("default")
-

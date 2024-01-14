@@ -7,10 +7,14 @@ var player #El nivel tiene que inicializar al jugador
 enum STATE { hurt, moving }
 var anim_state
 
+var _hurtbox: Area2D
+
 func _ready():
 	speed = 120
 	life = 2
 	_sprite = $ButterboySprite
+	_hurtbox = $Hurtbox
+	
 	anim_state = STATE.moving
 	
 func _process(delta):
@@ -39,8 +43,20 @@ func _get_hurt():
 	anim_state = STATE.hurt
 	life -= player.damage
 
-func _on_hurtbox_area_entered(area):
-	_get_hurt()
+func _on_hurtbox_area_entered(area): 
+	# Collision layers and masks are actually 32 bit binary strings. Each bit
+	# represents a different layer. For example: Layer 3 is bit 2. If bit 2 is
+	# set to 1 then that object is on collision layer 3.
+	
+	# Because of this, you can read collision layers as integers. An object
+	# in collision layer 3 would have a binary string of 100, which is 4 in decimal.
+	
+	# if there is a better way of doing this, please find one.
+	match area.get_collision_layer():
+		1: #Player layer
+			player.get_hurt(10)
+		4: #Player attack layer
+			_get_hurt()
 
 func _on_butterboy_sprite_animation_finished():
 	if anim_state == STATE.hurt:
