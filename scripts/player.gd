@@ -52,7 +52,6 @@ func _move():
 		velocity.y += 1
 	if Input.is_action_pressed("up"):
 		velocity.y -= 1
-	
 	velocity = velocity.normalized() * speed
 
 func _handle_animations():
