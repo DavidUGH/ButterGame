@@ -11,6 +11,7 @@ script = ExtResource("1_8cq0s")
 [node name="GUI" parent="." instance=ExtResource("2_v7qqs")]
 
 [node name="Player" parent="." instance=ExtResource("1_25avk")]
+position = Vector2(456, 48)
 
 [node name="Toast" parent="." instance=ExtResource("5_762rq")]
 z_index = -1
