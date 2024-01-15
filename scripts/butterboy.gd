@@ -6,6 +6,7 @@ var _sprite: AnimatedSprite2D
 var player #El nivel tiene que inicializar al jugador
 enum STATE { hurt, moving }
 var anim_state
+var tile_map
 
 var _hurtbox: Area2D
 
@@ -36,7 +37,10 @@ func _handle_animations():
 			_sprite.play("moving")
 
 func _die():
+	var tile
 	if life <= 0:
+		tile = tile_map.local_to_map(position)
+		tile_map.set_cell(1, tile, -1, Vector2i(4,0))
 		queue_free()
 
 func _get_hurt():
