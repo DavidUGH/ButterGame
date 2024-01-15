@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/lvl0.gd" id="1_8cq0s"]
 [ext_resource type="PackedScene" uid="uid://s6bmsorcy044" path="res://player.tscn" id="1_25avk"]
-[ext_resource type="PackedScene" uid="uid://dye7un7bwbjih" path="res://butterboy.tscn" id="2_14g4j"]
 [ext_resource type="PackedScene" uid="uid://bs7gr3h8tldn5" path="res://scenes/GUI.tscn" id="2_v7qqs"]
+[ext_resource type="PackedScene" uid="uid://de60mm2g1xrfp" path="res://scenes/Toast.tscn" id="5_762rq"]
 
 [node name="Node" type="Node"]
 script = ExtResource("1_8cq0s")
@@ -12,5 +12,5 @@ script = ExtResource("1_8cq0s")
 
 [node name="Player" parent="." instance=ExtResource("1_25avk")]
 
-[node name="Butterboy" parent="." instance=ExtResource("2_14g4j")]
-position = Vector2(618, 394)
+[node name="Toast" parent="." instance=ExtResource("5_762rq")]
+z_index = -1

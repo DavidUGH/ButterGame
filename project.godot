@@ -19,6 +19,12 @@ config/icon="res://icon.svg"
 
 FMODRuntime="*res://addons/FMOD/runtime/fmod_runtime_manager.gd"
 
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/resizable=false
+
 [fmod]
 
 settings/banks_path="res://banks"
@@ -83,3 +89,7 @@ attack={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/stretch/mode="disabled"
+textures/size/resizable=true
+textures/size/viewport_height=648
+textures/size/viewport_width=1280

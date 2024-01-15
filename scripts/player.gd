@@ -24,6 +24,7 @@ var _player_hitbox: Area2D
 var _player_hitbox_shape: CollisionShape2D
 var _animation_player: AnimationPlayer
 
+
 func _ready():
 	#Instantiating child nodes
 	_sprite = $PlayerAnimatedSprite
@@ -48,8 +49,6 @@ func _process(delta):
 	_handle_animations()
 	move_and_slide()
 	_follow_mouse_with_weapon()
-	
-	emit_signal("vida_cambiada", life)
 
 func _input(event):
 	if event.is_action_pressed("attack"):
