@@ -59,6 +59,7 @@ func _input(event):
 func get_hurt(damage):
 	life -= damage
 	_animation_player.play("hurt")
+	_player_hitbox.set_deferred("monitorable", false)
 	print(life)
 
 func _move():
@@ -95,3 +96,9 @@ func _attack():
 	_weapon_sprite.add_child(weapon_swing_spawn)
 	weapon_swing_spawn.position = Vector2(weapon_pos.x+20, 0)
 	weapon_swing_spawn.play("default")
+
+
+func _on_animation_player_animation_finished(anim_name):
+	match anim_name:
+		"hurt":
+			_player_hitbox.set_deferred("monitorable", true)

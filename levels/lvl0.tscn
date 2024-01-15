@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/lvl0.gd" id="1_8cq0s"]
 [ext_resource type="PackedScene" uid="uid://s6bmsorcy044" path="res://player.tscn" id="1_25avk"]
 [ext_resource type="PackedScene" uid="uid://bs7gr3h8tldn5" path="res://scenes/GUI.tscn" id="2_v7qqs"]
-[ext_resource type="PackedScene" uid="uid://de60mm2g1xrfp" path="res://scenes/Toast.tscn" id="5_762rq"]
+[ext_resource type="PackedScene" path="res://scenes/Toast.tscn" id="5_762rq"]
 
 [node name="Node" type="Node"]
 script = ExtResource("1_8cq0s")

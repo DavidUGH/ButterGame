@@ -10,7 +10,7 @@ var anim_state
 var _hurtbox: Area2D
 
 func _ready():
-	speed = 120
+	speed = 60
 	life = 2
 	_sprite = $ButterboySprite
 	_hurtbox = $Hurtbox
