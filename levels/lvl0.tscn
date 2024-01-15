@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://cu0v74505stil"]
+
+[ext_resource type="Script" path="res://scripts/lvl0.gd" id="1_8cq0s"]
+[ext_resource type="PackedScene" uid="uid://s6bmsorcy044" path="res://player.tscn" id="1_25avk"]
+[ext_resource type="PackedScene" uid="uid://bs7gr3h8tldn5" path="res://scenes/GUI.tscn" id="2_v7qqs"]
+[ext_resource type="PackedScene" uid="uid://bcy5nymfsf3dm" path="res://scenes/Toast.tscn" id="5_762rq"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_8cq0s")
+
+[node name="GUI" parent="." instance=ExtResource("2_v7qqs")]
+
+[node name="Player" parent="." instance=ExtResource("1_25avk")]
+position = Vector2(640, 360)
+
+[node name="Toast" parent="." instance=ExtResource("5_762rq")]
+z_index = -1
+position = Vector2(640, 360)
