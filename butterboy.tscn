@@ -1,10 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://dye7un7bwbjih"]
+[gd_scene load_steps=12 format=3 uid="uid://dye7un7bwbjih"]
 
 [ext_resource type="Texture2D" uid="uid://dcyrdkfercaxp" path="res://sprites/enemies/butterboi-hort.png" id="1_0rrga"]
 [ext_resource type="Script" path="res://scripts/butterboy.gd" id="1_owlft"]
 [ext_resource type="Texture2D" uid="uid://cuoc4gdjw8esb" path="res://sprites/enemies/butterboi-Sheet.png" id="2_87a4j"]
+[ext_resource type="Shader" path="res://butterboy.gdshader" id="2_vacgc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_admgk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3deu5"]
+resource_local_to_scene = true
+shader = ExtResource("2_vacgc")
+shader_parameter/flash = null
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bdl0i"]
 atlas = ExtResource("1_0rrga")
@@ -43,14 +49,17 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_08nmv"]
 
 [node name="Butterboy" type="CharacterBody2D"]
+z_index = 99
 collision_layer = 2
 collision_mask = 2
+platform_floor_layers = 4294901760
 script = ExtResource("1_owlft")
 
 [node name="ButterboyCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_admgk")
 
 [node name="ButterboySprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_3deu5")
 sprite_frames = SubResource("SpriteFrames_g86t6")
 animation = &"moving"
 
