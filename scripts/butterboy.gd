@@ -39,15 +39,18 @@ func _handle_animations():
 func _die():
 	var tile
 	if life <= 0:
+		
 		tile = tile_map.local_to_map(position)
-		tile.x-=20
-		tile.y-=11
+		print(tile)
 		tile_map.set_cell(1, tile, 1, Vector2i(4,0))
 		queue_free()
 
 func _get_hurt():
 	anim_state = STATE.hurt
 	life -= player.damage
+	_sprite.material.set_shader_parameter("flash", true)
+	await get_tree().create_timer(0.05).timeout
+	_sprite.material.set_shader_parameter("flash", false)
 
 func _on_hurtbox_area_entered(area): 
 	# Collision layers and masks are actually 32 bit binary strings. Each bit
