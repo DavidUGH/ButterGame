@@ -48,6 +48,9 @@ func _die():
 func _get_hurt():
 	anim_state = STATE.hurt
 	life -= player.damage
+	_sprite.material.set_shader_parameter("flash", true)
+	await get_tree().create_timer(0.05).timeout
+	_sprite.material.set_shader_parameter("flash", false)
 
 func _on_hurtbox_area_entered(area): 
 	# Collision layers and masks are actually 32 bit binary strings. Each bit

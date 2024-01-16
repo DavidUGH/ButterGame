@@ -4,7 +4,7 @@ enum WEAPON { knife }
 
 var life : int
 var speed: int
-var cadence: float
+var attack_speed: float
 var damage: int
 var weapon_kit: WEAPON
 var can_walk: bool
@@ -37,7 +37,7 @@ func _ready():
 	#Attribute initialization
 	speed = 200
 	life = 100
-	cadence = 1.0
+	attack_speed = 0.5
 	damage = 1
 	weapon_kit = WEAPON.knife
 	
@@ -49,6 +49,7 @@ func _process(delta):
 	_handle_animations()
 	move_and_slide()
 	_follow_mouse_with_weapon()
+	_attack()
 
 func get_hurt(damage):
 	life -= damage
@@ -85,15 +86,16 @@ func _follow_mouse_with_weapon():
 	_weapon_sprite.look_at(get_viewport().get_mouse_position())
 	
 func _attack():
-	if Input.is_action_pressed("right") and !is_attacking:
+	if Input.is_action_pressed("attack") and !is_attacking:
 		var weapon_pos = _weapon_sprite.position
 		var weapon_rot = _weapon_sprite.rotation
 		var weapon_swing_spawn = weapon_swing.instantiate()
-		is_attacking = true
-		await get_tree().create_timer(cadence).timeout
 		_weapon_sprite.add_child(weapon_swing_spawn)
 		weapon_swing_spawn.position = Vector2(weapon_pos.x+20, 0)
 		weapon_swing_spawn.play("default")
+		is_attacking = true
+		await get_tree().create_timer(attack_speed).timeout
+		is_attacking = false
 
 
 func _on_animation_player_animation_finished(anim_name):
