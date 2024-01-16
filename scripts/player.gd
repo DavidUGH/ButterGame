@@ -61,8 +61,10 @@ func get_hurt(damage):
 func _move():
 	velocity = Vector2()
 	if Input.is_action_pressed("right"):
+		_sprite.scale.x = 1
 		velocity.x += 1
 	if Input.is_action_pressed("left"):
+		_sprite.scale.x = -1
 		velocity.x -= 1
 	if Input.is_action_pressed("down"):
 		velocity.y += 1
@@ -71,7 +73,7 @@ func _move():
 	velocity = velocity.normalized() * speed
 
 func _handle_animations():
-	if velocity.x > 0 or velocity.y > 0:
+	if velocity.x != 0 or velocity.y != 0:
 		_sprite.play("run")
 	else:
 		_sprite.play("idle")
