@@ -7,4 +7,3 @@ func _ready():
 	_tile_map = $TileMap
 	# Habilitar el manejo de la entrada del teclado
 	set_process_input(true)
-

@@ -39,9 +39,9 @@ func _handle_animations():
 func _die():
 	var tile
 	if life <= 0:
+		
 		tile = tile_map.local_to_map(position)
-		tile.x-=20
-		tile.y-=11
+		print(tile)
 		tile_map.set_cell(1, tile, 1, Vector2i(4,0))
 		queue_free()
 
