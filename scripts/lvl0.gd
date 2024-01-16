@@ -10,7 +10,7 @@ var tile_map : TileMap
 func _ready():
 	player = $Player
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
-	tile_map = $TileMap
+	tile_map = $TileMap2
 	
 func _process(delta):
 	if(Input.is_key_pressed(KEY_F)):

@@ -41,8 +41,15 @@ func _die():
 	if life <= 0:
 		tile = tile_map.local_to_map(position)
 		print(tile)
-		tile_map.set_cell(1, tile, 1, Vector2i(4,0))
+		_draw_cross(tile.x, tile.y)
 		queue_free()
+
+func _draw_cross(x, y):
+	tile_map.set_cell(0, Vector2i(x, y), 0, Vector2i(1,1))
+	tile_map.set_cell(0, Vector2i(x+1, y), 0, Vector2i(1,1))
+	tile_map.set_cell(0, Vector2i(x-1, y), 0, Vector2i(1,1))
+	tile_map.set_cell(0, Vector2i(x, y+1), 0, Vector2i(1,1))
+	tile_map.set_cell(0, Vector2i(x, y-1), 0, Vector2i(1,1))
 
 func _get_hurt():
 	anim_state = STATE.hurt
