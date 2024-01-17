@@ -6,8 +6,7 @@ var _sprite: AnimatedSprite2D
 var player #El nivel tiene que inicializar al jugador
 enum STATE { hurt, moving }
 var anim_state
-var tile_map_to_stain
-
+var tile_map : TileMap
 var _hurtbox: Area2D
 
 func _ready():
@@ -15,7 +14,6 @@ func _ready():
 	life = 2
 	_sprite = $ButterboySprite
 	_hurtbox = $Hurtbox
-	
 	anim_state = STATE.moving
 	
 func _process(delta):
@@ -39,26 +37,16 @@ func _handle_animations():
 func _die():
 	var tile
 	if life <= 0:
-		tile = tile_map_to_stain.local_to_map(position)
-		print("This is where I died")
+		tile = tile_map.local_to_map(position)
 		print(tile)
-		_draw_cross(tile.x, tile.y)
-		get_parent().have_we_won()
+		print(tile_map)
+		tile_map.draw_cross(tile.x, tile.y, 1)
 		queue_free()
 
-func _draw_cross(x, y):
-	tile_map_to_stain.set_cell(0, Vector2i(x, y), 0, Vector2i(1,1))
-	tile_map_to_stain.set_cell(0, Vector2i(x+1, y), 0, Vector2i(1,1))
-	tile_map_to_stain.set_cell(0, Vector2i(x-1, y), 0, Vector2i(1,1))
-	tile_map_to_stain.set_cell(0, Vector2i(x, y+1), 0, Vector2i(1,1))
-	
 
 func _get_hurt():
 	anim_state = STATE.hurt
 	life -= player.damage
-	_sprite.material.set_shader_parameter("flash", true)
-	await get_tree().create_timer(0.05).timeout
-	_sprite.material.set_shader_parameter("flash", false)
 
 func _on_hurtbox_area_entered(area): 
 	# Collision layers and masks are actually 32 bit binary strings. Each bit
