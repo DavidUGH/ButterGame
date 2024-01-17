@@ -737,8 +737,8 @@ terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.701961, 0, 0.368627, 1)
 sources/0 = SubResource("TileSetAtlasSource_yfwqh")
-sources/1 = SubResource("TileSetAtlasSource_to3g6")
 sources/2 = SubResource("TileSetAtlasSource_t1qbo")
+sources/1 = SubResource("TileSetAtlasSource_to3g6")
 
 [node name="Node" type="Node"]
 script = ExtResource("1_8cq0s")
