@@ -1,26 +1,21 @@
+class_name Level
 extends Node
 
 var enemies_list: Array = []
 var player
-var flag:bool = false
+var tiles_to_win = 0
 
 var _stained_tile_map : TileMap
+var _bread_tile_map : TileMap
 
 func _ready():
-	player = $Player
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
-	_stained_tile_map = $StainedTileMap
-	
-func _process(delta):
-	if(Input.is_key_pressed(KEY_F)):
-		if(!flag):
-			flag = true
-			spawn_enemy($Butterboy)
-	else:
-		flag = false
 
-func set_tileset(t):
+func set_stain_tileset(t):
 	_stained_tile_map = t
+
+func set_bread_tileset(t):
+	_bread_tile_map = t
 
 func set_player(p):
 	player = p
@@ -29,9 +24,9 @@ func have_we_won():
 	var used_tiles = []
 	used_tiles = _stained_tile_map.get_used_cells(0)
 	print(used_tiles.size())
-	if used_tiles.size()/4 > 5:
+	if used_tiles.size()/4 > tiles_to_win:
 		print("You win!")
-	
+
 # Función para realizar el spawn de una instancia de enemigo
 func spawn_enemy(enemy):
 	var nueva_instancia = enemy.instantiate()
