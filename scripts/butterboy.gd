@@ -6,7 +6,7 @@ var _sprite: AnimatedSprite2D
 var player #El nivel tiene que inicializar al jugador
 enum STATE { hurt, moving }
 var anim_state
-var tile_map
+var tile_map_to_stain
 
 var _hurtbox: Area2D
 
@@ -39,17 +39,19 @@ func _handle_animations():
 func _die():
 	var tile
 	if life <= 0:
-		tile = tile_map.local_to_map(position)
+		tile = tile_map_to_stain.local_to_map(position)
+		print("This is where I died")
 		print(tile)
 		_draw_cross(tile.x, tile.y)
+		get_parent().have_we_won()
 		queue_free()
 
 func _draw_cross(x, y):
-	tile_map.set_cell(0, Vector2i(x, y), 0, Vector2i(1,1))
-	tile_map.set_cell(0, Vector2i(x+1, y), 0, Vector2i(1,1))
-	tile_map.set_cell(0, Vector2i(x-1, y), 0, Vector2i(1,1))
-	tile_map.set_cell(0, Vector2i(x, y+1), 0, Vector2i(1,1))
-	tile_map.set_cell(0, Vector2i(x, y-1), 0, Vector2i(1,1))
+	tile_map_to_stain.set_cell(0, Vector2i(x, y), 0, Vector2i(1,1))
+	tile_map_to_stain.set_cell(0, Vector2i(x+1, y), 0, Vector2i(1,1))
+	tile_map_to_stain.set_cell(0, Vector2i(x-1, y), 0, Vector2i(1,1))
+	tile_map_to_stain.set_cell(0, Vector2i(x, y+1), 0, Vector2i(1,1))
+	tile_map_to_stain.set_cell(0, Vector2i(x, y-1), 0, Vector2i(1,1))
 
 func _get_hurt():
 	anim_state = STATE.hurt
