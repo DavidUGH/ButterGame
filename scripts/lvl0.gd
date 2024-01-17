@@ -23,6 +23,7 @@ func _process(delta):
 func have_we_won():
 	var used_tiles = []
 	used_tiles = _stained_tile_map.get_used_cells(0)
+	print(used_tiles.size())
 	if used_tiles.size()/4 > 5:
 		print("You win!")
 	

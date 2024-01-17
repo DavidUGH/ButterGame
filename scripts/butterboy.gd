@@ -51,7 +51,6 @@ func _draw_cross(x, y):
 	tile_map_to_stain.set_cell(0, Vector2i(x+1, y), 0, Vector2i(1,1))
 	tile_map_to_stain.set_cell(0, Vector2i(x-1, y), 0, Vector2i(1,1))
 	tile_map_to_stain.set_cell(0, Vector2i(x, y+1), 0, Vector2i(1,1))
-	tile_map_to_stain.set_cell(0, Vector2i(x, y-1), 0, Vector2i(1,1))
 	
 
 func _get_hurt():
