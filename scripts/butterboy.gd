@@ -1,12 +1,13 @@
 extends CharacterBody2D
 
+signal died(position_at_death)
+
 var speed: int
 var life: int
 var _sprite: AnimatedSprite2D
 var player #El nivel tiene que inicializar al jugador
 enum STATE { hurt, moving }
 var anim_state
-var tile_map : TileMap
 var _hurtbox: Area2D
 
 func _ready():
@@ -35,18 +36,15 @@ func _handle_animations():
 			_sprite.play("moving")
 
 func _die():
-	var tile
-	if life <= 0:
-		tile = tile_map.local_to_map(position)
-		print(tile)
-		print(tile_map)
-		tile_map.draw_cross(tile.x, tile.y, 1)
-		queue_free()
+	died.emit(position)
+	queue_free()
 
 
 func _get_hurt():
 	anim_state = STATE.hurt
 	life -= player.damage
+	if life <= 0:
+		_die()
 
 func _on_hurtbox_area_entered(area): 
 	# Collision layers and masks are actually 32 bit binary strings. Each bit
