@@ -37,7 +37,7 @@ func _ready():
 	#Attribute initialization
 	speed = 200
 	life = 100
-	attack_speed = 0.5
+	attack_speed = 0.2
 	damage = 1
 	weapon_kit = WEAPON.knife
 	
@@ -86,9 +86,9 @@ func _die():
 
 func _follow_mouse_with_weapon():
 	_weapon_sprite.look_at(get_viewport().get_mouse_position())
-	
+
 func _attack():
-	if Input.is_action_pressed("attack") and !is_attacking:
+	if Input.is_action_just_pressed("attack") and !is_attacking:
 		var weapon_pos = _weapon_sprite.position
 		var weapon_rot = _weapon_sprite.rotation
 		var weapon_swing_spawn = weapon_swing.instantiate()

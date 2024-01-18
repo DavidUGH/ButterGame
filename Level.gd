@@ -33,7 +33,7 @@ func have_we_won(layer):
 func spawn_enemy(enemy_scene):
 	var nueva_instancia = enemy_scene.instantiate()
 	nueva_instancia.player = player
-	nueva_instancia.position = Vector2(randf_range(0, 1280), randf_range(0, 720))
+	nueva_instancia.position = Vector2(randf_range(0, get_viewport().content_scale_size.x), randf_range(0, get_viewport().content_scale_size.y))
 	add_child(nueva_instancia)
 	nueva_instancia.died.connect(_on_died)
 
@@ -60,9 +60,6 @@ func draw_cross(v: Vector2i):
 	_append_tile_if_in_bounds(vector, Vector2i(x, y+1))
 	_append_tile_if_in_bounds(vector, Vector2i(x-1, y))
 	_append_tile_if_in_bounds(vector, Vector2i(x, y-1))
-	for i in range(0, vector.size()):
-		if !_is_in_bounds(vector[i]):
-			vector.remove_at(i)
 	tile_map.set_cells_terrain_connect(BUTTER_LAYER, vector, 0, 0, true)
 
 func draw_circle(v: Vector2i):

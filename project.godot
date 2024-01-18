@@ -22,9 +22,14 @@ HitstopManager="*res://scripts/hitstop_manager.gd"
 
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=720
-window/size/resizable=false
+window/size/viewport_width=320
+window/size/viewport_height=240
+window/size/mode=2
+window/stretch/mode="viewport"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/FMOD/plugin.cfg")
 
 [fmod]
 
@@ -88,6 +93,7 @@ attack={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/stretch/mode="disabled"

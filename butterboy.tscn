@@ -10,7 +10,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3deu5"]
 resource_local_to_scene = true
 shader = ExtResource("2_vacgc")
-shader_parameter/flash = null
+shader_parameter/flash = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bdl0i"]
 atlas = ExtResource("1_0rrga")
@@ -27,7 +27,7 @@ region = Rect2(32, 0, 32, 32)
 [sub_resource type="SpriteFrames" id="SpriteFrames_g86t6"]
 animations = [{
 "frames": [{
-"duration": 5.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_bdl0i")
 }],
 "loop": false,
@@ -56,6 +56,7 @@ platform_floor_layers = 4294901760
 script = ExtResource("1_owlft")
 
 [node name="ButterboyCollision" type="CollisionShape2D" parent="."]
+z_index = 1
 shape = SubResource("RectangleShape2D_admgk")
 
 [node name="ButterboySprite" type="AnimatedSprite2D" parent="."]
