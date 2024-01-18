@@ -21,7 +21,6 @@ func _process(delta):
 	_follow_player()
 	move_and_slide()
 	_handle_animations()
-	_die()
 	
 func _follow_player():
 	var player_position = player.position

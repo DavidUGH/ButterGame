@@ -4,6 +4,8 @@ extends Node
 var enemies_list: Array = []
 var player
 var tiles_to_win = 0
+const BREAD_LAYER = 0
+const BUTTER_LAYER = 1
 
 var tile_map : TileMap
 
@@ -37,6 +39,7 @@ func spawn_enemy(enemy_scene):
 func _on_died(position_at_death):
 	var tile = tile_map.local_to_map(position_at_death)
 	draw_cross(tile)
+	have_we_won(BUTTER_LAYER)
 
 func draw_cross(v: Vector2i):
 	var x = v.x
@@ -47,4 +50,4 @@ func draw_cross(v: Vector2i):
 	vector.append(Vector2i(x+1, y))
 	vector.append(Vector2i(x, y+1))
 	vector.append(Vector2i(x, y-1))
-	tile_map.set_cells_terrain_connect(0, vector, 0, 0, true)
+	tile_map.set_cells_terrain_connect(BUTTER_LAYER, vector, 0, 0, true)
