@@ -18,11 +18,15 @@ func set_tileset(t):
 func set_player(p):
 	player = p
 
+func _is_in_bounds(tile):
+	var bread_tiles = tile_map.get_used_cells(0)
+	return bread_tiles.has(tile)
+
 func have_we_won(layer):
 	var used_tiles = []
 	used_tiles = tile_map.get_used_cells(layer)
 	print(used_tiles.size())
-	if used_tiles.size() > tiles_to_win:
+	if used_tiles.size() >= tiles_to_win:
 		print("You win!")
 
 # Función para realizar el spawn de una instancia de enemigo
@@ -38,16 +42,48 @@ func spawn_enemy(enemy_scene):
 
 func _on_died(position_at_death):
 	var tile = tile_map.local_to_map(position_at_death)
-	draw_cross(tile)
+	draw_circle(tile)
 	have_we_won(BUTTER_LAYER)
+
+func _append_tile_if_in_bounds(arr, tile):
+	if _is_in_bounds(tile):
+		arr.append(tile)
+	return arr
 
 func draw_cross(v: Vector2i):
 	var x = v.x
 	var y = v.y
 	var vector: Array[Vector2i]
-	vector.append(Vector2i(x-1, y))
-	vector.append(Vector2i(x, y))
-	vector.append(Vector2i(x+1, y))
-	vector.append(Vector2i(x, y+1))
-	vector.append(Vector2i(x, y-1))
+	# Esto es horrible pero no se me ocurre como más hacerle
+	_append_tile_if_in_bounds(vector, Vector2i(x, y))
+	_append_tile_if_in_bounds(vector, Vector2i(x+1, y))
+	_append_tile_if_in_bounds(vector, Vector2i(x, y+1))
+	_append_tile_if_in_bounds(vector, Vector2i(x-1, y))
+	_append_tile_if_in_bounds(vector, Vector2i(x, y-1))
+	for i in range(0, vector.size()):
+		if !_is_in_bounds(vector[i]):
+			vector.remove_at(i)
+	tile_map.set_cells_terrain_connect(BUTTER_LAYER, vector, 0, 0, true)
+
+func draw_circle(v: Vector2i):
+	var x = v.x
+	var y = v.y
+	var vector: Array[Vector2i]
+	# Esto es horrible pero no se me ocurre como más hacerle
+	_append_tile_if_in_bounds(vector, Vector2i(x, y))
+	_append_tile_if_in_bounds(vector, Vector2i(x+1, y))
+	_append_tile_if_in_bounds(vector, Vector2i(x+2, y))
+	_append_tile_if_in_bounds(vector, Vector2i(x, y+1))
+	_append_tile_if_in_bounds(vector, Vector2i(x, y+2))
+	_append_tile_if_in_bounds(vector, Vector2i(x-1, y))
+	_append_tile_if_in_bounds(vector, Vector2i(x-2, y))
+	_append_tile_if_in_bounds(vector, Vector2i(x, y-1))
+	_append_tile_if_in_bounds(vector, Vector2i(x, y-2))
+	_append_tile_if_in_bounds(vector, Vector2i(x+1, y-1))
+	_append_tile_if_in_bounds(vector, Vector2i(x+1, y+1))
+	_append_tile_if_in_bounds(vector, Vector2i(x-1, y+1))
+	_append_tile_if_in_bounds(vector, Vector2i(x-1, y-1))
+	for i in range(0, vector.size()):
+		if !_is_in_bounds(vector[i]):
+			vector.remove_at(i)
 	tile_map.set_cells_terrain_connect(BUTTER_LAYER, vector, 0, 0, true)
