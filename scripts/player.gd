@@ -67,9 +67,9 @@ func get_hurt(damage):
 		_animation_player.stop()
 		is_hurting = false
 		_player_hitbox.set_deferred("monitorable", true)
-		_is_still_colliding()
+		handle_collision_of_overlapping_areas()
 
-func _is_still_colliding():
+func handle_collision_of_overlapping_areas():
 	var overlapping = _player_hitbox.get_overlapping_areas()
 	if !overlapping.is_empty():
 		#No me gusta hacer esto pero ya que
