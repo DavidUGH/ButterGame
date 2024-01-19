@@ -12,11 +12,13 @@ var anim_state
 var _hurtbox: Area2D
 var _is_flashing : bool
 var is_hurt = false
+var damage : int
 
 func _ready():
 	speed = 60
 	life = 4
 	friction = 10
+	damage = 10
 	_is_flashing = false
 	_sprite = $ButterboySprite
 	_hurtbox = $Hurtbox
@@ -72,7 +74,7 @@ func _on_hurtbox_area_entered(area):
 	# if there is a better way of doing this, please find one.
 	match area.get_collision_layer():
 		1: #Player layer
-			player.get_hurt(10)
+			player.get_hurt(damage)
 		4: #Player attack layer
 			_get_hurt()
 

@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal died
+
 enum WEAPON { knife }
 
 var life : int
@@ -15,6 +17,7 @@ var can_be_hurt: bool
 var is_slippery: bool
 var is_power_up_anim: bool
 var is_falling: bool
+var invis_frames = 2
 var weapon_swing
 
 var _weapon_sprite: Sprite2D
@@ -33,7 +36,7 @@ func _ready():
 	_player_hitbox_shape = $PlayerHitbox/PlayerHitboxShape
 	_weapon_sprite = $KnifeSprite
 	_animation_player = $AnimationPlayer
-	
+	is_hurting = false
 	#Attribute initialization
 	speed = 200
 	life = 100
@@ -52,11 +55,25 @@ func _process(delta):
 	_attack()
 
 func get_hurt(damage):
-	life -= damage
-	HitstopManager.hitstop_short()
-	_animation_player.play("hurt")
-	_player_hitbox.set_deferred("monitorable", false)
-	
+	if !is_hurting:
+		life -= damage
+		if life <= 0:
+			_die()
+		HitstopManager.hitstop_short()
+		_animation_player.play("hurt")
+		is_hurting = true
+		_player_hitbox.set_deferred("monitorable", false)
+		await get_tree().create_timer(invis_frames).timeout
+		_animation_player.stop()
+		is_hurting = false
+		_player_hitbox.set_deferred("monitorable", true)
+		_is_still_colliding()
+
+func _is_still_colliding():
+	var overlapping = _player_hitbox.get_overlapping_areas()
+	if !overlapping.is_empty():
+		#No me gusta hacer esto pero ya que
+		get_hurt(overlapping[0].get_parent().damage)
 
 func _move():
 	velocity = Vector2()
@@ -82,7 +99,8 @@ func _is_falling():
 	pass
 	
 func _die():
-	pass
+	print("I'm dead")
+	died.emit()
 
 func _follow_mouse_with_weapon():
 	_weapon_sprite.look_at(get_viewport().get_mouse_position())
@@ -98,9 +116,3 @@ func _attack():
 		is_attacking = true
 		await get_tree().create_timer(attack_speed).timeout
 		is_attacking = false
-
-
-func _on_animation_player_animation_finished(anim_name):
-	match anim_name:
-		"hurt":
-			_player_hitbox.set_deferred("monitorable", true)
