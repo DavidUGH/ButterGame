@@ -9,6 +9,7 @@
 script = ExtResource("1_8cq0s")
 
 [node name="GUI" parent="." instance=ExtResource("2_v7qqs")]
+visible = false
 
 [node name="Player" parent="." instance=ExtResource("1_25avk")]
 z_index = 100

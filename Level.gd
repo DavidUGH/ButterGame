@@ -29,11 +29,26 @@ func have_we_won(layer):
 	if used_tiles.size() >= tiles_to_win:
 		print("You win!")
 
+# Horrible function may god forgive my soul
+func _get_random_coord_outside_square(square_size):
+	var sides = randi() % 4
+	var rand_position = Vector2()
+	match sides:
+		0: #top
+			rand_position = Vector2(randf_range(0, square_size.x), -10)
+		1: #left
+			rand_position = Vector2(-10, randf_range(0, square_size.y))
+		2: #right
+			rand_position = Vector2(square_size.x+10, randf_range(0, square_size.y))
+		3: #down
+			rand_position = Vector2(randf_range(0, square_size.x), square_size.y+10)
+	return rand_position
+
 # Función para realizar el spawn de una instancia de enemigo
 func spawn_enemy(enemy_scene):
 	var nueva_instancia = enemy_scene.instantiate()
 	nueva_instancia.player = player
-	nueva_instancia.position = Vector2(randf_range(0, get_viewport().content_scale_size.x), randf_range(0, get_viewport().content_scale_size.y))
+	nueva_instancia.position = _get_random_coord_outside_square(get_viewport().content_scale_size)
 	add_child(nueva_instancia)
 	nueva_instancia.died.connect(_on_died)
 
