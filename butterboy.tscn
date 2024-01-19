@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dye7un7bwbjih"]
+[gd_scene load_steps=13 format=3 uid="uid://dye7un7bwbjih"]
 
 [ext_resource type="Texture2D" uid="uid://dcyrdkfercaxp" path="res://sprites/enemies/butterboi-hort.png" id="1_0rrga"]
 [ext_resource type="Script" path="res://scripts/butterboy.gd" id="1_owlft"]
@@ -14,6 +14,10 @@ shader_parameter/flash = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bdl0i"]
 atlas = ExtResource("1_0rrga")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njw4o"]
+atlas = ExtResource("2_87a4j")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ayt52"]
@@ -32,6 +36,14 @@ animations = [{
 }],
 "loop": false,
 "name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_njw4o")
+}],
+"loop": false,
+"name": &"jumping",
 "speed": 5.0
 }, {
 "frames": [{
@@ -62,7 +74,7 @@ shape = SubResource("RectangleShape2D_admgk")
 [node name="ButterboySprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_3deu5")
 sprite_frames = SubResource("SpriteFrames_g86t6")
-animation = &"moving"
+animation = &"jumping"
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 2
