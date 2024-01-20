@@ -6,7 +6,7 @@ var speed: int
 var friction: float
 var life: int
 var _sprite: AnimatedSprite2D
-var player #El nivel tiene que inicializar al jugador
+var player
 enum STATE { hurt, moving, jumping}
 var anim_state
 var _hurtbox: Area2D
@@ -14,6 +14,7 @@ var _is_flashing : bool
 var is_hurt = false
 var damage : int
 var is_jumping : bool
+var knockback_amount : int
 
 func _ready():
 	speed = 60
@@ -39,7 +40,7 @@ func _follow_player(delta):
 	var direction = (player_position - position).normalized()
 	velocity = direction * speed
 	if is_hurt:
-		velocity = (direction * 20) * -1
+		velocity = (direction * knockback_amount) * -1
 
 func _handle_animations():
 	match anim_state:
@@ -71,7 +72,7 @@ func jump():
 	if velocity.x < 0:
 		character_size = Vector2(-20, 0)
 	if velocity.y > 0:
-		character_size = Vector2(0, 20)
+		character_size = Vector2(0, 0)
 	if velocity.y < 0:
 		character_size = Vector2(0, -20)
 	var new_position = position+velocity+character_size
@@ -84,6 +85,16 @@ func jump():
 	_hurtbox.set_deferred("monitoring", false)
 
 func _get_hurt():
+	knockback_amount = 20
+	_flash_white()
+	anim_state = STATE.hurt
+	life -= player.damage
+	is_hurt = true
+	if life <= 0:
+		_die()
+
+func _get_kicked():
+	knockback_amount = 150
 	_flash_white()
 	anim_state = STATE.hurt
 	life -= player.damage
@@ -92,19 +103,14 @@ func _get_hurt():
 		_die()
 
 func _on_hurtbox_area_entered(area): 
-	# Collision layers and masks are actually 32 bit binary strings. Each bit
-	# represents a different layer. For example: Layer 3 is bit 2. If bit 2 is
-	# set to 1 then that object is on collision layer 3.
-	
-	# Because of this, you can read collision layers as integers. An object
-	# in collision layer 3 would have a binary string of 100, which is 4 in decimal.
-	
-	# if there is a better way of doing this, please find one.
-	match area.get_collision_layer():
-		1: #Player layer
+	var parent_name = area.get_parent().name
+	match parent_name:
+		"Player":
 			player.get_hurt(damage)
-		4: #Player attack layer
+		"AttackEffect":
 			_get_hurt()
+		"KickEffect":
+			_get_kicked()
 
 func _on_butterboy_sprite_animation_finished():
 	if anim_state == STATE.hurt:

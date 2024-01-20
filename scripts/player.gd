@@ -8,6 +8,8 @@ var life : int
 var speed: int
 var attack_speed: float
 var damage: int
+var knockback: int
+var kick_knockback: int
 var weapon_kit: WEAPON
 var can_walk: bool
 var can_attack: bool
@@ -19,6 +21,8 @@ var is_power_up_anim: bool
 var is_falling: bool
 var invis_frames = 2
 var weapon_swing
+var kick_swing
+var _is_kicking: bool = false
 
 var _weapon_sprite: Sprite2D
 var _collision_box: CollisionShape2D
@@ -46,6 +50,7 @@ func _ready():
 	
 	#Loading scenes to instance
 	weapon_swing = load("res://attack_effect.tscn")
+	kick_swing = load("res://kick_effect.tscn")
 
 func _process(delta):
 	_move()
@@ -53,6 +58,7 @@ func _process(delta):
 	move_and_slide()
 	_follow_mouse_with_weapon()
 	_attack()
+	_kick()
 
 func get_hurt(damage):
 	if !is_hurting:
@@ -116,3 +122,15 @@ func _attack():
 		is_attacking = true
 		await get_tree().create_timer(attack_speed).timeout
 		is_attacking = false
+
+func _kick():
+	if Input.is_action_just_pressed("secondary_attack") and !_is_kicking:
+		var weapon_pos = _weapon_sprite.position
+		var weapon_rot = _weapon_sprite.rotation
+		var kick_swing_spawn = kick_swing.instantiate()
+		_weapon_sprite.add_child(kick_swing_spawn)
+		kick_swing_spawn.position = Vector2(weapon_pos.x+20, 0)
+		kick_swing_spawn.play("default")
+		_is_kicking = true
+		await get_tree().create_timer(1).timeout
+		_is_kicking = false

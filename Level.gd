@@ -31,7 +31,7 @@ func have_we_won(layer):
 
 # Horrible function may god forgive my soul
 func _get_random_coord_outside_square(square_size):
-	var sides = randi() % 4
+	var sides = randi() % 1
 	var rand_position = Vector2()
 	match sides:
 		0: #top
