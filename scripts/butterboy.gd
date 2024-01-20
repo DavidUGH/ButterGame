@@ -67,24 +67,20 @@ func jump(jump_vector):
 	anim_state = STATE.jumping
 	var character_size = Vector2(0,0)
 	if jump_vector.x > 0:
-		character_size = Vector2(30, 0)
+		character_size = Vector2(20, 0)
 	if jump_vector.x < 0:
-		character_size = Vector2(-30, 0)
+		character_size = Vector2(-20, 0)
 	if jump_vector.y > 0:
-		character_size = Vector2(0, 30)
+		character_size = Vector2(0, 20)
 	if jump_vector.y < 0:
-		character_size = Vector2(0, -30)
-	print("ch")
-	print(character_size)
-	print("vector")
-	print(jump_vector)
+		character_size = Vector2(0, -20)
 	var new_position = position+jump_vector+character_size
 	var tween = get_tree().create_tween()
-	tween.tween_property(self, "position", new_position, 1)
+	tween.tween_property(self, "position", new_position, 0.5)
 	var sprite_position = _sprite.position
 	var sprite_tween = get_tree().create_tween()
-	sprite_tween.tween_property(_sprite, "position", Vector2(0,sprite_position.y-10), 0.5)
-	sprite_tween.tween_property(_sprite, "position", sprite_position, 0.5)
+	sprite_tween.tween_property(_sprite, "position", Vector2(0,sprite_position.y-10), 0.25)
+	sprite_tween.tween_property(_sprite, "position", sprite_position, 0.25)
 	_hurtbox.set_deferred("monitoring", false)
 
 func _get_hurt():
