@@ -1,20 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://ci1xeirsohchw"]
+[gd_scene load_steps=4 format=3 uid="uid://ci1xeirsohchw"]
 
 [ext_resource type="Script" path="res://lvl1.gd" id="1_svi4e"]
 [ext_resource type="PackedScene" uid="uid://s6bmsorcy044" path="res://player.tscn" id="2_wxa0i"]
-[ext_resource type="TileSet" uid="uid://je7b7jygh7rk" path="res://tiles/new_tile_set.tres" id="3_vpi5y"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_du3b2"]
-size = Vector2(1, 96)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yebwu"]
-size = Vector2(96, 1)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p4omj"]
-size = Vector2(96, 1)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_oyw3r"]
-size = Vector2(1.25, 96)
+[ext_resource type="TileSet" uid="uid://cbnrjgcaudwh" path="res://tiles/new_tile_set.tres" id="3_vpi5y"]
 
 [node name="lvl1" type="Node"]
 script = ExtResource("1_svi4e")
@@ -36,39 +24,11 @@ layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array()
 
-[node name="LeftArea2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftArea2D"]
-position = Vector2(82.5, 128)
-shape = SubResource("RectangleShape2D_du3b2")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(83, 51, 236, 52, 236, 205, 83, 205, 82, 65, 76, 64, 77, 212, 242, 210, 243, 43, 75, 44, 76, 64, 82, 65)
 
-[node name="TopArea2D" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TopArea2D"]
-position = Vector2(160, 49.5)
-shape = SubResource("RectangleShape2D_yebwu")
-
-[node name="BottomArea2D" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomArea2D"]
-position = Vector2(160, 205.5)
-shape = SubResource("RectangleShape2D_p4omj")
-
-[node name="RightArea2D" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RightArea2D"]
-position = Vector2(237.625, 128)
-shape = SubResource("RectangleShape2D_oyw3r")
-
-[connection signal="area_entered" from="LeftArea2D" to="." method="_on_left_area_2d_area_entered"]
-[connection signal="area_entered" from="TopArea2D" to="." method="_on_top_area_2d_area_entered"]
-[connection signal="area_entered" from="BottomArea2D" to="." method="_on_bottom_area_2d_area_entered"]
-[connection signal="area_entered" from="RightArea2D" to="." method="_on_right_area_2d_area_entered"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

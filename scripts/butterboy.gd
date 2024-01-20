@@ -62,19 +62,19 @@ func _flash_white():
 		_is_flashing = false
 		_sprite.material.set_shader_parameter("flash", false)
 
-func jump(jump_vector):
+func jump():
 	is_jumping = true
 	anim_state = STATE.jumping
 	var character_size = Vector2(0,0)
-	if jump_vector.x > 0:
+	if velocity.x > 0:
 		character_size = Vector2(20, 0)
-	if jump_vector.x < 0:
+	if velocity.x < 0:
 		character_size = Vector2(-20, 0)
-	if jump_vector.y > 0:
+	if velocity.y > 0:
 		character_size = Vector2(0, 20)
-	if jump_vector.y < 0:
+	if velocity.y < 0:
 		character_size = Vector2(0, -20)
-	var new_position = position+jump_vector+character_size
+	var new_position = position+velocity+character_size
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "position", new_position, 0.5)
 	var sprite_position = _sprite.position
