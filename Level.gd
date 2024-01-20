@@ -2,15 +2,18 @@ class_name Level
 extends Node
 
 var enemies_list: Array = []
+var butter_matrix : Array = []
 var player
-var tiles_to_win = 0
+var tiles_to_win = 16*20
+var current_tiles = 0
 const BREAD_LAYER = 0
-const BUTTER_LAYER = 1
+const BUTTER_LAYER = 2
+
+var filas = 31
+var columnas = 24
 
 var tile_map : TileMap
 
-func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 
 func set_tileset(t):
 	tile_map = t
@@ -18,18 +21,12 @@ func set_tileset(t):
 func set_player(p):
 	player = p
 
-func _is_in_bounds(tile):
-	var bread_tiles = tile_map.get_used_cells(0)
-	return bread_tiles.has(tile)
+func have_won():
+	print("CURRENT TILES: "+ str(current_tiles))
+	print("TILES TO WIN: "+ str(tiles_to_win))
+	if(current_tiles>=tiles_to_win):
+		print("You Win!")
 
-func have_we_won(layer):
-	var used_tiles = []
-	used_tiles = tile_map.get_used_cells(layer)
-	print(used_tiles.size())
-	if used_tiles.size() >= tiles_to_win:
-		print("You win!")
-
-# Horrible function may god forgive my soul
 func _get_random_coord_outside_square(square_size):
 	var sides = randi() % 1
 	var rand_position = Vector2()
@@ -58,44 +55,44 @@ func spawn_enemy(enemy_scene):
 func _on_died(position_at_death):
 	var tile = tile_map.local_to_map(position_at_death)
 	draw_circle(tile)
-	have_we_won(BUTTER_LAYER)
-
-func _append_tile_if_in_bounds(arr, tile):
-	if _is_in_bounds(tile):
-		arr.append(tile)
-	return arr
+	have_won()
 
 func draw_cross(v: Vector2i):
 	var x = v.x
 	var y = v.y
 	var vector: Array[Vector2i]
-	# Esto es horrible pero no se me ocurre como más hacerle
-	_append_tile_if_in_bounds(vector, Vector2i(x, y))
-	_append_tile_if_in_bounds(vector, Vector2i(x+1, y))
-	_append_tile_if_in_bounds(vector, Vector2i(x, y+1))
-	_append_tile_if_in_bounds(vector, Vector2i(x-1, y))
-	_append_tile_if_in_bounds(vector, Vector2i(x, y-1))
+	check_tile(vector, Vector2i(x, y))
+	check_tile(vector, Vector2i(x+1, y))
+	check_tile(vector, Vector2i(x, y+1))
+	check_tile(vector, Vector2i(x-1, y))
+	check_tile(vector, Vector2i(x, y-1))
 	tile_map.set_cells_terrain_connect(BUTTER_LAYER, vector, 0, 0, true)
+
+func check_tile(vector:Array[Vector2i], v:Vector2i):
+	if(v.x>=10&&v.y>=7 && v.x<=29&&v.y<=22):#10,7 29,22
+		if(butter_matrix[v.x][v.y] == 0):
+			butter_matrix[v.x][v.y] = 1
+			current_tiles = current_tiles+1
+			vector.append(Vector2i(v.x, v.y))
+		else:
+			print("Hi")
 
 func draw_circle(v: Vector2i):
 	var x = v.x
 	var y = v.y
 	var vector: Array[Vector2i]
 	# Esto es horrible pero no se me ocurre como más hacerle
-	_append_tile_if_in_bounds(vector, Vector2i(x, y))
-	_append_tile_if_in_bounds(vector, Vector2i(x+1, y))
-	_append_tile_if_in_bounds(vector, Vector2i(x+2, y))
-	_append_tile_if_in_bounds(vector, Vector2i(x, y+1))
-	_append_tile_if_in_bounds(vector, Vector2i(x, y+2))
-	_append_tile_if_in_bounds(vector, Vector2i(x-1, y))
-	_append_tile_if_in_bounds(vector, Vector2i(x-2, y))
-	_append_tile_if_in_bounds(vector, Vector2i(x, y-1))
-	_append_tile_if_in_bounds(vector, Vector2i(x, y-2))
-	_append_tile_if_in_bounds(vector, Vector2i(x+1, y-1))
-	_append_tile_if_in_bounds(vector, Vector2i(x+1, y+1))
-	_append_tile_if_in_bounds(vector, Vector2i(x-1, y+1))
-	_append_tile_if_in_bounds(vector, Vector2i(x-1, y-1))
-	for i in range(0, vector.size()):
-		if !_is_in_bounds(vector[i]):
-			vector.remove_at(i)
+	check_tile(vector, Vector2i(x, y))
+	check_tile(vector, Vector2i(x+1, y))
+	check_tile(vector, Vector2i(x+2, y))
+	check_tile(vector, Vector2i(x, y+1))
+	check_tile(vector, Vector2i(x, y+2))
+	check_tile(vector, Vector2i(x-1, y))
+	check_tile(vector, Vector2i(x-2, y))
+	check_tile(vector, Vector2i(x, y-1))
+	check_tile(vector, Vector2i(x, y-2))
+	check_tile(vector, Vector2i(x+1, y-1))
+	check_tile(vector, Vector2i(x+1, y+1))
+	check_tile(vector, Vector2i(x-1, y+1))
+	check_tile(vector, Vector2i(x-1, y-1))
 	tile_map.set_cells_terrain_connect(BUTTER_LAYER, vector, 0, 0, true)
