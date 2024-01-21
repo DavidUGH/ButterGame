@@ -1,28 +1,28 @@
 [gd_resource type="EventAsset" load_steps=4 format=3 uid="uid://bn73jubky80nr"]
 
-[sub_resource type="FMOD_STUDIO_PARAMETER_ID" id="FMOD_STUDIO_PARAMETER_ID_d165w"]
+[sub_resource type="FMOD_STUDIO_PARAMETER_ID" id="FMOD_STUDIO_PARAMETER_ID_6gums"]
 data1 = 2568706395
 data2 = 2033976643
 
-[sub_resource type="FMOD_STUDIO_PARAMETER_DESCRIPTION" id="FMOD_STUDIO_PARAMETER_DESCRIPTION_dkol1"]
-name = "musicState"
-id = SubResource("FMOD_STUDIO_PARAMETER_ID_d165w")
-maximum = 3.0
+[sub_resource type="FMOD_STUDIO_PARAMETER_DESCRIPTION" id="FMOD_STUDIO_PARAMETER_DESCRIPTION_b53t1"]
+name = "TestParam"
+id = SubResource("FMOD_STUDIO_PARAMETER_ID_6gums")
+maximum = 1.0
 flags = 8
 guid = "{64301a87-0a88-4b46-9670-d2dc15f9a224}"
 
-[sub_resource type="ParameterAsset" id="ParameterAsset_vxsf0"]
-parameter_description = SubResource("FMOD_STUDIO_PARAMETER_DESCRIPTION_dkol1")
-path = "parameter:/musicState"
+[sub_resource type="ParameterAsset" id="ParameterAsset_wq6sn"]
+parameter_description = SubResource("FMOD_STUDIO_PARAMETER_DESCRIPTION_b53t1")
+path = "parameter:/TestParam"
 guid = "{64301a87-0a88-4b46-9670-d2dc15f9a224}"
-name = "musicState"
+name = "TestParam"
 
 [resource]
 min_distance = 1.0
 max_distance = 20.0
 parameters = {
-"{64301a87-0a88-4b46-9670-d2dc15f9a224}": SubResource("ParameterAsset_vxsf0")
+"{64301a87-0a88-4b46-9670-d2dc15f9a224}": SubResource("ParameterAsset_wq6sn")
 }
-path = "event:/Music/gameMusic"
+path = "event:/gameMusic"
 guid = "{c6c438a9-66fb-4e79-81a1-5bf3b889ea50}"
 name = "gameMusic"

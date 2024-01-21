@@ -1,9 +1,0 @@
-[gd_resource type="EventAsset" format=3 uid="uid://dmosed1gjdisg"]
-
-[resource]
-is_oneshot = true
-min_distance = 1.0
-max_distance = 20.0
-path = "event:/SFX/buttonPress"
-guid = "{4d6ceebb-de21-43e1-ad3a-3aadf3779466}"
-name = "buttonPress"

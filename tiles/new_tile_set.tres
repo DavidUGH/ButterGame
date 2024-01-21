@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://je7b7jygh7rk"]
+[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://rp4wossdcy1r"]
 
 [ext_resource type="Texture2D" uid="uid://drp5e7bofgfws" path="res://sprites/scenario/bread.png" id="1_2bkb3"]
 [ext_resource type="Texture2D" uid="uid://bcod08dxm8yoy" path="res://tiles/butter.png" id="3_bre0h"]

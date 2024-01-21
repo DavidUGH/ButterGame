@@ -1,9 +1,0 @@
-[gd_resource type="EventAsset" format=3 uid="uid://muwwhwg8cs4g"]
-
-[resource]
-is_oneshot = true
-min_distance = 1.0
-max_distance = 20.0
-path = "event:/SFX/stepWet"
-guid = "{08167721-a8c8-45ce-8b8c-4302979df2a7}"
-name = "stepWet"
