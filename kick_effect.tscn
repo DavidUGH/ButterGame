@@ -28,10 +28,10 @@ animations = [{
 "duration": 0.2,
 "texture": SubResource("AtlasTexture_71kog")
 }, {
-"duration": 0.7,
+"duration": 0.2,
 "texture": SubResource("AtlasTexture_f32r6")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_3vue8")
 }],
 "loop": false,

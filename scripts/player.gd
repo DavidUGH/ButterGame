@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@export var walk_sfx : EventAsset
+
 signal died
 
 enum WEAPON { knife }
@@ -31,7 +33,7 @@ var _sprite: AnimatedSprite2D
 var _player_hitbox: Area2D
 var _player_hitbox_shape: CollisionShape2D
 var _animation_player: AnimationPlayer
-
+var _has_played_walk_sfx = false
 
 func _ready():
 	#Instantiating child nodes
@@ -84,18 +86,29 @@ func handle_collision_of_overlapping_areas():
 		#No me gusta hacer esto pero ya que
 		get_hurt(overlapping[0].get_parent().damage)
 
+func _play_walk_sfx():
+	if !_has_played_walk_sfx:
+		_has_played_walk_sfx = true
+		FMODRuntime.play_one_shot(walk_sfx)
+		await get_tree().create_timer(0.2).timeout
+		_has_played_walk_sfx = false
+
 func _move():
 	velocity = Vector2()
 	if Input.is_action_pressed("right"):
 		_sprite.scale.x = 1
+		_play_walk_sfx()
 		velocity.x += 1
 	if Input.is_action_pressed("left"):
 		_sprite.scale.x = -1
 		velocity.x -= 1
+		_play_walk_sfx()
 	if Input.is_action_pressed("down"):
 		velocity.y += 1
+		_play_walk_sfx()
 	if Input.is_action_pressed("up"):
 		velocity.y -= 1
+		_play_walk_sfx()
 	velocity = velocity.normalized() * speed
 
 func _handle_animations():

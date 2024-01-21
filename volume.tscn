@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkffwvt63ay3q"]
+
+[ext_resource type="ParameterAsset" uid="uid://bhlgwt3c1awo3" path="res://addons/FMOD/editor/resources/parameters/{79d50be0-5bef-4d61-96ee-bf9513dbc6f8}.tres" id="1_3qqxg"]
+
+[node name="StudioGlobalParameterTrigger" type="StudioGlobalParameterTrigger"]
+trigger_on = 2
+parameter = ExtResource("1_3qqxg")
+value = 1.0
