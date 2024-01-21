@@ -4,15 +4,16 @@ extends Node
 var enemies_list: Array = []
 var butter_matrix : Array = []
 var player
-var tiles_to_win = 16*20
+var tiles_to_win = 32*24
 var current_tiles = 0
 const BREAD_LAYER = 0
 const BUTTER_LAYER = 2
 
-var filas = 31
-var columnas = 24
+var filas = 41
+var columnas = 32
 
 var tile_map : TileMap
+var GUI
 
 
 func set_tileset(t):
@@ -22,10 +23,10 @@ func set_player(p):
 	player = p
 
 func have_won():
-	print("CURRENT TILES: "+ str(current_tiles))
-	print("TILES TO WIN: "+ str(tiles_to_win))
+	GUI.setConsole("CURRENT TILES: "+ str(current_tiles)+"\nTILES TO WIN: "+ str(tiles_to_win))
 	if(current_tiles>=tiles_to_win):
 		print("You Win!")
+		GUI.setConsole("You Win!")
 
 func _get_random_coord_outside_square(square_size):
 	var sides = randi() % 1
@@ -69,7 +70,7 @@ func draw_cross(v: Vector2i):
 	tile_map.set_cells_terrain_connect(BUTTER_LAYER, vector, 0, 0, true)
 
 func check_tile(vector:Array[Vector2i], v:Vector2i):
-	if(v.x>=10&&v.y>=7 && v.x<=29&&v.y<=22):#10,7 29,22
+	if(v.x>=8&&v.y>=7 && v.x<=39&&v.y<=30):#10,7 29,22
 		if(butter_matrix[v.x][v.y] == 0):
 			butter_matrix[v.x][v.y] = 1
 			current_tiles = current_tiles+1
