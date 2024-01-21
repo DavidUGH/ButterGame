@@ -1,0 +1,18 @@
+[gd_resource type="ParameterAsset" load_steps=3 format=3 uid="uid://bde8wb2aesexd"]
+
+[sub_resource type="FMOD_STUDIO_PARAMETER_ID" id="FMOD_STUDIO_PARAMETER_ID_q6l3l"]
+data1 = 3604502955
+data2 = 734426052
+
+[sub_resource type="FMOD_STUDIO_PARAMETER_DESCRIPTION" id="FMOD_STUDIO_PARAMETER_DESCRIPTION_8vdsk"]
+name = "effectsVolume"
+id = SubResource("FMOD_STUDIO_PARAMETER_ID_q6l3l")
+maximum = 1.0
+flags = 4
+guid = "{9b41376c-f560-4dd0-9691-461069217d79}"
+
+[resource]
+parameter_description = SubResource("FMOD_STUDIO_PARAMETER_DESCRIPTION_8vdsk")
+path = "parameter:/effectsVolume"
+guid = "{9b41376c-f560-4dd0-9691-461069217d79}"
+name = "effectsVolume"

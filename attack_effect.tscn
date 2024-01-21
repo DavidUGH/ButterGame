@@ -30,7 +30,7 @@ region = Rect2(320, 0, 64, 64)
 [sub_resource type="SpriteFrames" id="SpriteFrames_qa3du"]
 animations = [{
 "frames": [{
-"duration": 0.2,
+"duration": 0.1,
 "texture": SubResource("AtlasTexture_fptnj")
 }, {
 "duration": 0.2,
@@ -98,7 +98,6 @@ _data = {
 [node name="AttackEffect" type="AnimatedSprite2D"]
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_qa3du")
-frame = 1
 script = ExtResource("2_walbw")
 
 [node name="Area2D" type="Area2D" parent="."]

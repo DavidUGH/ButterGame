@@ -1,0 +1,9 @@
+[gd_resource type="EventAsset" format=3 uid="uid://d0icentg5b56l"]
+
+[resource]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/SFX/stepDry"
+guid = "{d7027700-8c2f-42e2-afc3-b6067e6b1d05}"
+name = "stepDry"
