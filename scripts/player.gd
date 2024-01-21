@@ -23,6 +23,7 @@ var invis_frames = 2
 var weapon_swing = preload("res://attack_effect.tscn")
 var kick_swing = preload("res://kick_effect.tscn")
 var _is_kicking: bool
+var gui
 
 var _weapon_sprite: Sprite2D
 var _collision_box: CollisionShape2D
@@ -63,7 +64,9 @@ func _process(delta):
 func get_hurt(damage):
 	if !is_hurting:
 		life -= damage
+		gui.set_life(life)
 		if life <= 0:
+			gui.set_life(0)
 			_die()
 		HitstopManager.hitstop_short()
 		_animation_player.play("hurt")

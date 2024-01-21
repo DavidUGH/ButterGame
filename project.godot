@@ -23,7 +23,11 @@ HitstopManager="*res://scripts/hitstop_manager.gd"
 [display]
 
 window/size/viewport_width=400
+<<<<<<< HEAD
 window/size/viewport_height=260
+=======
+window/size/viewport_height=280
+>>>>>>> b7f32324b025afa1455815d7b5521f1075cded10
 window/size/mode=2
 window/stretch/mode="viewport"
 
