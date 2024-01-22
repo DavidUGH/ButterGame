@@ -191,7 +191,6 @@ position = Vector2(0, 16)
 shape = SubResource("CapsuleShape2D_bxaeh")
 
 [node name="KnifeSprite" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(0, 16)
 texture = ExtResource("5_ffkdh")
 
