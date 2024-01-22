@@ -1,12 +1,16 @@
-[gd_scene load_steps=26 format=3 uid="uid://s6bmsorcy044"]
+[gd_scene load_steps=28 format=3 uid="uid://s6bmsorcy044"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ykyym"]
+[ext_resource type="EventAsset" uid="uid://b84qu5s2xfas8" path="res://addons/FMOD/editor/resources/events/{d7027700-8c2f-42e2-afc3-b6067e6b1d05}.tres" id="2_aiu6s"]
 [ext_resource type="Texture2D" uid="uid://7wvg8wqah0uo" path="res://sprites/Rogue/Idle/Run-Sheet-Idle-Weapons.png" id="2_u84bo"]
 [ext_resource type="Texture2D" uid="uid://cxlq2mltj60h3" path="res://sprites/Rogue/Run/Run-Sheet-Jump.png" id="3_mvsob"]
 [ext_resource type="Texture2D" uid="uid://dnue4wh2avv4s" path="res://sprites/Rogue/Run/Run-Sheet-Weapons.png" id="4_tfwpj"]
 [ext_resource type="Texture2D" uid="uid://bks2d2w3u3b5b" path="res://sprites/knife.png" id="5_ffkdh"]
+[ext_resource type="Texture2D" uid="uid://eyqn3ndyffad" path="res://sprites/shadow.png" id="6_qnwfy"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_olwyu"]
+radius = 3.99996
+height = 19.9998
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_43itr"]
 atlas = ExtResource("2_u84bo")
@@ -143,7 +147,8 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_pwek3"]
 resource_name = "hurt"
-length = 2.0
+length = 0.3
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -151,10 +156,10 @@ tracks/0/path = NodePath("PlayerAnimatedSprite:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true, false, true, false, true, false, true, false, true, false, true]
+"values": [true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_12ypq"]
@@ -164,33 +169,19 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 0
+collision_layer = 9
 script = ExtResource("1_ykyym")
+walk_sfx = ExtResource("2_aiu6s")
 
 [node name="PlayerShape" type="CollisionShape2D" parent="."]
-position = Vector2(0, 16)
+position = Vector2(0, 29)
+rotation = -1.56649
 shape = SubResource("CapsuleShape2D_olwyu")
 
 [node name="PlayerAnimatedSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_w1i7l")
 animation = &"run"
 speed_scale = 1.5
-
-[node name="PlayerSprite" type="Sprite2D" parent="PlayerAnimatedSprite"]
-show_behind_parent = true
-position = Vector2(0, -2.38419e-07)
-scale = Vector2(1.1, 1.1)
-
-[node name="PlayerAnimatedSprite" type="AnimatedSprite2D" parent="PlayerAnimatedSprite"]
-visible = false
-sprite_frames = SubResource("SpriteFrames_w1i7l")
-animation = &"run"
-speed_scale = 1.5
-
-[node name="PlayerSprite" type="Sprite2D" parent="PlayerAnimatedSprite/PlayerAnimatedSprite"]
-show_behind_parent = true
-position = Vector2(0, -2.38419e-07)
-scale = Vector2(1.1, 1.1)
 
 [node name="PlayerHitbox" type="Area2D" parent="."]
 collision_mask = 2
@@ -200,7 +191,8 @@ position = Vector2(0, 16)
 shape = SubResource("CapsuleShape2D_bxaeh")
 
 [node name="KnifeSprite" type="Sprite2D" parent="."]
-position = Vector2(5, 11)
+visible = false
+position = Vector2(0, 16)
 texture = ExtResource("5_ffkdh")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -208,4 +200,9 @@ libraries = {
 "": SubResource("AnimationLibrary_12ypq")
 }
 
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.721569)
+z_index = -2
+position = Vector2(0, 32)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("6_qnwfy")

@@ -1,33 +1,59 @@
 extends CharacterBody2D
 
+signal died(position_at_death)
+
 var speed: int
+var friction: float
 var life: int
 var _sprite: AnimatedSprite2D
-var player #El nivel tiene que inicializar al jugador
-enum STATE { hurt, moving }
+var player
+var destination = Vector2(0,0)
+enum STATE { hurt, moving, jumping}
 var anim_state
-var tile_map
-
 var _hurtbox: Area2D
+var _is_flashing : bool
+var is_hurt = false
+var damage : int
+var is_jumping : bool
+var knockback_amount : int
 
 func _ready():
 	speed = 60
-	life = 2
+	life = 4
+	friction = 10
+	damage = 10
+	_is_flashing = false
 	_sprite = $ButterboySprite
 	_hurtbox = $Hurtbox
-	
+	is_jumping = false
 	anim_state = STATE.moving
 	
-func _process(delta):
-	_follow_player()
+func _physics_process(delta):
+	if !is_jumping:
+		_move(destination	)
+	else:
+		velocity = Vector2.ZERO
 	move_and_slide()
 	_handle_animations()
-	_die()
-	
-func _follow_player():
-	var player_position = player.position
-	var direction = (player_position - position).normalized()
+	_despawn_if_out_of_view()
+
+func _despawn_if_out_of_view():
+	var scz : Vector2
+	scz.x = get_viewport().content_scale_size.x
+	scz.y = get_viewport().content_scale_size.y
+	if position.x >= scz.x+15 or position.x <= -15:
+		queue_free()
+	if position.y >= scz.y+15 or position.y <= -15:
+		queue_free()
+
+func _move(destination = Vector2(0,0)):
+	if destination == Vector2(0,0):
+		destination = player.position
+	var direction = (destination - position).normalized()
 	velocity = direction * speed
+	if is_hurt:
+		direction = (player.position - position).normalized()
+		velocity = (direction * knockback_amount) * -1
 
 func _handle_animations():
 	match anim_state:
@@ -35,44 +61,75 @@ func _handle_animations():
 			_sprite.play("hurt")
 		STATE.moving:
 			_sprite.play("moving")
+		STATE.jumping:
+			_sprite.play("jumping")
 
 func _die():
-	var tile
-	if life <= 0:
-		tile = tile_map.local_to_map(position)
-		print(tile)
-		_draw_cross(tile.x, tile.y)
-		queue_free()
+	died.emit(position)
+	queue_free()
 
-func _draw_cross(x, y):
-	tile_map.set_cell(0, Vector2i(x, y), 0, Vector2i(1,1))
-	tile_map.set_cell(0, Vector2i(x+1, y), 0, Vector2i(1,1))
-	tile_map.set_cell(0, Vector2i(x-1, y), 0, Vector2i(1,1))
-	tile_map.set_cell(0, Vector2i(x, y+1), 0, Vector2i(1,1))
-	tile_map.set_cell(0, Vector2i(x, y-1), 0, Vector2i(1,1))
+func _flash_white():
+	if !_is_flashing:
+		_sprite.material.set_shader_parameter("flash", true)
+		_is_flashing = true
+		await get_tree().create_timer(0.2).timeout
+		_is_flashing = false
+		_sprite.material.set_shader_parameter("flash", false)
+
+func jump():
+	is_jumping = true
+	anim_state = STATE.jumping
+	var character_size = Vector2(0,0)
+	if velocity.x > 0:
+		character_size = Vector2(20, 0)
+	if velocity.x < 0:
+		character_size = Vector2(-20, 0)
+	if velocity.y > 0:
+		character_size = Vector2(0, 0)
+	if velocity.y < 0:
+		character_size = Vector2(0, -20)
+	var new_position = position+velocity+character_size
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "position", new_position, 0.5)
+	var sprite_position = _sprite.position
+	var sprite_tween = get_tree().create_tween()
+	sprite_tween.tween_property(_sprite, "position", Vector2(0,sprite_position.y-10), 0.25)
+	sprite_tween.tween_property(_sprite, "position", sprite_position, 0.25)
+	_hurtbox.set_deferred("monitoring", false)
 
 func _get_hurt():
+	knockback_amount = 60
+	_flash_white()
 	anim_state = STATE.hurt
 	life -= player.damage
-	_sprite.material.set_shader_parameter("flash", true)
-	await get_tree().create_timer(0.05).timeout
-	_sprite.material.set_shader_parameter("flash", false)
+	is_hurt = true
+	if life <= 0:
+		_die()
+
+func _get_kicked():
+	knockback_amount = 200
+	_flash_white()
+	anim_state = STATE.hurt
+	life -= player.kick_damage
+	is_hurt = true
+	if life <= 0:
+		_die()
 
 func _on_hurtbox_area_entered(area): 
-	# Collision layers and masks are actually 32 bit binary strings. Each bit
-	# represents a different layer. For example: Layer 3 is bit 2. If bit 2 is
-	# set to 1 then that object is on collision layer 3.
-	
-	# Because of this, you can read collision layers as integers. An object
-	# in collision layer 3 would have a binary string of 100, which is 4 in decimal.
-	
-	# if there is a better way of doing this, please find one.
-	match area.get_collision_layer():
-		1: #Player layer
-			player.get_hurt(10)
-		4: #Player attack layer
+	var parent_name = area.get_parent().name
+	match parent_name:
+		"Player":
+			player.get_hurt(damage)
+		"AttackEffect":
 			_get_hurt()
+		"KickEffect":
+			_get_kicked()
 
 func _on_butterboy_sprite_animation_finished():
 	if anim_state == STATE.hurt:
 		anim_state = STATE.moving
+		is_hurt = false
+	if anim_state == STATE.jumping:
+		anim_state = STATE.moving
+		is_jumping = false
+		_hurtbox.set_deferred("monitoring", true)

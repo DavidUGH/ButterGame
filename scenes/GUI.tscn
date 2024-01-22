@@ -1,6 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://bs7gr3h8tldn5"]
+[gd_scene load_steps=8 format=3 uid="uid://bs7gr3h8tldn5"]
 
 [ext_resource type="Script" path="res://scripts/GUI.gd" id="1_tudpf"]
+[ext_resource type="FontFile" uid="uid://lkrvfvmqjnlb" path="res://fonts/Daydream.ttf" id="2_s5xdx"]
+[ext_resource type="Texture2D" uid="uid://dn2c1kqmwi2gy" path="res://sprites/ui/PauseButton.png" id="3_tt2mp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_teo1u"]
+font = ExtResource("2_s5xdx")
+font_size = 10
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbdi6"]
+atlas = ExtResource("3_tt2mp")
+region = Rect2(0, 0, 25, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mmrua"]
+atlas = ExtResource("3_tt2mp")
+region = Rect2(0, 50, 25, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbjhx"]
+atlas = ExtResource("3_tt2mp")
+region = Rect2(0, 25, 25, 25)
 
 [node name="GUI" type="Control"]
 layout_mode = 3
@@ -13,8 +31,35 @@ script = ExtResource("1_tudpf")
 
 [node name="LifeLabel" type="Label" parent="."]
 layout_mode = 1
-offset_right = 65.0
-offset_bottom = 26.0
-text = "Life: 100"
+offset_left = 8.0
+offset_top = 15.0
+offset_right = 87.0
+offset_bottom = 32.0
+text = "Life: 100%"
+label_settings = SubResource("LabelSettings_teo1u")
 
-[connection signal="vida_cambiada" from="." to="." method="_on_vida_cambiada"]
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -37.0
+offset_top = -35.0
+offset_right = -12.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = SubResource("AtlasTexture_cbdi6")
+texture_pressed = SubResource("AtlasTexture_mmrua")
+texture_hover = SubResource("AtlasTexture_rbjhx")
+
+[node name="ConsoleLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 15.0
+offset_right = 224.0
+offset_bottom = 32.0
+text = "Mensaje"
+label_settings = SubResource("LabelSettings_teo1u")

@@ -1,0 +1,158 @@
+[gd_scene load_steps=18 format=3 uid="uid://dkpxsu5mqia5j"]
+
+[ext_resource type="Texture2D" uid="uid://bjmc5aksumc2b" path="res://sprites/ui/menu.png" id="1_g20na"]
+[ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_x2u6e"]
+[ext_resource type="Texture2D" uid="uid://s3b1buy5j3oq" path="res://sprites/ui/playButton.png" id="2_6uifg"]
+[ext_resource type="Texture2D" uid="uid://1ivl0g2822gj" path="res://sprites/ui/creditsButton.png" id="4_mch1r"]
+[ext_resource type="Texture2D" uid="uid://coxn4q21xbtsn" path="res://sprites/ui/exitButton.png" id="5_ut3y1"]
+[ext_resource type="EventAsset" uid="uid://bn73jubky80nr" path="res://addons/FMOD/editor/resources/events/{c6c438a9-66fb-4e79-81a1-5bf3b889ea50}.tres" id="10_8md70"]
+[ext_resource type="EventAsset" uid="uid://c8hqeknlrf5ri" path="res://addons/FMOD/editor/resources/events/{4d6ceebb-de21-43e1-ad3a-3aadf3779466}.tres" id="12_eyj3q"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3bg1p"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4vc7"]
+atlas = ExtResource("2_6uifg")
+region = Rect2(0, 0, 115, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjhly"]
+atlas = ExtResource("2_6uifg")
+region = Rect2(0, 80, 115, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3mh77"]
+atlas = ExtResource("2_6uifg")
+region = Rect2(0, 40, 115, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8drmk"]
+atlas = ExtResource("4_mch1r")
+region = Rect2(0, 0, 182, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6gsfb"]
+atlas = ExtResource("4_mch1r")
+region = Rect2(0, 92, 182, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fhglo"]
+atlas = ExtResource("4_mch1r")
+region = Rect2(0, 46, 182, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a4r1v"]
+atlas = ExtResource("5_ut3y1")
+region = Rect2(0, 0, 128, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7thv"]
+atlas = ExtResource("5_ut3y1")
+region = Rect2(0, 90, 128, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ulcrh"]
+atlas = ExtResource("5_ut3y1")
+region = Rect2(0, 45, 128, 45)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x2u6e")
+event = ExtResource("12_eyj3q")
+
+[node name="Panel" type="Panel" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3bg1p")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -120.0
+offset_right = 160.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_g20na")
+
+[node name="ColorRect" type="ColorRect" parent="TextureRect"]
+z_index = -1
+layout_mode = 0
+offset_left = -40.0
+offset_top = -20.0
+offset_right = 360.0
+offset_bottom = 260.0
+color = Color(0.386719, 0.261719, 0.164063, 1)
+
+[node name="PlayButton" type="TextureButton" parent="."]
+z_index = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = SubResource("AtlasTexture_c4vc7")
+texture_pressed = SubResource("AtlasTexture_fjhly")
+texture_hover = SubResource("AtlasTexture_3mh77")
+
+[node name="CreditsButton" type="TextureButton" parent="."]
+z_index = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = 25.0
+offset_right = 58.0
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = SubResource("AtlasTexture_8drmk")
+texture_pressed = SubResource("AtlasTexture_6gsfb")
+texture_hover = SubResource("AtlasTexture_fhglo")
+
+[node name="ExitButton" type="TextureButton" parent="."]
+z_index = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = 73.0
+offset_right = 58.0
+offset_bottom = 113.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = SubResource("AtlasTexture_a4r1v")
+texture_pressed = SubResource("AtlasTexture_v7thv")
+texture_hover = SubResource("AtlasTexture_ulcrh")
+
+[node name="MusicEmitter" type="StudioEventEmitter2D" parent="."]
+play_event = 2
+stop_event = 3
+event = ExtResource("10_8md70")
+
+[node name="ButtonSFXEmitter" type="StudioEventEmitter2D" parent="."]
+event = ExtResource("12_eyj3q")
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]

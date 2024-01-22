@@ -1,0 +1,116 @@
+[gd_scene load_steps=11 format=3 uid="uid://dnt12g4py7p61"]
+
+[ext_resource type="Script" path="res://scripts/credits.gd" id="1_83p38"]
+[ext_resource type="Texture2D" uid="uid://dly66affv54qx" path="res://sprites/ui/creditsBackground.png" id="1_fg45o"]
+[ext_resource type="FontFile" uid="uid://lkrvfvmqjnlb" path="res://fonts/Daydream.ttf" id="2_kd1w4"]
+[ext_resource type="Texture2D" uid="uid://bu26b1q24vjcl" path="res://sprites/ui/BackButton.png" id="3_eh5et"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x8xmg"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_esm5a"]
+font = ExtResource("2_kd1w4")
+font_size = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_1adqb"]
+font = ExtResource("2_kd1w4")
+font_size = 10
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pd640"]
+atlas = ExtResource("3_eh5et")
+region = Rect2(0, 0, 25, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xktcb"]
+atlas = ExtResource("3_eh5et")
+region = Rect2(0, 50, 25, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_14sv1"]
+atlas = ExtResource("3_eh5et")
+region = Rect2(0, 25, 25, 25)
+
+[node name="credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_83p38")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_x8xmg")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_fg45o")
+
+[node name="David" type="Label" parent="."]
+texture_filter = 1
+offset_left = -2.0
+offset_top = 32.0
+offset_right = 122.0
+offset_bottom = 89.0
+text = "Davidugh
+as
+Developer"
+label_settings = SubResource("LabelSettings_esm5a")
+horizontal_alignment = 1
+
+[node name="Tanqueta" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 7.0
+offset_top = 154.0
+offset_right = 131.0
+offset_bottom = 222.0
+text = "LaTanqueta
+as
+Developer &
+2D Artist"
+label_settings = SubResource("LabelSettings_esm5a")
+horizontal_alignment = 1
+
+[node name="Even" type="Label" parent="."]
+texture_filter = 1
+offset_left = 178.0
+offset_top = 12.0
+offset_right = 318.0
+offset_bottom = 104.0
+text = "Evan Gedert
+as
+composer &
+sound designer"
+label_settings = SubResource("LabelSettings_1adqb")
+horizontal_alignment = 1
+
+[node name="Eber" type="Label" parent="."]
+texture_filter = 1
+offset_left = 202.0
+offset_top = 156.0
+offset_right = 326.0
+offset_bottom = 213.0
+text = "Eber
+as
+2D Artist"
+label_settings = SubResource("LabelSettings_esm5a")
+horizontal_alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 5.0
+offset_right = 28.0
+offset_bottom = 30.0
+texture_normal = SubResource("AtlasTexture_pd640")
+texture_pressed = SubResource("AtlasTexture_xktcb")
+texture_hover = SubResource("AtlasTexture_14sv1")
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

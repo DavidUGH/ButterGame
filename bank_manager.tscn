@@ -1,0 +1,16 @@
+[gd_scene load_steps=6 format=3 uid="uid://d2o8pmcirdmpl"]
+
+[ext_resource type="BankAsset" uid="uid://cbilo1uwjrqg7" path="res://addons/FMOD/editor/resources/banks/{5ea7a18e-fecc-429c-945d-7032db2d1495}.tres" id="1_0xhm0"]
+[ext_resource type="BankAsset" uid="uid://c6mhib1a2u6qs" path="res://addons/FMOD/editor/resources/banks/{c6ba815a-8fb7-0ede-1214-facc2ade120d}.tres" id="2_u0gsy"]
+[ext_resource type="BankAsset" uid="uid://ex25hs026ex" path="res://addons/FMOD/editor/resources/banks/{f78aac19-b194-4c81-8e1d-ca5d0899c650}.tres" id="3_oqjsh"]
+[ext_resource type="BankAsset" uid="uid://bk1y8eoepeok5" path="res://addons/FMOD/editor/resources/banks/{7043259b-7f37-4937-978c-fa20fe7e4996}.tres" id="4_pd3ji"]
+[ext_resource type="Script" path="res://bank_manager.gd" id="5_71q0e"]
+
+[node name="StudioBankLoader" type="StudioBankLoader"]
+load_on = 1
+num_banks = 4
+bank_0 = ExtResource("1_0xhm0")
+bank_1 = ExtResource("2_u0gsy")
+bank_2 = ExtResource("3_oqjsh")
+bank_3 = ExtResource("4_pd3ji")
+script = ExtResource("5_71q0e")
