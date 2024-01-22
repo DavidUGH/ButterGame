@@ -24,7 +24,7 @@ BankManager="*res://bank_manager.tscn"
 [display]
 
 window/size/viewport_width=400
-window/size/viewport_height=280
+window/size/viewport_height=300
 window/size/mode=2
 window/stretch/mode="viewport"
 

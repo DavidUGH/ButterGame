@@ -24,11 +24,14 @@ func set_tileset(t):
 func set_player(p):
 	player = p
 
+func _game_over():
+	get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
+
 func have_won():
 	GUI.setConsole("CURRENT TILES: "+ str(current_tiles)+"\nTILES TO WIN: "+ str(tiles_to_win))
 	if(current_tiles>=tiles_to_win):
-		print("You Win!")
 		GUI.setConsole("You Win!")
+		_game_over()
 
 func get_random_coord_at_random_side(square_size):
 	var sides = randi() % 4
@@ -82,7 +85,7 @@ func spawn_passing_enemy_at(enemy_scene, initial_position, end_position):
 func _on_died(position_at_death):
 	var tile = tile_map.local_to_map(position_at_death)
 	draw_circle(tile)
-	have_won()
+	#have_won()
 
 func draw_cross(v: Vector2i):
 	var x = v.x
@@ -117,6 +120,21 @@ func draw_circle(v: Vector2i):
 	check_tile(vector, Vector2i(x-2, y))
 	check_tile(vector, Vector2i(x, y-1))
 	check_tile(vector, Vector2i(x, y-2))
+	check_tile(vector, Vector2i(x+1, y-1))
+	check_tile(vector, Vector2i(x+1, y+1))
+	check_tile(vector, Vector2i(x-1, y+1))
+	check_tile(vector, Vector2i(x-1, y-1))
+	tile_map.set_cells_terrain_connect(BUTTER_LAYER, vector, 0, 0, true)
+
+func draw_square(v: Vector2i):
+	var x = v.x
+	var y = v.y
+	var vector: Array[Vector2i]
+	check_tile(vector, Vector2i(x, y))
+	check_tile(vector, Vector2i(x+1, y))
+	check_tile(vector, Vector2i(x, y+1))
+	check_tile(vector, Vector2i(x-1, y))
+	check_tile(vector, Vector2i(x, y-1))
 	check_tile(vector, Vector2i(x+1, y-1))
 	check_tile(vector, Vector2i(x+1, y+1))
 	check_tile(vector, Vector2i(x-1, y+1))

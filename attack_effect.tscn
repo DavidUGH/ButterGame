@@ -96,9 +96,9 @@ _data = {
 }
 
 [node name="AttackEffect" type="AnimatedSprite2D"]
-scale = Vector2(1.5, 1.5)
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_qa3du")
-frame = 1
+frame = 3
 script = ExtResource("2_walbw")
 
 [node name="Area2D" type="Area2D" parent="."]

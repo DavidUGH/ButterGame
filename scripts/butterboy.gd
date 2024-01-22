@@ -98,7 +98,7 @@ func jump():
 	_hurtbox.set_deferred("monitoring", false)
 
 func _get_hurt():
-	knockback_amount = 20
+	knockback_amount = 60
 	_flash_white()
 	anim_state = STATE.hurt
 	life -= player.damage

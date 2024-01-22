@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://eyqn3ndyffad" path="res://sprites/shadow.png" id="6_qnwfy"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_olwyu"]
+radius = 3.99996
+height = 19.9998
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_43itr"]
 atlas = ExtResource("2_u84bo")
@@ -167,14 +169,13 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D"]
-collision_layer = 8
-collision_mask = 0
+collision_layer = 9
 script = ExtResource("1_ykyym")
 walk_sfx = ExtResource("2_aiu6s")
 
 [node name="PlayerShape" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, 16)
+position = Vector2(0, 29)
+rotation = -1.56649
 shape = SubResource("CapsuleShape2D_olwyu")
 
 [node name="PlayerAnimatedSprite" type="AnimatedSprite2D" parent="."]
@@ -190,7 +191,8 @@ position = Vector2(0, 16)
 shape = SubResource("CapsuleShape2D_bxaeh")
 
 [node name="KnifeSprite" type="Sprite2D" parent="."]
-position = Vector2(5, 11)
+visible = false
+position = Vector2(0, 16)
 texture = ExtResource("5_ffkdh")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

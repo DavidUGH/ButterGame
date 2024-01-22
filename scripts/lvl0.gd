@@ -3,6 +3,8 @@ extends Level
 var spawn_flag = true
 var butterboy = preload("res://butterboy.tscn")
 var screen_size
+var timer : Timer
+var time_counter
 
 func _ready():
 	for i in range(filas):
@@ -11,16 +13,33 @@ func _ready():
 			fila.append(0)
 		butter_matrix.append(fila)
 	player = $Player
+	player.died.connect(_on_player_died)
 	tile_map = $TileMap
+	timer = $Timer
 	GUI = $GUI
 	player.gui = GUI
+	time_counter = 3.0
+	
 	screen_size = get_viewport().content_scale_size
+
+func _process(delta):
+	spawn_enemies_periodically()
+	var minutes = floor(timer.time_left / 60)
+	var seconds = floor(timer.time_left - minutes * 60)
+	GUI.setConsole(str(minutes) + ":" + time_format(seconds))
+	if timer.time_left <= 60:
+		time_counter = 1.5
+
+func time_format(time):
+	if time < 10:
+		return "0" + str(time)
+	return str(time)
 
 func spawn_enemies_periodically():
 	if spawn_flag:
 		random_spawn_pattern()
 		spawn_flag = false
-		await get_tree().create_timer(3).timeout
+		await get_tree().create_timer(time_counter).timeout
 		spawn_flag = true
 
 func random_spawn_pattern():
@@ -77,10 +96,13 @@ func spawn_pattern_right_to_left():
 	spawn_passing_enemy_at(butterboy, Vector2(screen_width, quarter_screen*3), Vector2(-20, quarter_screen*3))
 	spawn_passing_enemy_at(butterboy, Vector2(screen_width, quarter_screen*4), Vector2(-20, quarter_screen*4))
 
-func _process(delta):
-	spawn_enemies_periodically()
-
 
 func _on_area_2d_area_entered(area):
 	var enemy = area.get_parent()
 	enemy.jump()
+
+func _on_timer_timeout():
+	_game_over()
+
+func _on_player_died():
+	_game_over()

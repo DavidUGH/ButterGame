@@ -3,36 +3,36 @@
 [ext_resource type="Texture2D" uid="uid://b2p7s83hyfofm" path="res://sprites/kick_alternate.png" id="1_mf0rv"]
 [ext_resource type="Script" path="res://kick_effect.gd" id="2_bm5mg"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lyrf0"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_kgrrr"]
 atlas = ExtResource("1_mf0rv")
 region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_t3dlv"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_tegod"]
 atlas = ExtResource("1_mf0rv")
 region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_75opb"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_v42uh"]
 atlas = ExtResource("1_mf0rv")
 region = Rect2(128, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cesit"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_yhdcs"]
 atlas = ExtResource("1_mf0rv")
 region = Rect2(192, 0, 64, 64)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_map51"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_l3bvm"]
 animations = [{
 "frames": [{
 "duration": 0.2,
-"texture": SubResource("AtlasTexture_lyrf0")
+"texture": SubResource("AtlasTexture_kgrrr")
 }, {
 "duration": 0.2,
-"texture": SubResource("AtlasTexture_t3dlv")
+"texture": SubResource("AtlasTexture_tegod")
 }, {
 "duration": 0.2,
-"texture": SubResource("AtlasTexture_75opb")
+"texture": SubResource("AtlasTexture_v42uh")
 }, {
 "duration": 0.5,
-"texture": SubResource("AtlasTexture_cesit")
+"texture": SubResource("AtlasTexture_yhdcs")
 }],
 "loop": false,
 "name": &"default",
@@ -40,7 +40,8 @@ animations = [{
 }]
 
 [node name="KickEffect" type="AnimatedSprite2D"]
-sprite_frames = SubResource("SpriteFrames_map51")
+sprite_frames = SubResource("SpriteFrames_l3bvm")
+autoplay = "default"
 script = ExtResource("2_bm5mg")
 
 [node name="Area2D" type="Area2D" parent="."]

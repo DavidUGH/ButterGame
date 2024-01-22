@@ -51,5 +51,16 @@ stop_event = 3
 event = ExtResource("2_by7eh")
 parameter_musicState = 1.0
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 120.0
+autostart = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(37, 25, 39, 274, 347, 273, 347, 27, 38, 25, 50, 39, 337, 40, 337, 264, 47, 264, 48, 38, 37, 25)
+
 [connection signal="input_event" from="Player" to="." method="_on_player_input_event"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
