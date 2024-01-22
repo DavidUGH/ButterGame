@@ -9,12 +9,7 @@ func _ready():
 	tiles_to_win = 144
 
 func _process(delta):
-	if(Input.is_key_pressed(KEY_F)):
-		if(!_enemy_spawn_flag):
-			_enemy_spawn_flag = true
-			spawn_enemy(butterboy)
-	else:
-		_enemy_spawn_flag = false
+	spawn_following_enemy_at(butterboy, get_random_coord_at_random_side(get_viewport().content_scale_size))
 
 func _on_area_2d_area_entered(area):
 	var enemy = area.get_parent()

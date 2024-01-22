@@ -82,7 +82,17 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_g20na")
 
+[node name="ColorRect" type="ColorRect" parent="TextureRect"]
+z_index = -1
+layout_mode = 0
+offset_left = -40.0
+offset_top = -20.0
+offset_right = 360.0
+offset_bottom = 260.0
+color = Color(0.386719, 0.261719, 0.164063, 1)
+
 [node name="PlayButton" type="TextureButton" parent="."]
+z_index = 3
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -100,6 +110,7 @@ texture_pressed = SubResource("AtlasTexture_fjhly")
 texture_hover = SubResource("AtlasTexture_3mh77")
 
 [node name="CreditsButton" type="TextureButton" parent="."]
+z_index = 3
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -117,6 +128,7 @@ texture_pressed = SubResource("AtlasTexture_6gsfb")
 texture_hover = SubResource("AtlasTexture_fhglo")
 
 [node name="ExitButton" type="TextureButton" parent="."]
+z_index = 3
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

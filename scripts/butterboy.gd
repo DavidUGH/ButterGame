@@ -7,6 +7,7 @@ var friction: float
 var life: int
 var _sprite: AnimatedSprite2D
 var player
+var destination = Vector2(0,0)
 enum STATE { hurt, moving, jumping}
 var anim_state
 var _hurtbox: Area2D
@@ -29,17 +30,29 @@ func _ready():
 	
 func _physics_process(delta):
 	if !is_jumping:
-		_follow_player(delta)
+		_move(destination	)
 	else:
 		velocity = Vector2.ZERO
 	move_and_slide()
 	_handle_animations()
-	
-func _follow_player(delta):
-	var player_position = player.position
-	var direction = (player_position - position).normalized()
+	_despawn_if_out_of_view()
+
+func _despawn_if_out_of_view():
+	var scz : Vector2
+	scz.x = get_viewport().content_scale_size.x
+	scz.y = get_viewport().content_scale_size.y
+	if position.x >= scz.x+15 or position.x <= -15:
+		queue_free()
+	if position.y >= scz.y+15 or position.y <= -15:
+		queue_free()
+
+func _move(destination = Vector2(0,0)):
+	if destination == Vector2(0,0):
+		destination = player.position
+	var direction = (destination - position).normalized()
 	velocity = direction * speed
 	if is_hurt:
+		direction = (player.position - position).normalized()
 		velocity = (direction * knockback_amount) * -1
 
 func _handle_animations():
@@ -94,10 +107,10 @@ func _get_hurt():
 		_die()
 
 func _get_kicked():
-	knockback_amount = 150
+	knockback_amount = 200
 	_flash_white()
 	anim_state = STATE.hurt
-	life -= player.damage
+	life -= player.kick_damage
 	is_hurt = true
 	if life <= 0:
 		_die()

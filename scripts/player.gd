@@ -10,6 +10,7 @@ var life : int
 var speed: int
 var attack_speed: float
 var damage: int
+var kick_damage: int
 var knockback: int
 var kick_knockback: int
 var weapon_kit: WEAPON
@@ -48,8 +49,9 @@ func _ready():
 	speed = 200
 	life = 100
 	attack_speed = 0.2
-	damage = 1
-	weapon_kit = WEAPON.knife
+	damage = 2
+	kick_damage = 1
+	weapon_kit = WEAPON.knife	
 	
 	#Loading scenes to instance
 	weapon_swing = load("res://attack_effect.tscn")

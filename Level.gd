@@ -1,6 +1,8 @@
 class_name Level
 extends Node
 
+enum SIDE {Top, Bottom, Left, Right}
+
 var enemies_list: Array = []
 var butter_matrix : Array = []
 var player
@@ -28,8 +30,8 @@ func have_won():
 		print("You Win!")
 		GUI.setConsole("You Win!")
 
-func _get_random_coord_outside_square(square_size):
-	var sides = randi() % 1
+func get_random_coord_at_random_side(square_size):
+	var sides = randi() % 4
 	var rand_position = Vector2()
 	match sides:
 		0: #top
@@ -42,11 +44,35 @@ func _get_random_coord_outside_square(square_size):
 			rand_position = Vector2(randf_range(0, square_size.x), square_size.y+10)
 	return rand_position
 
+func get_random_coord_outside_square_at_side(square_size, side : SIDE):
+	var rand_position = Vector2()
+	match side:
+		SIDE.Top:
+			rand_position = Vector2(randf_range(0, square_size.x), -10)
+		SIDE.Left:
+			rand_position = Vector2(-10, randf_range(0, square_size.y))
+		SIDE.Right:
+			rand_position = Vector2(square_size.x+10, randf_range(0, square_size.y))
+		SIDE.Bottom:
+			rand_position = Vector2(randf_range(0, square_size.x), square_size.y+10)
+	return rand_position
+
 # Función para realizar el spawn de una instancia de enemigo
-func spawn_enemy(enemy_scene):
+func spawn_following_enemy_at(enemy_scene, enemy_position):
 	var nueva_instancia = enemy_scene.instantiate()
 	nueva_instancia.player = player
-	nueva_instancia.position = _get_random_coord_outside_square(get_viewport().content_scale_size)
+	nueva_instancia.position = enemy_position
+	add_child(nueva_instancia)
+	nueva_instancia.died.connect(_on_died)
+
+	# Agregar la nueva instancia a la lista de enemigos
+	enemies_list.append(nueva_instancia)
+
+func spawn_passing_enemy_at(enemy_scene, initial_position, end_position):
+	var nueva_instancia = enemy_scene.instantiate()
+	nueva_instancia.player = player
+	nueva_instancia.position = initial_position
+	nueva_instancia.destination = end_position
 	add_child(nueva_instancia)
 	nueva_instancia.died.connect(_on_died)
 
@@ -76,13 +102,12 @@ func check_tile(vector:Array[Vector2i], v:Vector2i):
 			current_tiles = current_tiles+1
 			vector.append(Vector2i(v.x, v.y))
 		else:
-			print("Hi")
+			pass
 
 func draw_circle(v: Vector2i):
 	var x = v.x
 	var y = v.y
 	var vector: Array[Vector2i]
-	# Esto es horrible pero no se me ocurre como más hacerle
 	check_tile(vector, Vector2i(x, y))
 	check_tile(vector, Vector2i(x+1, y))
 	check_tile(vector, Vector2i(x+2, y))

@@ -71,6 +71,7 @@ script = ExtResource("1_owlft")
 [node name="ButterboyCollision" type="CollisionShape2D" parent="."]
 z_index = 1
 shape = SubResource("RectangleShape2D_admgk")
+disabled = true
 
 [node name="ButterboySprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_3deu5")
