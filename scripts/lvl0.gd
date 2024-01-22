@@ -18,6 +18,7 @@ func _ready():
 	timer = $Timer
 	GUI = $GUI
 	player.gui = GUI
+	player.camera2d = $Camera2D
 	time_counter = 3.0
 	
 	screen_size = get_viewport().content_scale_size

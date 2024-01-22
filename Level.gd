@@ -84,7 +84,7 @@ func spawn_passing_enemy_at(enemy_scene, initial_position, end_position):
 
 func _on_died(position_at_death):
 	var tile = tile_map.local_to_map(position_at_death)
-	draw_circle(tile)
+	draw_square(tile)
 	#have_won()
 
 func draw_cross(v: Vector2i):

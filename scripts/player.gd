@@ -28,6 +28,7 @@ var kick_swing
 var _is_kicking: bool = false
 var gui
 
+var camera2d : Camera2D
 var _weapon_sprite : Sprite2D
 var _collision_box: CollisionShape2D
 var _sprite: AnimatedSprite2D
@@ -35,6 +36,10 @@ var _player_hitbox: Area2D
 var _player_hitbox_shape: CollisionShape2D
 var _animation_player: AnimationPlayer
 var _has_played_walk_sfx = false
+
+var _original_camera_position = Vector2(0, 0)
+var _shake_timer = 0.0
+var _shake_duration = 0.2
 
 func _ready():
 	#Instantiating child nodes
@@ -64,6 +69,7 @@ func _process(delta):
 	_follow_mouse_with_weapon()
 	_attack()
 	_kick()
+	_screen_shake(delta)
 
 func get_hurt(damage):
 	if !is_hurting:
@@ -72,6 +78,7 @@ func get_hurt(damage):
 		if life <= 0:
 			gui.set_life(0)
 			_die()
+		_start_screen_shake()
 		HitstopManager.hitstop_short()
 		_animation_player.play("hurt")
 		is_hurting = true
@@ -81,6 +88,25 @@ func get_hurt(damage):
 		is_hurting = false
 		_player_hitbox.set_deferred("monitorable", true)
 		handle_collision_of_overlapping_areas()
+
+func _screen_shake(delta):
+	if _shake_timer > 0:
+		var _shake_amplitude = 2.0
+		# Generate a random offset for the camera position within the shake amplitude
+		var offset = Vector2(randf_range(-_shake_amplitude, _shake_amplitude), randf_range(-_shake_amplitude, _shake_amplitude))
+		
+		# Apply the offset to the camera position
+		camera2d.offset = offset
+
+		# Decrease the shake timer
+		_shake_timer -= delta
+	else:
+		# Reset the camera position when the shake is complete
+		camera2d.offset = _original_camera_position
+
+func _start_screen_shake():
+	_original_camera_position = camera2d.offset
+	_shake_timer = _shake_duration
 
 func handle_collision_of_overlapping_areas():
 	var overlapping = _player_hitbox.get_overlapping_areas()
