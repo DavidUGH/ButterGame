@@ -1,4 +1,4 @@
-[gd_resource type="ProjectCache" load_steps=22 format=3 uid="uid://cm546bl656uki"]
+[gd_resource type="ProjectCache" load_steps=20 format=3 uid="uid://cm546bl656uki"]
 
 [ext_resource type="BankAsset" uid="uid://cbilo1uwjrqg7" path="res://addons/FMOD/editor/resources/banks/{5ea7a18e-fecc-429c-945d-7032db2d1495}.tres" id="1_m7rnd"]
 [ext_resource type="BankAsset" uid="uid://c6mhib1a2u6qs" path="res://addons/FMOD/editor/resources/banks/{c6ba815a-8fb7-0ede-1214-facc2ade120d}.tres" id="2_uprwn"]
@@ -9,74 +9,16 @@
 [ext_resource type="EventAsset" uid="uid://bn73jubky80nr" path="res://addons/FMOD/editor/resources/events/{c6c438a9-66fb-4e79-81a1-5bf3b889ea50}.tres" id="7_xgjba"]
 [ext_resource type="EventAsset" uid="uid://c8hqeknlrf5ri" path="res://addons/FMOD/editor/resources/events/{4d6ceebb-de21-43e1-ad3a-3aadf3779466}.tres" id="8_icmmg"]
 [ext_resource type="EventAsset" uid="uid://b84qu5s2xfas8" path="res://addons/FMOD/editor/resources/events/{d7027700-8c2f-42e2-afc3-b6067e6b1d05}.tres" id="9_12u4x"]
+[ext_resource type="EventAsset" path="res://addons/FMOD/editor/resources/events/{637b375b-7bf5-423d-996f-f562165430fc}.tres" id="9_xmerp"]
 [ext_resource type="EventAsset" uid="uid://blthxsjuwcatw" path="res://addons/FMOD/editor/resources/events/{08167721-a8c8-45ce-8b8c-4302979df2a7}.tres" id="10_06w6b"]
+[ext_resource type="EventAsset" path="res://addons/FMOD/editor/resources/events/{ad049370-db7b-43b0-87b3-93f05ef9c65a}.tres" id="10_lpfoh"]
+[ext_resource type="EventAsset" path="res://addons/FMOD/editor/resources/events/{ddc7b3d0-e2ef-4e1b-876c-dd6a6f4969f0}.tres" id="11_j1tlr"]
 [ext_resource type="ParameterAsset" uid="uid://pgowo0s4drm4" path="res://addons/FMOD/editor/resources/parameters/{9b41376c-f560-4dd0-9691-461069217d79}.tres" id="11_n718f"]
+[ext_resource type="EventAsset" path="res://addons/FMOD/editor/resources/events/{728f4fe2-40f0-4fde-b144-d4198de83aa4}.tres" id="12_2mnd8"]
 [ext_resource type="ParameterAsset" uid="uid://bhlgwt3c1awo3" path="res://addons/FMOD/editor/resources/parameters/{79d50be0-5bef-4d61-96ee-bf9513dbc6f8}.tres" id="12_ryxqy"]
-
-[sub_resource type="EventAsset" id="EventAsset_nh0po"]
-is_oneshot = true
-min_distance = 1.0
-max_distance = 20.0
-path = "event:/SFX/enemyDie"
-guid = "{637b375b-7bf5-423d-996f-f562165430fc}"
-name = "enemyDie"
-
-[sub_resource type="EventAsset" id="EventAsset_titgc"]
-is_oneshot = true
-min_distance = 1.0
-max_distance = 20.0
-path = "event:/SFX/enemyHit"
-guid = "{ad049370-db7b-43b0-87b3-93f05ef9c65a}"
-name = "enemyHit"
-
-[sub_resource type="EventAsset" id="EventAsset_1dmq8"]
-is_oneshot = true
-min_distance = 1.0
-max_distance = 20.0
-path = "event:/SFX/knifeAttack"
-guid = "{ddc7b3d0-e2ef-4e1b-876c-dd6a6f4969f0}"
-name = "knifeAttack"
-
-[sub_resource type="EventAsset" id="EventAsset_3x84j"]
-is_oneshot = true
-min_distance = 1.0
-max_distance = 20.0
-path = "event:/SFX/playerDie"
-guid = "{728f4fe2-40f0-4fde-b144-d4198de83aa4}"
-name = "playerDie"
-
-[sub_resource type="EventAsset" id="EventAsset_vqyj7"]
-is_oneshot = true
-min_distance = 1.0
-max_distance = 20.0
-path = "event:/SFX/playerHit"
-guid = "{b619927b-5d3f-4f14-9dbe-8f7b5d2e4a44}"
-name = "playerHit"
-
-[sub_resource type="EventAsset" id="EventAsset_ebfks"]
-is_oneshot = true
-min_distance = 1.0
-max_distance = 20.0
-path = "event:/SFX/powerUp"
-guid = "{8c83ee47-8bfb-4441-9fdc-efe887bd3033}"
-name = "powerUp"
-
-[sub_resource type="FMOD_STUDIO_PARAMETER_ID" id="FMOD_STUDIO_PARAMETER_ID_rxsa5"]
-data1 = 497932876
-data2 = 71823915
-
-[sub_resource type="FMOD_STUDIO_PARAMETER_DESCRIPTION" id="FMOD_STUDIO_PARAMETER_DESCRIPTION_ck6d7"]
-name = "musicPause"
-id = SubResource("FMOD_STUDIO_PARAMETER_ID_rxsa5")
-maximum = 1.0
-flags = 12
-guid = "{9769553d-c1b8-4fd2-8382-bc4ee1c385b7}"
-
-[sub_resource type="ParameterAsset" id="ParameterAsset_0rc0i"]
-parameter_description = SubResource("FMOD_STUDIO_PARAMETER_DESCRIPTION_ck6d7")
-path = "parameter:/musicPause"
-guid = "{9769553d-c1b8-4fd2-8382-bc4ee1c385b7}"
-name = "musicPause"
+[ext_resource type="EventAsset" path="res://addons/FMOD/editor/resources/events/{b619927b-5d3f-4f14-9dbe-8f7b5d2e4a44}.tres" id="13_xpet5"]
+[ext_resource type="EventAsset" path="res://addons/FMOD/editor/resources/events/{8c83ee47-8bfb-4441-9fdc-efe887bd3033}.tres" id="14_yaqb1"]
+[ext_resource type="ParameterAsset" uid="uid://2tb67f0clvkb" path="res://addons/FMOD/editor/resources/parameters/{9769553d-c1b8-4fd2-8382-bc4ee1c385b7}.tres" id="18_0wc6j"]
 
 [resource]
 banks = {
@@ -88,14 +30,14 @@ banks = {
 events = {
 "{08167721-a8c8-45ce-8b8c-4302979df2a7}": ExtResource("10_06w6b"),
 "{4d6ceebb-de21-43e1-ad3a-3aadf3779466}": ExtResource("8_icmmg"),
-"{637b375b-7bf5-423d-996f-f562165430fc}": SubResource("EventAsset_nh0po"),
-"{728f4fe2-40f0-4fde-b144-d4198de83aa4}": SubResource("EventAsset_3x84j"),
-"{8c83ee47-8bfb-4441-9fdc-efe887bd3033}": SubResource("EventAsset_ebfks"),
-"{ad049370-db7b-43b0-87b3-93f05ef9c65a}": SubResource("EventAsset_titgc"),
-"{b619927b-5d3f-4f14-9dbe-8f7b5d2e4a44}": SubResource("EventAsset_vqyj7"),
+"{637b375b-7bf5-423d-996f-f562165430fc}": ExtResource("9_xmerp"),
+"{728f4fe2-40f0-4fde-b144-d4198de83aa4}": ExtResource("12_2mnd8"),
+"{8c83ee47-8bfb-4441-9fdc-efe887bd3033}": ExtResource("14_yaqb1"),
+"{ad049370-db7b-43b0-87b3-93f05ef9c65a}": ExtResource("10_lpfoh"),
+"{b619927b-5d3f-4f14-9dbe-8f7b5d2e4a44}": ExtResource("13_xpet5"),
 "{c6c438a9-66fb-4e79-81a1-5bf3b889ea50}": ExtResource("7_xgjba"),
 "{d7027700-8c2f-42e2-afc3-b6067e6b1d05}": ExtResource("9_12u4x"),
-"{ddc7b3d0-e2ef-4e1b-876c-dd6a6f4969f0}": SubResource("EventAsset_1dmq8")
+"{ddc7b3d0-e2ef-4e1b-876c-dd6a6f4969f0}": ExtResource("11_j1tlr")
 }
 busses = {
 "{2f56e35b-4779-4608-b615-7d43ba1297c9}": ExtResource("6_7f43l"),
@@ -103,7 +45,7 @@ busses = {
 }
 parameters = {
 "{79d50be0-5bef-4d61-96ee-bf9513dbc6f8}": ExtResource("12_ryxqy"),
-"{9769553d-c1b8-4fd2-8382-bc4ee1c385b7}": SubResource("ParameterAsset_0rc0i"),
+"{9769553d-c1b8-4fd2-8382-bc4ee1c385b7}": ExtResource("18_0wc6j"),
 "{9b41376c-f560-4dd0-9691-461069217d79}": ExtResource("11_n718f")
 }
 bank_tree = [{
@@ -155,37 +97,37 @@ event_tree = [{
 "item_type": 1,
 "node_name": "enemyDie",
 "path": "event:/SFX/enemyDie",
-"resource": SubResource("EventAsset_nh0po")
+"resource": ExtResource("9_xmerp")
 }, {
 "children": [],
 "item_type": 1,
 "node_name": "enemyHit",
 "path": "event:/SFX/enemyHit",
-"resource": SubResource("EventAsset_titgc")
+"resource": ExtResource("10_lpfoh")
 }, {
 "children": [],
 "item_type": 1,
 "node_name": "knifeAttack",
 "path": "event:/SFX/knifeAttack",
-"resource": SubResource("EventAsset_1dmq8")
+"resource": ExtResource("11_j1tlr")
 }, {
 "children": [],
 "item_type": 1,
 "node_name": "playerDie",
 "path": "event:/SFX/playerDie",
-"resource": SubResource("EventAsset_3x84j")
+"resource": ExtResource("12_2mnd8")
 }, {
 "children": [],
 "item_type": 1,
 "node_name": "playerHit",
 "path": "event:/SFX/playerHit",
-"resource": SubResource("EventAsset_vqyj7")
+"resource": ExtResource("13_xpet5")
 }, {
 "children": [],
 "item_type": 1,
 "node_name": "powerUp",
 "path": "event:/SFX/powerUp",
-"resource": SubResource("EventAsset_ebfks")
+"resource": ExtResource("14_yaqb1")
 }, {
 "children": [],
 "item_type": 1,
@@ -228,7 +170,7 @@ parameter_tree = [{
 "item_type": 6,
 "node_name": "musicPause",
 "path": "parameter:/musicPause",
-"resource": SubResource("ParameterAsset_0rc0i")
+"resource": ExtResource("18_0wc6j")
 }, {
 "children": [],
 "item_type": 6,

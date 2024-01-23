@@ -1,18 +1,18 @@
 [gd_resource type="ParameterAsset" load_steps=3 format=3 uid="uid://bhlgwt3c1awo3"]
 
-[sub_resource type="FMOD_STUDIO_PARAMETER_ID" id="FMOD_STUDIO_PARAMETER_ID_po8lt"]
+[sub_resource type="FMOD_STUDIO_PARAMETER_ID" id="FMOD_STUDIO_PARAMETER_ID_5xrer"]
 data1 = 4040633386
 data2 = 2890970526
 
-[sub_resource type="FMOD_STUDIO_PARAMETER_DESCRIPTION" id="FMOD_STUDIO_PARAMETER_DESCRIPTION_7u6ij"]
+[sub_resource type="FMOD_STUDIO_PARAMETER_DESCRIPTION" id="FMOD_STUDIO_PARAMETER_DESCRIPTION_qktr6"]
 name = "musicVolume"
-id = SubResource("FMOD_STUDIO_PARAMETER_ID_po8lt")
+id = SubResource("FMOD_STUDIO_PARAMETER_ID_5xrer")
 maximum = 1.0
 flags = 4
 guid = "{79d50be0-5bef-4d61-96ee-bf9513dbc6f8}"
 
 [resource]
-parameter_description = SubResource("FMOD_STUDIO_PARAMETER_DESCRIPTION_7u6ij")
+parameter_description = SubResource("FMOD_STUDIO_PARAMETER_DESCRIPTION_qktr6")
 path = "parameter:/musicVolume"
 guid = "{79d50be0-5bef-4d61-96ee-bf9513dbc6f8}"
 name = "musicVolume"

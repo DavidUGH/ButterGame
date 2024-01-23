@@ -2,25 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://dcyrdkfercaxp" path="res://sprites/enemies/butterboi-hort.png" id="1_0rrga"]
 [ext_resource type="Script" path="res://scripts/butterboy.gd" id="1_owlft"]
+[ext_resource type="EventAsset" path="res://addons/FMOD/editor/resources/events/{ad049370-db7b-43b0-87b3-93f05ef9c65a}.tres" id="2_4r40y"]
 [ext_resource type="Texture2D" uid="uid://cuoc4gdjw8esb" path="res://sprites/enemies/butterboi-Sheet.png" id="2_87a4j"]
 [ext_resource type="Shader" path="res://butterboy.gdshader" id="2_vacgc"]
+[ext_resource type="EventAsset" path="res://addons/FMOD/editor/resources/events/{637b375b-7bf5-423d-996f-f562165430fc}.tres" id="3_vq0wb"]
 [ext_resource type="Texture2D" uid="uid://eyqn3ndyffad" path="res://sprites/shadow.png" id="5_gp68d"]
-
-[sub_resource type="EventAsset" id="EventAsset_titgc"]
-is_oneshot = true
-min_distance = 1.0
-max_distance = 20.0
-path = "event:/SFX/enemyHit"
-guid = "{ad049370-db7b-43b0-87b3-93f05ef9c65a}"
-name = "enemyHit"
-
-[sub_resource type="EventAsset" id="EventAsset_nh0po"]
-is_oneshot = true
-min_distance = 1.0
-max_distance = 20.0
-path = "event:/SFX/enemyDie"
-guid = "{637b375b-7bf5-423d-996f-f562165430fc}"
-name = "enemyDie"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_admgk"]
 
@@ -83,8 +69,8 @@ collision_layer = 2
 collision_mask = 2
 platform_floor_layers = 4294901760
 script = ExtResource("1_owlft")
-hurt_sfx = SubResource("EventAsset_titgc")
-die_sfx = SubResource("EventAsset_nh0po")
+hurt_sfx = ExtResource("2_4r40y")
+die_sfx = ExtResource("3_vq0wb")
 
 [node name="ButterboyCollision" type="CollisionShape2D" parent="."]
 z_index = 1

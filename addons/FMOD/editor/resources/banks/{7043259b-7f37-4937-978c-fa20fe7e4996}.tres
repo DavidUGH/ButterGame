@@ -2,7 +2,7 @@
 
 [resource]
 file_path = "res://banks/SFX.bank"
-modified_time = 1705979264
+modified_time = 1705978078
 path = "bank:/SFX"
 guid = "{7043259b-7f37-4937-978c-fa20fe7e4996}"
 name = "SFX"
