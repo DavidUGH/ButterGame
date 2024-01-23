@@ -1,0 +1,9 @@
+[gd_resource type="EventAsset" format=3 uid="uid://ccqosuo5gvy6p"]
+
+[resource]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/SFX/playerDie"
+guid = "{728f4fe2-40f0-4fde-b144-d4198de83aa4}"
+name = "playerDie"
