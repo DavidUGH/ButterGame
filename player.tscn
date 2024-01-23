@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://s6bmsorcy044"]
+[gd_scene load_steps=30 format=3 uid="uid://s6bmsorcy044"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ykyym"]
 [ext_resource type="EventAsset" uid="uid://b84qu5s2xfas8" path="res://addons/FMOD/editor/resources/events/{d7027700-8c2f-42e2-afc3-b6067e6b1d05}.tres" id="2_aiu6s"]
@@ -7,6 +7,22 @@
 [ext_resource type="Texture2D" uid="uid://dnue4wh2avv4s" path="res://sprites/Rogue/Run/Run-Sheet-Weapons.png" id="4_tfwpj"]
 [ext_resource type="Texture2D" uid="uid://bks2d2w3u3b5b" path="res://sprites/knife.png" id="5_ffkdh"]
 [ext_resource type="Texture2D" uid="uid://eyqn3ndyffad" path="res://sprites/shadow.png" id="6_qnwfy"]
+
+[sub_resource type="EventAsset" id="EventAsset_1dmq8"]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/SFX/knifeAttack"
+guid = "{ddc7b3d0-e2ef-4e1b-876c-dd6a6f4969f0}"
+name = "knifeAttack"
+
+[sub_resource type="EventAsset" id="EventAsset_vqyj7"]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/SFX/playerHit"
+guid = "{b619927b-5d3f-4f14-9dbe-8f7b5d2e4a44}"
+name = "playerHit"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_olwyu"]
 radius = 3.99996
@@ -172,6 +188,8 @@ _data = {
 collision_layer = 9
 script = ExtResource("1_ykyym")
 walk_sfx = ExtResource("2_aiu6s")
+attack_sfx = SubResource("EventAsset_1dmq8")
+hurt_sfx = SubResource("EventAsset_vqyj7")
 
 [node name="PlayerShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, 29)

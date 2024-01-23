@@ -1,0 +1,9 @@
+[gd_resource type="EventAsset" format=3 uid="uid://ct3k52lnmd3m6"]
+
+[resource]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/SFX/knifeAttack"
+guid = "{ddc7b3d0-e2ef-4e1b-876c-dd6a6f4969f0}"
+name = "knifeAttack"
