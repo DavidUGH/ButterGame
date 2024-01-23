@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 @export var walk_sfx : EventAsset
+@export var attack_sfx : EventAsset
+@export var hurt_sfx : EventAsset
 
 signal died
 
@@ -81,6 +83,7 @@ func get_hurt(damage):
 		_start_screen_shake()
 		HitstopManager.hitstop_short()
 		_animation_player.play("hurt")
+		FMODRuntime.play_one_shot(hurt_sfx)
 		is_hurting = true
 		_player_hitbox.set_deferred("monitorable", false)
 		await get_tree().create_timer(invis_frames).timeout
@@ -164,6 +167,7 @@ func _attack():
 		weapon_swing_spawn.position.x = x + 40 * cos(_weapon_sprite.rotation)
 		weapon_swing_spawn.position.y = y + 40 * sin(_weapon_sprite.rotation)
 		weapon_swing_spawn.rotation = _weapon_sprite.rotation
+		FMODRuntime.play_one_shot(attack_sfx)
 		weapon_swing_spawn.play("default")
 		is_attacking = true
 		await get_tree().create_timer(attack_speed).timeout

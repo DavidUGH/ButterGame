@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+@export var hurt_sfx : EventAsset
+@export var die_sfx : EventAsset
+
 signal died(position_at_death)
 
 var speed: int
@@ -65,6 +68,7 @@ func _handle_animations():
 			_sprite.play("jumping")
 
 func _die():
+	FMODRuntime.play_one_shot(die_sfx)
 	died.emit(position)
 	queue_free()
 
@@ -97,12 +101,14 @@ func jump():
 	sprite_tween.tween_property(_sprite, "position", sprite_position, 0.25)
 	_hurtbox.set_deferred("monitoring", false)
 
+
 func _get_hurt():
 	knockback_amount = 60
 	_flash_white()
 	anim_state = STATE.hurt
 	life -= player.damage
 	is_hurt = true
+	FMODRuntime.play_one_shot(hurt_sfx)
 	if life <= 0:
 		_die()
 

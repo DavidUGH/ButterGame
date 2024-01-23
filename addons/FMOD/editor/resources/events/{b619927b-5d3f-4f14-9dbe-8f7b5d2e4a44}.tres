@@ -1,0 +1,9 @@
+[gd_resource type="EventAsset" format=3 uid="uid://cgxhljjj05s6j"]
+
+[resource]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/SFX/playerHit"
+guid = "{b619927b-5d3f-4f14-9dbe-8f7b5d2e4a44}"
+name = "playerHit"
