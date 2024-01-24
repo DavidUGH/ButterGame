@@ -3,6 +3,7 @@ extends StudioBankLoader
 var volume : float
 
 func _ready():
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	set_music_volume(0.7)
 	set_sfx_volume(0.7)
 

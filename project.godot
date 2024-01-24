@@ -97,6 +97,7 @@ secondary_attack={
 2d_physics/layer_2="enemigos"
 2d_physics/layer_3="ataques_jugador"
 2d_physics/layer_4="jugador_collision"
+2d_physics/layer_9="power_up"
 
 [rendering]
 

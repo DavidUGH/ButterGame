@@ -13,6 +13,8 @@ func _ready():
 	console_label = $ConsoleLabel
 	pause_menu = $OptionsMenu
 	pause_menu.gui = self
+	pause_menu.music_volume.value = BankManager.get_music_volume()
+	pause_menu.sfx_volume.value = BankManager.get_sfx_volume()
 
 func _process(delta):
 	if(flag&&i<1):
@@ -30,5 +32,4 @@ func setConsole(msg):
 func _on_texture_button_pressed():
 	get_tree().paused = true
 	flag = true
-	
 

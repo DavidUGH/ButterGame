@@ -185,3 +185,17 @@ func _kick():
 		_is_kicking = true
 		await get_tree().create_timer(1).timeout
 		_is_kicking = false
+
+
+func _on_player_hitbox_area_entered(area):
+	var parent = area.get_parent()
+	if parent.name == "PowerUp":
+		match parent.stat_type:
+			parent.TYPE.Damage:
+				damage += parent.pick_up()
+			parent.TYPE.AS:
+				attack_speed -= parent.pick_up()
+			parent.TYPE.MS:
+				speed += parent.pick_up()
+			_:
+				print("This shouldn't happen")

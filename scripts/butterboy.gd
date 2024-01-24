@@ -12,7 +12,7 @@ func _ready():
 	
 func _physics_process(delta):
 	if !is_jumping:
-		_move(destination	)
+		_move(destination)
 	else:
 		velocity = Vector2.ZERO
 	move_and_slide()

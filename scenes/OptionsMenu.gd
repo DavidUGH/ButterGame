@@ -1,10 +1,13 @@
 extends Control
 
 var gui
+var music_volume
+var sfx_volume
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	music_volume = $musicVolume
+	sfx_volume = $sfXVolume
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -25,7 +28,6 @@ func _on_continue_button_pressed():
 	gui.flag = false
 	get_tree().paused = false
 	self.position.y = -220
-
 
 func _on_restart_button_pressed():
 	pass # Replace with function body.

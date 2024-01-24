@@ -1,8 +1,12 @@
 class_name Level
 extends Node
 
+var powerup = preload("res://sprites/scenario/power_up.tscn")
+
 enum SIDE {Top, Bottom, Left, Right}
 
+var last_death = Vector2()
+var enemy_death_count = 0
 var enemies_list: Array = []
 var butter_matrix : Array = []
 var player
@@ -16,6 +20,8 @@ var columnas = 32
 
 var tile_map : TileMap
 var GUI
+var _powerup_counter = 0
+var enemies_till_powerup = 10
 
 
 func set_tileset(t):
@@ -28,10 +34,21 @@ func _game_over():
 	get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
 
 func have_won():
-	GUI.setConsole("CURRENT TILES: "+ str(current_tiles)+"\nTILES TO WIN: "+ str(tiles_to_win))
+	#GUI.setConsole("CURRENT TILES: "+ str(current_tiles)+"\nTILES TO WIN: "+ str(tiles_to_win))
 	if(current_tiles>=tiles_to_win):
 		GUI.setConsole("You Win!")
 		_game_over()
+
+func spawn_powerups():
+	if enemy_death_count % enemies_till_powerup == 0:
+		print("new powerup")
+		var new_powerup = powerup.instantiate()
+		new_powerup.set_type(_powerup_counter)
+		new_powerup.position = last_death
+		call_deferred("add_child", new_powerup)
+		_powerup_counter += 1
+		if _powerup_counter > 3:
+			_powerup_counter = 0
 
 func get_random_coord_at_random_side(square_size):
 	var sides = randi() % 4
@@ -85,7 +102,10 @@ func spawn_passing_enemy_at(enemy_scene, initial_position, end_position):
 func _on_died(position_at_death):
 	var tile = tile_map.local_to_map(position_at_death)
 	draw_square(tile)
-	#have_won()
+	enemy_death_count += 1
+	last_death = position_at_death
+	have_won()
+	spawn_powerups()
 
 func draw_cross(v: Vector2i):
 	var x = v.x
