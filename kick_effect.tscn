@@ -42,6 +42,8 @@ animations = [{
 [node name="KickEffect" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_l3bvm")
 autoplay = "default"
+frame = 3
+frame_progress = 1.0
 script = ExtResource("2_bm5mg")
 
 [node name="Area2D" type="Area2D" parent="."]

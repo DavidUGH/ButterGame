@@ -10,8 +10,8 @@ var enemy_death_count = 0
 var enemies_list: Array = []
 var butter_matrix : Array = []
 var player
-var tiles_to_win = 32*24
-var current_tiles = 0
+var tiles_to_win : float = 32*24 
+var current_tiles : float = 0 
 const BREAD_LAYER = 0
 const BUTTER_LAYER = 2
 
@@ -34,7 +34,6 @@ func _game_over():
 	get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
 
 func have_won():
-	#GUI.setConsole("CURRENT TILES: "+ str(current_tiles)+"\nTILES TO WIN: "+ str(tiles_to_win))
 	if(current_tiles>=tiles_to_win):
 		GUI.setConsole("You Win!")
 		_game_over()
@@ -102,10 +101,15 @@ func spawn_passing_enemy_at(enemy_scene, initial_position, end_position):
 func _on_died(position_at_death):
 	var tile = tile_map.local_to_map(position_at_death)
 	draw_square(tile)
+<<<<<<< HEAD
 	enemy_death_count += 1
 	last_death = position_at_death
 	have_won()
 	spawn_powerups()
+=======
+	GUI.setButterProgress((current_tiles/ tiles_to_win) * 100)
+	#have_won()
+>>>>>>> a799182c8f7b22647543678da2c49fe7b82a9a21
 
 func draw_cross(v: Vector2i):
 	var x = v.x

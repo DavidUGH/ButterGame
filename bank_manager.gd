@@ -16,6 +16,7 @@ func get_sfx_volume():
 	return ceil(v * 10) / 10
 
 func set_music_volume(v):
+	print("Hi")
 	FMODStudioModule.get_studio_system().set_parameter_by_name("musicVolume", v)
 
 func set_sfx_volume(v):
