@@ -1,5 +1,6 @@
 extends Control
 
+var gui
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,14 +13,17 @@ func _process(delta):
 
 
 func _on_music_volume_value_changed(value):
-	pass # Replace with function body.
+	BankManager.set_music_volume(value)
 
 
 func _on_sf_x_volume_value_changed(value):
-	pass # Replace with function body.
+	BankManager.set_sfx_volume(value)
 
 
 func _on_continue_button_pressed():
+	gui.i = 0
+	gui.flag = false
+	get_tree().paused = false
 	self.position.y = -220
 
 
