@@ -27,9 +27,10 @@ var is_falling: bool
 var invis_frames = 2
 var weapon_swing
 var kick_swing
+var special_kick_swing
 var _is_kicking: bool = false
 var gui
-var kick_base_knockback : float
+var kick_knockback : float
 
 var camera2d : Camera2D
 var _weapon_sprite : Sprite2D
@@ -43,6 +44,7 @@ var _has_played_walk_sfx = false
 var _original_camera_position = Vector2(0, 0)
 var _shake_timer = 0.0
 var _shake_duration = 0.2
+var hold_duration = 0
 
 func _ready():
 	#Instantiating child nodes
@@ -59,13 +61,14 @@ func _ready():
 	attack_speed = 0.2
 	damage = 2
 	kick_damage = 1
-	kick_base_knockback = 180
+	kick_knockback = 180
 	knockback = 30
 	weapon_kit = WEAPON.knife
 	
 	#Loading scenes to instance
 	weapon_swing = load("res://attack_effect.tscn")
 	kick_swing = load("res://kick_effect.tscn")
+	special_kick_swing = load("res://special_kick_effect.tscn")
 
 func _process(delta):
 	_move()
@@ -73,7 +76,7 @@ func _process(delta):
 	move_and_slide()
 	_follow_mouse_with_weapon()
 	_attack()
-	_kick()
+	_kick(delta)
 	_screen_shake(delta)
 
 func get_hurt(damage):
@@ -177,19 +180,49 @@ func _attack():
 		await get_tree().create_timer(attack_speed).timeout
 		is_attacking = false
 
-func _kick():
-	if Input.is_action_just_pressed("secondary_attack") and !_is_kicking:
-		var kick_swing_spawn = kick_swing.instantiate()
-		add_child(kick_swing_spawn)
-		var x = _weapon_sprite.position.x
-		var y = _weapon_sprite.position.y
-		kick_swing_spawn.position.x = x + 40 * cos(_weapon_sprite.rotation)
-		kick_swing_spawn.position.y = y + 40 * sin(_weapon_sprite.rotation)
-		kick_swing_spawn.rotation = _weapon_sprite.rotation
-		_is_kicking = true
-		await get_tree().create_timer(0.2).timeout
-		_is_kicking = false
+func _kick(delta):
+	if Input.is_action_pressed("secondary_attack") and !_is_kicking:
+		hold_duration += delta
+	if Input.is_action_just_released("secondary_attack") and !_is_kicking:
+		print(hold_duration)
+		if hold_duration <= 0.3:
+			_spawn_kick()
+		elif hold_duration <= 0.5:
+			_spawn_kick(250, 0.5, 1.4)
+		elif hold_duration <= 0.8:
+			_spawn_kick(310, 0.6, 1.8)
+		elif hold_duration >= 1:
+			_special_kick()
+		hold_duration = 0
+		
 
+func _spawn_kick(new_knockback = 210, cooldown = 0.2, new_scale = 1):
+	var new_scale_v = Vector2(new_scale, new_scale)
+	var kick_swing_spawn = kick_swing.instantiate()
+	kick_knockback = new_knockback
+	add_child(kick_swing_spawn)
+	var x = _weapon_sprite.position.x
+	var y = _weapon_sprite.position.y
+	kick_swing_spawn.position.x = x + 40 * cos(_weapon_sprite.rotation)
+	kick_swing_spawn.position.y = y + 40 * sin(_weapon_sprite.rotation)
+	kick_swing_spawn.rotation = _weapon_sprite.rotation
+	kick_swing_spawn.scale = new_scale_v
+	_is_kicking = true
+	await get_tree().create_timer(cooldown).timeout
+	_is_kicking = false
+
+func _special_kick():
+	var kick_swing_spawn = special_kick_swing.instantiate()
+	kick_knockback = 400
+	add_child(kick_swing_spawn)
+	var x = _weapon_sprite.position.x
+	var y = _weapon_sprite.position.y
+	kick_swing_spawn.position.x = x + 40 * cos(_weapon_sprite.rotation)
+	kick_swing_spawn.position.y = y + 40 * sin(_weapon_sprite.rotation)
+	kick_swing_spawn.rotation = _weapon_sprite.rotation
+	_is_kicking = true
+	await get_tree().create_timer(1).timeout
+	_is_kicking = false
 
 func _on_player_hitbox_area_entered(area):
 	var parent = area.get_parent()

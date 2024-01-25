@@ -103,7 +103,7 @@ func _get_hurt():
 		_die()
 
 func _get_kicked():
-	knockback_amount = player.kick_base_knockback
+	knockback_amount = player.kick_knockback
 	_flash_white()
 	anim_state = STATE.kicked
 	life -= player.kick_damage

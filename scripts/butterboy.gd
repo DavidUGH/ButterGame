@@ -28,6 +28,8 @@ func _on_hurtbox_area_entered(area):
 			_get_hurt()
 		"KickEffect":
 			_get_kicked()
+		"SpecialKickEffect":
+			_get_kicked()
 
 #no te preocupes por esto, copialo y ya
 func _on_butterboy_sprite_animation_finished():
