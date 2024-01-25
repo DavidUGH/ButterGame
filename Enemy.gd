@@ -91,6 +91,8 @@ func jump():
 	_hurtbox.set_deferred("monitoring", false)
 
 func _get_hurt():
+	if is_kicked: # a bug was happening when enemies got attacked while in their kick animation
+		is_kicked = false
 	knockback_amount = player.knockback
 	_flash_white()
 	anim_state = STATE.hurt

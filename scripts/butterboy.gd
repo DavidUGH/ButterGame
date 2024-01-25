@@ -29,10 +29,12 @@ func _on_hurtbox_area_entered(area):
 		"KickEffect":
 			_get_kicked()
 
+#no te preocupes por esto, copialo y ya
 func _on_butterboy_sprite_animation_finished():
 	match anim_state:
 		STATE.hurt:
 			anim_state = STATE.moving
+			is_stunned = false
 			is_hurt = false
 		STATE.jumping:
 			anim_state = STATE.moving
