@@ -40,6 +40,7 @@ func _on_butterboy_sprite_animation_finished():
 			_hurtbox.set_deferred("monitoring", true)
 		STATE.kicked:
 			anim_state = STATE.stunned
+			is_hurt = false
 			is_kicked = false
 			is_stunned = true
 		STATE.stunned:

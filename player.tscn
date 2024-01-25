@@ -8,8 +8,8 @@
 [ext_resource type="EventAsset" uid="uid://cgxhljjj05s6j" path="res://addons/FMOD/editor/resources/events/{b619927b-5d3f-4f14-9dbe-8f7b5d2e4a44}.tres" id="4_jkl8g"]
 [ext_resource type="Texture2D" uid="uid://dnue4wh2avv4s" path="res://sprites/Rogue/Run/Run-Sheet-Weapons.png" id="4_tfwpj"]
 [ext_resource type="EventAsset" uid="uid://c0xruqkfjb5db" path="res://addons/FMOD/editor/resources/events/{8c83ee47-8bfb-4441-9fdc-efe887bd3033}.tres" id="5_7aajq"]
-[ext_resource type="Texture2D" uid="uid://bks2d2w3u3b5b" path="res://sprites/knife.png" id="5_ffkdh"]
 [ext_resource type="Texture2D" uid="uid://eyqn3ndyffad" path="res://sprites/shadow.png" id="6_qnwfy"]
+[ext_resource type="Texture2D" uid="uid://y0atjiy3nwye" path="res://sprites/pointer.png" id="11_or3xl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_olwyu"]
 radius = 3.99996
@@ -196,10 +196,6 @@ collision_mask = 18
 position = Vector2(0, 16)
 shape = SubResource("CapsuleShape2D_bxaeh")
 
-[node name="KnifeSprite" type="Sprite2D" parent="."]
-position = Vector2(0, 16)
-texture = ExtResource("5_ffkdh")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_12ypq")
@@ -211,5 +207,10 @@ z_index = -2
 position = Vector2(0, 32)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("6_qnwfy")
+
+[node name="Pointer" type="Sprite2D" parent="."]
+position = Vector2(0, 16)
+texture = ExtResource("11_or3xl")
+offset = Vector2(33.43, 0)
 
 [connection signal="area_entered" from="PlayerHitbox" to="." method="_on_player_hitbox_area_entered"]

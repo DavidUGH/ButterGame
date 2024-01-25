@@ -50,7 +50,7 @@ func _ready():
 	_collision_box = $PlayerShape
 	_player_hitbox = $PlayerHitbox
 	_player_hitbox_shape = $PlayerHitbox/PlayerHitboxShape
-	_weapon_sprite = $KnifeSprite
+	_weapon_sprite = $Pointer
 	_animation_player = $AnimationPlayer
 	is_hurting = false
 	#Attribute initialization
