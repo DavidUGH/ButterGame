@@ -2,7 +2,7 @@ extends Sprite2D
 
 enum TYPE {Damage, AS, MS}
 var stat_type : TYPE
-var stat : int
+var stat = 0.0
 
 func set_type(type_stat):
 	stat = type_stat

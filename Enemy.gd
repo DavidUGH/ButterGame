@@ -11,13 +11,15 @@ var life: int
 var _sprite: AnimatedSprite2D
 var player
 var destination = Vector2(0,0)
-enum STATE { hurt, moving, jumping}
+enum STATE { hurt, moving, jumping, kicked, stunned}
 var anim_state
 var _hurtbox: Area2D
 var _is_flashing : bool
 var is_hurt = false
 var damage : int
 var is_jumping : bool
+var is_kicked = false
+var is_stunned = false
 var knockback_amount : int
 
 func _despawn_if_out_of_view():
@@ -30,11 +32,14 @@ func _despawn_if_out_of_view():
 		queue_free()
 
 func _move(destination = Vector2(0,0)):
+	if is_stunned:
+		velocity = Vector2.ZERO
+		return
 	if destination == Vector2(0,0):
 		destination = player.position
 	var direction = (destination - position).normalized()
 	velocity = direction * speed
-	if is_hurt:
+	if is_kicked or is_hurt:
 		direction = (player.position - position).normalized()
 		velocity = (direction * knockback_amount) * -1
 
@@ -46,6 +51,10 @@ func _handle_animations():
 			_sprite.play("moving")
 		STATE.jumping:
 			_sprite.play("jumping")
+		STATE.kicked:
+			_sprite.play("kicked")
+		STATE.stunned:
+			_sprite.play("stunned")
 
 func _die():
 	FMODRuntime.play_one_shot(die_sfx)
@@ -82,7 +91,7 @@ func jump():
 	_hurtbox.set_deferred("monitoring", false)
 
 func _get_hurt():
-	knockback_amount = 60
+	knockback_amount = player.knockback
 	_flash_white()
 	anim_state = STATE.hurt
 	life -= player.damage
@@ -92,10 +101,10 @@ func _get_hurt():
 		_die()
 
 func _get_kicked():
-	knockback_amount = 200
+	knockback_amount = player.kick_base_knockback
 	_flash_white()
-	anim_state = STATE.hurt
+	anim_state = STATE.kicked
 	life -= player.kick_damage
-	is_hurt = true
+	is_kicked = true
 	if life <= 0:
 		_die()

@@ -110,6 +110,7 @@ texture_progress = SubResource("AtlasTexture_0ko6b")
 texture_progress_offset = Vector2(56, 12)
 
 [node name="StaminaBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
 offset_right = 170.0
 offset_bottom = 46.0
 value = 100.0
@@ -118,6 +119,7 @@ texture_progress = SubResource("AtlasTexture_6b7m4")
 texture_progress_offset = Vector2(56, 26)
 
 [node name="ButterBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
 offset_left = 89.0
 offset_top = 248.0
 offset_right = 337.0

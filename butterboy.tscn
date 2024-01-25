@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dye7un7bwbjih"]
+[gd_scene load_steps=18 format=3 uid="uid://dye7un7bwbjih"]
 
 [ext_resource type="Texture2D" uid="uid://dcyrdkfercaxp" path="res://sprites/enemies/butterboi-hort.png" id="1_0rrga"]
 [ext_resource type="Script" path="res://scripts/butterboy.gd" id="1_owlft"]
@@ -23,12 +23,20 @@ region = Rect2(32, 0, 32, 32)
 atlas = ExtResource("2_87a4j")
 region = Rect2(32, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_7fevp"]
+atlas = ExtResource("1_0rrga")
+region = Rect2(32, 0, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_ayt52"]
 atlas = ExtResource("2_87a4j")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w5dbr"]
 atlas = ExtResource("2_87a4j")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypwh6"]
+atlas = ExtResource("1_0rrga")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g86t6"]
@@ -51,6 +59,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_7fevp")
+}],
+"loop": false,
+"name": &"kicked",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ayt52")
 }, {
 "duration": 1.0,
@@ -58,6 +74,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"moving",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_ypwh6")
+}],
+"loop": false,
+"name": &"stunned",
 "speed": 5.0
 }]
 
@@ -80,7 +104,7 @@ disabled = true
 [node name="ButterboySprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_3deu5")
 sprite_frames = SubResource("SpriteFrames_g86t6")
-animation = &"jumping"
+animation = &"stunned"
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 2

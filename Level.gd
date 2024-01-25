@@ -46,7 +46,7 @@ func spawn_powerups():
 		new_powerup.position = last_death
 		call_deferred("add_child", new_powerup)
 		_powerup_counter += 1
-		if _powerup_counter > 3:
+		if _powerup_counter > 2:
 			_powerup_counter = 0
 
 func get_random_coord_at_random_side(square_size):
@@ -101,15 +101,10 @@ func spawn_passing_enemy_at(enemy_scene, initial_position, end_position):
 func _on_died(position_at_death):
 	var tile = tile_map.local_to_map(position_at_death)
 	draw_square(tile)
-<<<<<<< HEAD
 	enemy_death_count += 1
 	last_death = position_at_death
 	have_won()
 	spawn_powerups()
-=======
-	GUI.setButterProgress((current_tiles/ tiles_to_win) * 100)
-	#have_won()
->>>>>>> a799182c8f7b22647543678da2c49fe7b82a9a21
 
 func draw_cross(v: Vector2i):
 	var x = v.x

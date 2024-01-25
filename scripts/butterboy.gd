@@ -30,10 +30,18 @@ func _on_hurtbox_area_entered(area):
 			_get_kicked()
 
 func _on_butterboy_sprite_animation_finished():
-	if anim_state == STATE.hurt:
-		anim_state = STATE.moving
-		is_hurt = false
-	if anim_state == STATE.jumping:
-		anim_state = STATE.moving
-		is_jumping = false
-		_hurtbox.set_deferred("monitoring", true)
+	match anim_state:
+		STATE.hurt:
+			anim_state = STATE.moving
+			is_hurt = false
+		STATE.jumping:
+			anim_state = STATE.moving
+			is_jumping = false
+			_hurtbox.set_deferred("monitoring", true)
+		STATE.kicked:
+			anim_state = STATE.stunned
+			is_kicked = false
+			is_stunned = true
+		STATE.stunned:
+			anim_state = STATE.moving
+			is_stunned = false

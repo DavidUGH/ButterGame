@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var walk_sfx : EventAsset
 @export var attack_sfx : EventAsset
 @export var hurt_sfx : EventAsset
+@export var powerup_sfx : EventAsset
 
 signal died
 
@@ -13,8 +14,7 @@ var speed: int
 var attack_speed: float
 var damage: int
 var kick_damage: int
-var knockback: int
-var kick_knockback: int
+var knockback: float
 var weapon_kit: WEAPON
 var can_walk: bool
 var can_attack: bool
@@ -29,6 +29,7 @@ var weapon_swing
 var kick_swing
 var _is_kicking: bool = false
 var gui
+var kick_base_knockback : float
 
 var camera2d : Camera2D
 var _weapon_sprite : Sprite2D
@@ -58,7 +59,9 @@ func _ready():
 	attack_speed = 0.2
 	damage = 2
 	kick_damage = 1
-	weapon_kit = WEAPON.knife	
+	kick_base_knockback = 180
+	knockback = 30
+	weapon_kit = WEAPON.knife
 	
 	#Loading scenes to instance
 	weapon_swing = load("res://attack_effect.tscn")
@@ -114,8 +117,9 @@ func _start_screen_shake():
 func handle_collision_of_overlapping_areas():
 	var overlapping = _player_hitbox.get_overlapping_areas()
 	if !overlapping.is_empty():
-		#No me gusta hacer esto pero ya que
-		get_hurt(overlapping[0].get_parent().damage)
+		if overlapping[0].get_parent().name == "Butterboy":
+			#No me gusta hacer esto pero ya que
+			get_hurt(overlapping[0].get_parent().damage)
 
 func _play_walk_sfx():
 	if !_has_played_walk_sfx:
@@ -183,13 +187,14 @@ func _kick():
 		kick_swing_spawn.position.y = y + 40 * sin(_weapon_sprite.rotation)
 		kick_swing_spawn.rotation = _weapon_sprite.rotation
 		_is_kicking = true
-		await get_tree().create_timer(1).timeout
+		await get_tree().create_timer(0.2).timeout
 		_is_kicking = false
 
 
 func _on_player_hitbox_area_entered(area):
 	var parent = area.get_parent()
 	if parent.name == "PowerUp":
+		FMODRuntime.play_one_shot(powerup_sfx)
 		match parent.stat_type:
 			parent.TYPE.Damage:
 				damage += parent.pick_up()
