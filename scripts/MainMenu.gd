@@ -5,10 +5,44 @@ extends Control
 var fondo : TextureRect
 var atlas : AtlasTexture
 
-func _process(delta):
+var timerAccumulator : float = 0
+var timerInterval = 0.07
+var iterator = 0
+
+func _ready():
 	fondo = $TextureRect
 	atlas = fondo.texture
-	atlas.draw_rect_region(atlas.get_rid(), Rect2(0,0,320,240), Rect2(0,0,320,240))
+
+func _process(delta : float):
+	timerAccumulator = timerAccumulator + delta
+	if(timerAccumulator>=timerInterval):
+		if(iterator > 4):
+			iterator = 0
+		else: 
+			iterator = iterator +1
+		drawNextFrame()
+		timerAccumulator = 0
+	
+
+func drawNextFrame():
+	if(iterator == 0):
+		atlas.region.position.x = 0
+		atlas.region.position.y = 0
+	if(iterator == 1):
+		atlas.region.position.x = 320
+		atlas.region.position.y = 0
+	if(iterator == 2):
+		atlas.region.position.x = 640
+		atlas.region.position.y = 0
+	if(iterator == 3):
+		atlas.region.position.x = 0
+		atlas.region.position.y = 240
+	if(iterator == 4):
+		atlas.region.position.x = 320
+		atlas.region.position.y = 240
+	if(iterator == 5):
+		atlas.region.position.x = 640
+		atlas.region.position.y = 240
 
 func _on_play_button_pressed():
 	

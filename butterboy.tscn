@@ -1,12 +1,18 @@
-[gd_scene load_steps=20 format=3 uid="uid://dye7un7bwbjih"]
+[gd_scene load_steps=33 format=3 uid="uid://dye7un7bwbjih"]
 
 [ext_resource type="Texture2D" uid="uid://dcyrdkfercaxp" path="res://sprites/enemies/butterboi-hort.png" id="1_0rrga"]
 [ext_resource type="Script" path="res://scripts/butterboy.gd" id="1_owlft"]
 [ext_resource type="EventAsset" uid="uid://cpoojfwou1hka" path="res://addons/FMOD/editor/resources/events/{ad049370-db7b-43b0-87b3-93f05ef9c65a}.tres" id="2_4r40y"]
-[ext_resource type="Texture2D" uid="uid://cuoc4gdjw8esb" path="res://sprites/enemies/butterboi-Sheet.png" id="2_87a4j"]
 [ext_resource type="Shader" path="res://butterboy.gdshader" id="2_vacgc"]
 [ext_resource type="EventAsset" uid="uid://djafn8e4yqdvn" path="res://addons/FMOD/editor/resources/events/{637b375b-7bf5-423d-996f-f562165430fc}.tres" id="3_vq0wb"]
 [ext_resource type="Texture2D" uid="uid://eyqn3ndyffad" path="res://sprites/shadow.png" id="5_gp68d"]
+[ext_resource type="Texture2D" uid="uid://bbptta554qrta" path="res://sprites/enemies/butterBoy.png" id="7_p4fjn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spdph"]
+bg_color = Color(0.242188, 0.164063, 0.0703125, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gqge1"]
+bg_color = Color(0.710938, 0.386719, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_admgk"]
 
@@ -15,35 +21,119 @@ resource_local_to_scene = true
 shader = ExtResource("2_vacgc")
 shader_parameter/flash = false
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bdl0i"]
-atlas = ExtResource("1_0rrga")
+[sub_resource type="AtlasTexture" id="AtlasTexture_gew8w"]
+atlas = ExtResource("7_p4fjn")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q4w4h"]
+atlas = ExtResource("7_p4fjn")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2qbjf"]
+atlas = ExtResource("7_p4fjn")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c2bj6"]
+atlas = ExtResource("7_p4fjn")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3kkcd"]
+atlas = ExtResource("7_p4fjn")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mnwnr"]
+atlas = ExtResource("7_p4fjn")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_njw4o"]
-atlas = ExtResource("2_87a4j")
-region = Rect2(32, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_kljfv"]
+atlas = ExtResource("7_p4fjn")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jpgve"]
+atlas = ExtResource("7_p4fjn")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8h0aq"]
+atlas = ExtResource("7_p4fjn")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1437"]
+atlas = ExtResource("7_p4fjn")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtihk"]
+atlas = ExtResource("7_p4fjn")
+region = Rect2(0, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7fevp"]
 atlas = ExtResource("1_0rrga")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ayt52"]
-atlas = ExtResource("2_87a4j")
+[sub_resource type="AtlasTexture" id="AtlasTexture_ce46p"]
+atlas = ExtResource("7_p4fjn")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ksi7"]
+atlas = ExtResource("7_p4fjn")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hp2p2"]
+atlas = ExtResource("7_p4fjn")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bf34o"]
+atlas = ExtResource("7_p4fjn")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gu372"]
+atlas = ExtResource("7_p4fjn")
+region = Rect2(128, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mb5pd"]
+atlas = ExtResource("7_p4fjn")
+region = Rect2(160, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hiwqi"]
+atlas = ExtResource("7_p4fjn")
 region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w5dbr"]
-atlas = ExtResource("2_87a4j")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ypwh6"]
-atlas = ExtResource("1_0rrga")
-region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g86t6"]
 animations = [{
 "frames": [{
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_bdl0i")
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gew8w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q4w4h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2qbjf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c2bj6")
+}],
+"loop": false,
+"name": &"dying",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_3kkcd")
+}, {
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_mnwnr")
+}, {
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_kljfv")
+}, {
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_jpgve")
+}, {
+"duration": 0.61,
+"texture": SubResource("AtlasTexture_8h0aq")
+}, {
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_d1437")
 }],
 "loop": false,
 "name": &"hurt",
@@ -51,7 +141,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 2.5,
-"texture": SubResource("AtlasTexture_njw4o")
+"texture": SubResource("AtlasTexture_rtihk")
 }],
 "loop": false,
 "name": &"jumping",
@@ -67,10 +157,22 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ayt52")
+"texture": SubResource("AtlasTexture_ce46p")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_w5dbr")
+"texture": SubResource("AtlasTexture_6ksi7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hp2p2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bf34o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gu372")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mb5pd")
 }],
 "loop": true,
 "name": &"moving",
@@ -78,7 +180,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 0.5,
-"texture": SubResource("AtlasTexture_ypwh6")
+"texture": SubResource("AtlasTexture_hiwqi")
 }],
 "loop": false,
 "name": &"stunned",
@@ -86,12 +188,6 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_08nmv"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ej5y"]
-bg_color = Color(0.242188, 0.164063, 0.0703125, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3kslf"]
-bg_color = Color(0.710938, 0.386719, 0, 1)
 
 [node name="Butterboy" type="CharacterBody2D"]
 z_index = 99
@@ -102,6 +198,18 @@ script = ExtResource("1_owlft")
 hurt_sfx = ExtResource("2_4r40y")
 die_sfx = ExtResource("3_vq0wb")
 
+[node name="lifeBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = -24.0
+offset_top = -25.0
+offset_right = 24.0
+offset_bottom = -17.0
+theme_override_styles/background = SubResource("StyleBoxFlat_spdph")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gqge1")
+step = 1.0
+value = 100.0
+show_percentage = false
+
 [node name="ButterboyCollision" type="CollisionShape2D" parent="."]
 z_index = 1
 shape = SubResource("RectangleShape2D_admgk")
@@ -109,11 +217,11 @@ shape = SubResource("RectangleShape2D_admgk")
 [node name="ButterboySprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_3deu5")
 sprite_frames = SubResource("SpriteFrames_g86t6")
-animation = &"stunned"
+animation = &"hurt"
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 2
-collision_mask = 5
+collision_mask = 261
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("RectangleShape2D_08nmv")
@@ -124,18 +232,6 @@ z_index = -2
 position = Vector2(0, 13)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("5_gp68d")
-
-[node name="lifeBar" type="ProgressBar" parent="."]
-visible = false
-offset_left = -24.0
-offset_top = -25.0
-offset_right = 24.0
-offset_bottom = -17.0
-theme_override_styles/background = SubResource("StyleBoxFlat_8ej5y")
-theme_override_styles/fill = SubResource("StyleBoxFlat_3kslf")
-step = 1.0
-value = 100.0
-show_percentage = false
 
 [connection signal="animation_finished" from="ButterboySprite" to="." method="_on_butterboy_sprite_animation_finished"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
