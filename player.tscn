@@ -194,7 +194,7 @@ shape = SubResource("CapsuleShape2D_olwyu")
 [node name="PlayerAnimatedSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_w1i7l")
 animation = &"run"
-frame_progress = 0.241717
+frame_progress = 0.74226
 
 [node name="PlayerHitbox" type="Area2D" parent="."]
 collision_mask = 18

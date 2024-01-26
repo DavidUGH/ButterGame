@@ -1,5 +1,6 @@
 extends Level
 
+var napkins = []
 var spawn_flag = true
 var butterboy = preload("res://butterboy.tscn")
 var screen_size
@@ -35,11 +36,37 @@ func _ready():
 func _process(delta):
 	spawn_enemies_periodically()
 	_screen_shake(delta)
+	_count_napkins()
+	_clean_butter_below_napkins()
 	var minutes = floor(timer.time_left / 60)
 	var seconds = floor(timer.time_left - minutes * 60)
 	GUI.setConsole(str(minutes) + ":" + time_format(seconds))
 	if timer.time_left <= 60:
 		time_counter = 1.5
+
+func _count_napkins():
+	for e in enemies_list:
+		if e.name == "Napkin":
+			napkins.append(e)
+
+func _clean_butter_below_napkins():
+	for n in napkins:
+		_clean_butter(n.position)
+
+func _clean_butter(pos):
+	var tile = tile_map.local_to_map(pos)
+	var x = tile.x
+	var y = tile.y
+	#This cleans 1 square at a time
+	clean_tile_check(Vector2i(x, y))
+	clean_tile_check(Vector2i(x+1, y))
+	clean_tile_check(Vector2i(x, y+1))
+	clean_tile_check(Vector2i(x-1, y))
+	clean_tile_check(Vector2i(x, y-1))
+	clean_tile_check(Vector2i(x+1, y-1))
+	clean_tile_check(Vector2i(x+1, y+1))
+	clean_tile_check(Vector2i(x-1, y+1))
+	clean_tile_check(Vector2i(x-1, y-1))
 
 func time_format(time):
 	if time < 10:
@@ -126,16 +153,10 @@ func _on_player_special_kick():
 	
 func _screen_shake(delta):
 	if _shake_timer > 0:
-		# Generate a random offset for the camera position within the shake amplitude
 		var offset = Vector2(randf_range(-_shake_amplitude, _shake_amplitude), randf_range(-_shake_amplitude, _shake_amplitude))
-		
-		# Apply the offset to the camera position
 		camera2d.offset = offset
-
-		# Decrease the shake timer
 		_shake_timer -= delta
 	else:
-		# Reset the camera position when the shake is complete
 		camera2d.offset = _original_camera_position
 
 func _start_screen_shake(duration, amplitude):

@@ -126,6 +126,15 @@ func check_tile(vector:Array[Vector2i], v:Vector2i):
 		else:
 			pass
 
+func clean_tile_check(v:Vector2i):
+	if(v.x>=8&&v.y>=7 && v.x<=39&&v.y<=30):#10,7 29,22
+		if(butter_matrix[v.x][v.y] == 0):
+			butter_matrix[v.x][v.y] = 1
+			current_tiles = current_tiles+1
+			tile_map.set_cell(2, Vector2i(v.x, v.y))
+		else:
+			pass
+
 func draw_circle(v: Vector2i):
 	var x = v.x
 	var y = v.y

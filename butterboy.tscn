@@ -103,11 +103,11 @@ shape = SubResource("RectangleShape2D_admgk")
 [node name="ButterboySprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_3deu5")
 sprite_frames = SubResource("SpriteFrames_g86t6")
-animation = &"kicked"
+animation = &"stunned"
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 2
-collision_mask = 261
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("RectangleShape2D_08nmv")
