@@ -28,8 +28,8 @@ func drawNextFrame():
 	atlas.region.position.x = 400*iterator
 
 func _on_play_button_pressed():
-	
-	get_tree().change_scene_to_file("res://levels/lvl0.tscn")
+	$ColorRect.visible = true
+	$AnimationPlayer.play("fadeout")
 	FMODRuntime.play_one_shot(event)
 
 func _on_credits_button_pressed():
@@ -38,4 +38,9 @@ func _on_credits_button_pressed():
 
 func _on_exit_button_pressed():
 	get_tree().quit()
+	FMODRuntime.play_one_shot(event)
+
+
+func _on_animation_player_animation_finished(anim_name):
+	get_tree().change_scene_to_file("res://levels/lvl0.tscn")
 	FMODRuntime.play_one_shot(event)

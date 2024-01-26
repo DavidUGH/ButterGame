@@ -38,6 +38,7 @@ var kick_knockback : float
 var _weapon_sprite : Sprite2D
 var _collision_box: CollisionShape2D
 var _sprite: AnimatedSprite2D
+var _shadow: Sprite2D
 var _player_hitbox: Area2D
 var _player_hitbox_shape: CollisionShape2D
 var _hurt_animation_player: AnimationPlayer
@@ -50,6 +51,7 @@ const BASE_SPEED = 100
 func _ready():
 	#Instantiating child nodes
 	_sprite = $PlayerAnimatedSprite
+	_shadow = $Sprite2D
 	_collision_box = $PlayerShape
 	_player_hitbox = $PlayerHitbox
 	_player_hitbox_shape = $PlayerHitbox/PlayerHitboxShape
@@ -121,10 +123,12 @@ func _move():
 	velocity = Vector2()
 	if Input.is_action_pressed("right"):
 		_sprite.scale.x = 1
+		_shadow.scale.x = _shadow.scale.x * -1
 		_play_walk_sfx()
 		velocity.x += 1
 	if Input.is_action_pressed("left"):
 		_sprite.scale.x = -1
+		_shadow.scale.x = _shadow.scale.x * -1
 		velocity.x -= 1
 		_play_walk_sfx()
 	if Input.is_action_pressed("down"):

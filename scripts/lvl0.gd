@@ -44,37 +44,9 @@ func _process(delta):
 	var minutes = floor(timer.time_left / 60)
 	var seconds = floor(timer.time_left - minutes * 60)
 	GUI.setConsole(str(minutes) + ":" + time_format(seconds))
+	
 	if timer.time_left <= 60:
 		time_counter = 1.5
-
-func _count_napkins():
-	for e in enemies_list:
-		if e == null:
-			enemies_list.erase(e)
-		elif e.enemy_type == Enemy.TYPE.N:
-			napkins.append(e)
-
-func _clean_butter_below_napkins():
-	for n in napkins:
-		if n == null:
-			napkins.erase(n)
-		elif n.anim_state == Enemy.STATE.moving:
-			_clean_butter(n.position)
-
-func _clean_butter(pos):
-	var tile = tile_map.local_to_map(pos)
-	var x = tile.x
-	var y = tile.y
-	#This cleans 1 square at a time
-	clean_tile_check(Vector2i(x, y))
-	clean_tile_check(Vector2i(x+1, y))
-	clean_tile_check(Vector2i(x, y+1))
-	clean_tile_check(Vector2i(x-1, y))
-	clean_tile_check(Vector2i(x, y-1))
-	clean_tile_check(Vector2i(x+1, y-1))
-	clean_tile_check(Vector2i(x+1, y+1))
-	clean_tile_check(Vector2i(x-1, y+1))
-	clean_tile_check(Vector2i(x-1, y-1))
 
 func time_format(time):
 	if time < 10:
@@ -181,3 +153,32 @@ func _start_screen_shake(duration, amplitude):
 	_original_camera_position = camera2d.offset
 	_shake_timer = duration
 	_shake_amplitude = amplitude
+
+func _count_napkins():
+	for e in enemies_list:
+		if e == null:
+			enemies_list.erase(e)
+		elif e.enemy_type == Enemy.TYPE.N:
+			napkins.append(e)
+
+func _clean_butter_below_napkins():
+	for n in napkins:
+		if n == null:
+			napkins.erase(n)
+		elif n.anim_state == Enemy.STATE.moving:
+			_clean_butter(n.position)
+
+func _clean_butter(pos):
+	var tile = tile_map.local_to_map(pos)
+	var x = tile.x
+	var y = tile.y
+	#This cleans 1 square at a time
+	clean_tile_check(Vector2i(x, y))
+	clean_tile_check(Vector2i(x+1, y))
+	clean_tile_check(Vector2i(x, y+1))
+	clean_tile_check(Vector2i(x-1, y))
+	clean_tile_check(Vector2i(x, y-1))
+	clean_tile_check(Vector2i(x+1, y-1))
+	clean_tile_check(Vector2i(x+1, y+1))
+	clean_tile_check(Vector2i(x-1, y+1))
+	clean_tile_check(Vector2i(x-1, y-1))

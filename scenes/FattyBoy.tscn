@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c7rrqkg3qqlvc"]
+[gd_scene load_steps=24 format=3 uid="uid://cv832ug5tw080"]
 
 [ext_resource type="Script" path="res://scripts/FattyBoy.gd" id="1_52311"]
 [ext_resource type="Shader" path="res://butterboy.gdshader" id="1_b4nni"]
@@ -148,7 +148,7 @@ shape = SubResource("RectangleShape2D_admgk")
 [node name="ButterboySprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_3deu5")
 sprite_frames = SubResource("SpriteFrames_c30ye")
-animation = &"stunned"
+animation = &"dying"
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 2

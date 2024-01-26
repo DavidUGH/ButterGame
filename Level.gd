@@ -40,7 +40,6 @@ func have_won():
 
 func spawn_powerups():
 	if enemy_death_count % enemies_till_powerup == 0:
-		print("new powerup")
 		var new_powerup = powerup.instantiate()
 		new_powerup.set_type(_powerup_counter)
 		new_powerup.position = last_death
@@ -48,6 +47,8 @@ func spawn_powerups():
 		_powerup_counter += 1
 		if _powerup_counter > 2:
 			_powerup_counter = 0
+			print("Powerup counter")
+			print(_powerup_counter)
 
 func get_random_coord_at_random_side(square_size):
 	var sides = randi() % 4
@@ -104,12 +105,31 @@ func _on_died(who, position_at_death):
 		last_death = position_at_death
 		return
 	var tile = tile_map.local_to_map(position_at_death)
-	draw_square(tile)
+	draw_stain(who, tile)
 	enemy_death_count += 1
 	last_death = position_at_death
 	GUI.setButterProgress((current_tiles/ tiles_to_win) * 100)
 	have_won()
 	spawn_powerups()
+
+func draw_stain(type : Enemy.TYPE, tile):
+	match type:
+		Enemy.TYPE.SB:
+			draw_square(tile)
+		Enemy.TYPE.BB:
+			draw_square(tile)
+		Enemy.TYPE.FB:
+			draw_big_rectangle(tile)
+
+func draw_square(tile):
+	var r = randi() % 4
+	match r:
+		0:
+			draw_square_1(tile)
+		1:
+			draw_square_2(tile)
+		_:
+			draw_square_0(tile)
 
 func draw_cross(v: Vector2i):
 	var x = v.x
@@ -140,7 +160,49 @@ func clean_tile_check(v:Vector2i):
 			have_won()
 			GUI.setButterProgress((current_tiles/ tiles_to_win) * 100)
 
-func draw_circle(v: Vector2i):
+func draw_big_rectangle(v: Vector2i):
+	var x = v.x
+	var y = v.y
+	var vector: Array[Vector2i]
+	check_tile(vector, Vector2i(x, y))
+	check_tile(vector, Vector2i(x, y-1))
+	check_tile(vector, Vector2i(x, y+1))
+	check_tile(vector, Vector2i(x, y+2))
+	check_tile(vector, Vector2i(x-1, y))
+	check_tile(vector, Vector2i(x-1, y-1))
+	check_tile(vector, Vector2i(x-1, y+1))
+	check_tile(vector, Vector2i(x-1, y+2))
+	check_tile(vector, Vector2i(x-2, y))
+	check_tile(vector, Vector2i(x-2, y-1))
+	check_tile(vector, Vector2i(x-2, y+1))
+	check_tile(vector, Vector2i(x-2, y+2))
+	check_tile(vector, Vector2i(x+1, y))
+	check_tile(vector, Vector2i(x+1, y-1))
+	check_tile(vector, Vector2i(x+1, y+1))
+	check_tile(vector, Vector2i(x+1, y+2))
+	check_tile(vector, Vector2i(x+2, y))
+	check_tile(vector, Vector2i(x+2, y-1))
+	check_tile(vector, Vector2i(x+2, y+1))
+	check_tile(vector, Vector2i(x+2, y+2))
+	tile_map.set_cells_terrain_connect(BUTTER_LAYER, vector, 0, 0, true)
+
+func draw_square_0(v: Vector2i):
+	var x = v.x
+	var y = v.y
+	var vector: Array[Vector2i]
+	check_tile(vector, Vector2i(x, y))
+	check_tile(vector, Vector2i(x+1, y))
+	check_tile(vector, Vector2i(x, y+1))
+	check_tile(vector, Vector2i(x-1, y))
+	check_tile(vector, Vector2i(x-2, y))
+	check_tile(vector, Vector2i(x, y-1))
+	check_tile(vector, Vector2i(x+1, y-1))
+	check_tile(vector, Vector2i(x+1, y+1))
+	check_tile(vector, Vector2i(x-1, y+1))
+	check_tile(vector, Vector2i(x-1, y-1))
+	tile_map.set_cells_terrain_connect(BUTTER_LAYER, vector, 0, 0, true)
+
+func draw_square_1(v: Vector2i):
 	var x = v.x
 	var y = v.y
 	var vector: Array[Vector2i]
@@ -148,18 +210,15 @@ func draw_circle(v: Vector2i):
 	check_tile(vector, Vector2i(x+1, y))
 	check_tile(vector, Vector2i(x+2, y))
 	check_tile(vector, Vector2i(x, y+1))
-	check_tile(vector, Vector2i(x, y+2))
 	check_tile(vector, Vector2i(x-1, y))
-	check_tile(vector, Vector2i(x-2, y))
 	check_tile(vector, Vector2i(x, y-1))
-	check_tile(vector, Vector2i(x, y-2))
 	check_tile(vector, Vector2i(x+1, y-1))
 	check_tile(vector, Vector2i(x+1, y+1))
 	check_tile(vector, Vector2i(x-1, y+1))
 	check_tile(vector, Vector2i(x-1, y-1))
 	tile_map.set_cells_terrain_connect(BUTTER_LAYER, vector, 0, 0, true)
 
-func draw_square(v: Vector2i):
+func draw_square_2(v: Vector2i):
 	var x = v.x
 	var y = v.y
 	var vector: Array[Vector2i]
@@ -168,6 +227,7 @@ func draw_square(v: Vector2i):
 	check_tile(vector, Vector2i(x, y+1))
 	check_tile(vector, Vector2i(x-1, y))
 	check_tile(vector, Vector2i(x, y-1))
+	check_tile(vector, Vector2i(x+1, y-2))
 	check_tile(vector, Vector2i(x+1, y-1))
 	check_tile(vector, Vector2i(x+1, y+1))
 	check_tile(vector, Vector2i(x-1, y+1))
