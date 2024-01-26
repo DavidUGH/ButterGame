@@ -1,18 +1,18 @@
 extends Enemy
 
 func _ready():
-	speed = 50
-	life = 10
-	damage = 10
+	speed = 35
+	life = 15
+	damage = 25
 	_is_flashing = false
-	knockback_reduction = 50
+	knockback_reduction = 85
 	_sprite = $ButterboySprite
 	_hurtbox = $Hurtbox
 	lifeBar = $lifeBar
 	lifeBar.max_value = life
 	is_jumping = false
 	anim_state = STATE.moving
-
+	
 func _physics_process(delta):
 	if !is_jumping:
 		_move(destination)

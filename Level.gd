@@ -103,6 +103,7 @@ func _on_died(position_at_death):
 	draw_square(tile)
 	enemy_death_count += 1
 	last_death = position_at_death
+	GUI.setButterProgress((current_tiles/ tiles_to_win) * 100)
 	have_won()
 	spawn_powerups()
 

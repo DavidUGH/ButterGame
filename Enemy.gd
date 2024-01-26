@@ -9,6 +9,7 @@ signal died(position_at_death)
 var speed: int
 var life: int
 var _sprite: AnimatedSprite2D
+var lifeBar: ProgressBar
 var player
 var destination = Vector2(0,0)
 enum STATE { hurt, moving, jumping, kicked, stunned}
@@ -21,6 +22,7 @@ var is_jumping : bool
 var is_kicked = false
 var is_stunned = false
 var knockback_amount : int
+var knockback_reduction
 
 func _despawn_if_out_of_view():
 	var scz : Vector2
@@ -68,6 +70,7 @@ func _flash_white():
 		await get_tree().create_timer(0.2).timeout
 		_is_flashing = false
 		_sprite.material.set_shader_parameter("flash", false)
+		lifeBar.visible = false
 
 func jump():
 	is_jumping = true
@@ -97,6 +100,8 @@ func _get_hurt():
 	_flash_white()
 	anim_state = STATE.hurt
 	life -= player.damage
+	lifeBar.value = life
+	lifeBar.visible = true
 	is_hurt = true
 	FMODRuntime.play_one_shot(hurt_sfx)
 	if life <= 0:

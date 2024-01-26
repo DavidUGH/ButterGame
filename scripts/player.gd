@@ -62,8 +62,8 @@ func _ready():
 	life = 100
 	stamina = 100
 	attack_speed = 0.2
-	damage = 2
-	kick_damage = 1
+	damage = 5
+	kick_damage = 3
 	kick_knockback = 180
 	knockback = 30
 	weapon_kit = WEAPON.knife

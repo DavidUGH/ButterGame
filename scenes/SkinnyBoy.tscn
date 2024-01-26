@@ -1,12 +1,12 @@
-[gd_scene load_steps=33 format=3 uid="uid://dye7un7bwbjih"]
+[gd_scene load_steps=33 format=3 uid="uid://dgef6lgwd6fdo"]
 
-[ext_resource type="Texture2D" uid="uid://dcyrdkfercaxp" path="res://sprites/enemies/butterboi-hort.png" id="1_0rrga"]
-[ext_resource type="Script" path="res://scripts/butterboy.gd" id="1_owlft"]
-[ext_resource type="EventAsset" uid="uid://cpoojfwou1hka" path="res://addons/FMOD/editor/resources/events/{ad049370-db7b-43b0-87b3-93f05ef9c65a}.tres" id="2_4r40y"]
-[ext_resource type="Shader" path="res://butterboy.gdshader" id="2_vacgc"]
-[ext_resource type="EventAsset" uid="uid://djafn8e4yqdvn" path="res://addons/FMOD/editor/resources/events/{637b375b-7bf5-423d-996f-f562165430fc}.tres" id="3_vq0wb"]
-[ext_resource type="Texture2D" uid="uid://eyqn3ndyffad" path="res://sprites/shadow.png" id="5_gp68d"]
-[ext_resource type="Texture2D" uid="uid://bbptta554qrta" path="res://sprites/enemies/butterBoy.png" id="7_p4fjn"]
+[ext_resource type="Shader" path="res://butterboy.gdshader" id="1_bvxgi"]
+[ext_resource type="Script" path="res://scripts/SkinnyBoy.gd" id="1_kefbt"]
+[ext_resource type="EventAsset" uid="uid://cpoojfwou1hka" path="res://addons/FMOD/editor/resources/events/{ad049370-db7b-43b0-87b3-93f05ef9c65a}.tres" id="2_j2tqc"]
+[ext_resource type="Texture2D" uid="uid://bbptta554qrta" path="res://sprites/enemies/butterBoy.png" id="2_u1ufp"]
+[ext_resource type="Texture2D" uid="uid://dcyrdkfercaxp" path="res://sprites/enemies/butterboi-hort.png" id="3_kx1ap"]
+[ext_resource type="EventAsset" uid="uid://djafn8e4yqdvn" path="res://addons/FMOD/editor/resources/events/{637b375b-7bf5-423d-996f-f562165430fc}.tres" id="3_q6jpt"]
+[ext_resource type="Texture2D" uid="uid://eyqn3ndyffad" path="res://sprites/shadow.png" id="4_ejup8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spdph"]
 bg_color = Color(0.242188, 0.164063, 0.0703125, 1)
@@ -18,83 +18,83 @@ bg_color = Color(0.710938, 0.386719, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3deu5"]
 resource_local_to_scene = true
-shader = ExtResource("2_vacgc")
+shader = ExtResource("1_bvxgi")
 shader_parameter/flash = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gew8w"]
-atlas = ExtResource("7_p4fjn")
+atlas = ExtResource("2_u1ufp")
 region = Rect2(0, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q4w4h"]
-atlas = ExtResource("7_p4fjn")
+atlas = ExtResource("2_u1ufp")
 region = Rect2(32, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2qbjf"]
-atlas = ExtResource("7_p4fjn")
+atlas = ExtResource("2_u1ufp")
 region = Rect2(64, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c2bj6"]
-atlas = ExtResource("7_p4fjn")
+atlas = ExtResource("2_u1ufp")
 region = Rect2(96, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3kkcd"]
-atlas = ExtResource("7_p4fjn")
+atlas = ExtResource("2_u1ufp")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mnwnr"]
-atlas = ExtResource("7_p4fjn")
+atlas = ExtResource("2_u1ufp")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kljfv"]
-atlas = ExtResource("7_p4fjn")
+atlas = ExtResource("2_u1ufp")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jpgve"]
-atlas = ExtResource("7_p4fjn")
+atlas = ExtResource("2_u1ufp")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8h0aq"]
-atlas = ExtResource("7_p4fjn")
+atlas = ExtResource("2_u1ufp")
 region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d1437"]
-atlas = ExtResource("7_p4fjn")
+atlas = ExtResource("2_u1ufp")
 region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rtihk"]
-atlas = ExtResource("7_p4fjn")
+atlas = ExtResource("2_u1ufp")
 region = Rect2(0, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7fevp"]
-atlas = ExtResource("1_0rrga")
+atlas = ExtResource("3_kx1ap")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ce46p"]
-atlas = ExtResource("7_p4fjn")
+atlas = ExtResource("2_u1ufp")
 region = Rect2(0, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6ksi7"]
-atlas = ExtResource("7_p4fjn")
+atlas = ExtResource("2_u1ufp")
 region = Rect2(32, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hp2p2"]
-atlas = ExtResource("7_p4fjn")
+atlas = ExtResource("2_u1ufp")
 region = Rect2(64, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bf34o"]
-atlas = ExtResource("7_p4fjn")
+atlas = ExtResource("2_u1ufp")
 region = Rect2(96, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gu372"]
-atlas = ExtResource("7_p4fjn")
+atlas = ExtResource("2_u1ufp")
 region = Rect2(128, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mb5pd"]
-atlas = ExtResource("7_p4fjn")
+atlas = ExtResource("2_u1ufp")
 region = Rect2(160, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hiwqi"]
-atlas = ExtResource("7_p4fjn")
+atlas = ExtResource("2_u1ufp")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g86t6"]
@@ -189,14 +189,14 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_08nmv"]
 
-[node name="Butterboy" type="CharacterBody2D"]
+[node name="SkinnyBoy" type="CharacterBody2D"]
 z_index = 99
 collision_layer = 18
 collision_mask = 0
 platform_floor_layers = 4294901760
-script = ExtResource("1_owlft")
-hurt_sfx = ExtResource("2_4r40y")
-die_sfx = ExtResource("3_vq0wb")
+script = ExtResource("1_kefbt")
+hurt_sfx = ExtResource("2_j2tqc")
+die_sfx = ExtResource("3_q6jpt")
 
 [node name="lifeBar" type="ProgressBar" parent="."]
 visible = false
@@ -231,7 +231,7 @@ modulate = Color(1, 1, 1, 0.556863)
 z_index = -2
 position = Vector2(0, 13)
 scale = Vector2(0.7, 0.7)
-texture = ExtResource("5_gp68d")
+texture = ExtResource("4_ejup8")
 
-[connection signal="animation_finished" from="ButterboySprite" to="." method="_on_butterboy_sprite_animation_finished"]
-[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="animation_finished" from="ButterboySprite" to="." method="_on_butterboy_sprite_animation_finished" flags=18]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered" flags=18]

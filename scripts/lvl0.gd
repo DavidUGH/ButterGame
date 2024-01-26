@@ -2,6 +2,8 @@ extends Level
 
 var spawn_flag = true
 var butterboy = preload("res://butterboy.tscn")
+var fattyBoy = preload("res://scenes/FattyBoy.tscn")
+var skinnyBoy = preload("res://scenes/SkinnyBoy.tscn")
 var screen_size
 var timer : Timer
 var time_counter
@@ -70,18 +72,18 @@ func random_spawn_pattern():
 func spawn_followers_from_random_side():
 	var screen_height = screen_size.y
 	var quarter_screen =  screen_size.y / 4
-	spawn_following_enemy_at(butterboy, get_random_coord_at_random_side(screen_size))
-	spawn_following_enemy_at(butterboy, get_random_coord_at_random_side(screen_size))
-	spawn_following_enemy_at(butterboy, get_random_coord_at_random_side(screen_size))
-	spawn_following_enemy_at(butterboy, get_random_coord_at_random_side(screen_size))
+	spawn_following_enemy_at(skinnyBoy, get_random_coord_at_random_side(screen_size))
+	spawn_following_enemy_at(fattyBoy, get_random_coord_at_random_side(screen_size))
+	spawn_following_enemy_at(skinnyBoy, get_random_coord_at_random_side(screen_size))
+	spawn_following_enemy_at(fattyBoy, get_random_coord_at_random_side(screen_size))
 
 func spawn_pattern_top_to_bottom():
 	var screen_height = screen_size.y
 	var quarter_screen =  screen_size.y / 4
-	spawn_passing_enemy_at(butterboy, Vector2(quarter_screen, 0), Vector2(quarter_screen, screen_height+20))
-	spawn_passing_enemy_at(butterboy, Vector2(quarter_screen*2, 0) , Vector2(quarter_screen*2, screen_height+20))
-	spawn_passing_enemy_at(butterboy, Vector2(quarter_screen*3, 0) , Vector2(quarter_screen*3, screen_height+20))
-	spawn_passing_enemy_at(butterboy, Vector2(quarter_screen*4, 0) , Vector2(quarter_screen*4, screen_height+20))
+	spawn_passing_enemy_at(fattyBoy, Vector2(quarter_screen, 0), Vector2(quarter_screen, screen_height+20))
+	spawn_passing_enemy_at(fattyBoy, Vector2(quarter_screen*2, 0) , Vector2(quarter_screen*2, screen_height+20))
+	spawn_passing_enemy_at(fattyBoy, Vector2(quarter_screen*3, 0) , Vector2(quarter_screen*3, screen_height+20))
+	spawn_passing_enemy_at(fattyBoy, Vector2(quarter_screen*4, 0) , Vector2(quarter_screen*4, screen_height+20))
 
 func spawn_pattern_bottom_to_top():
 	var screen_height = screen_size.y
@@ -102,10 +104,10 @@ func spawn_pattern_left_to_right():
 func spawn_pattern_right_to_left():
 	var screen_width = screen_size.x
 	var quarter_screen =  screen_size.y / 5
-	spawn_passing_enemy_at(butterboy, Vector2(screen_width, quarter_screen), Vector2(-20, quarter_screen))
-	spawn_passing_enemy_at(butterboy, Vector2(screen_width, quarter_screen*2), Vector2(-20, quarter_screen*2))
-	spawn_passing_enemy_at(butterboy, Vector2(screen_width, quarter_screen*3), Vector2(-20, quarter_screen*3))
-	spawn_passing_enemy_at(butterboy, Vector2(screen_width, quarter_screen*4), Vector2(-20, quarter_screen*4))
+	spawn_passing_enemy_at(skinnyBoy, Vector2(screen_width, quarter_screen), Vector2(-20, quarter_screen))
+	spawn_passing_enemy_at(skinnyBoy, Vector2(screen_width, quarter_screen*2), Vector2(-20, quarter_screen*2))
+	spawn_passing_enemy_at(skinnyBoy, Vector2(screen_width, quarter_screen*3), Vector2(-20, quarter_screen*3))
+	spawn_passing_enemy_at(skinnyBoy, Vector2(screen_width, quarter_screen*4), Vector2(-20, quarter_screen*4))
 
 
 func _on_area_2d_area_entered(area):
