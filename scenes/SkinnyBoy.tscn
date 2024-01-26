@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://7u3engnd0yec"]
+[gd_scene load_steps=21 format=3 uid="uid://dgef6lgwd6fdo"]
 
 [ext_resource type="Shader" path="res://butterboy.gdshader" id="1_bvxgi"]
 [ext_resource type="Script" path="res://scripts/SkinnyBoy.gd" id="1_kefbt"]

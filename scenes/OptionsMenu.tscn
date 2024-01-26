@@ -1,16 +1,17 @@
-[gd_scene load_steps=16 format=3 uid="uid://bcmal22f68ct"]
+[gd_scene load_steps=18 format=3 uid="uid://bcmal22f68ct"]
 
-[ext_resource type="Texture2D" uid="uid://qx0hnomnrhu4" path="res://sprites/ui/pauseMenu.png" id="1_3j81s"]
 [ext_resource type="Script" path="res://scenes/OptionsMenu.gd" id="1_y5tj4"]
 [ext_resource type="Texture2D" uid="uid://c5ay1vtsnd05c" path="res://sprites/ui/volumeBar.png" id="2_wwpxd"]
+[ext_resource type="Texture2D" uid="uid://cdmmmdaopjb2o" path="res://sprites/ui/pause_menu_pause_gui.png" id="2_xrihl"]
 [ext_resource type="Texture2D" uid="uid://cxymku0glbqcg" path="res://sprites/ui/optionsButton.png" id="3_ggs1m"]
+[ext_resource type="FontFile" uid="uid://lkrvfvmqjnlb" path="res://fonts/Daydream.ttf" id="5_0ar6l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ul0ad"]
 atlas = ExtResource("2_wwpxd")
-region = Rect2(2, 4, 8, 8)
+region = Rect2(0, 0, 8, 8)
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_krux3"]
-color = Color(0.909804, 0.643137, 0.345098, 1)
+color = Color(0.00392157, 0.862745, 0.603922, 1)
 grow_begin = 0.0
 grow_end = 0.0
 thickness = 2
@@ -51,6 +52,11 @@ region = Rect2(224, 60, 112, 30)
 atlas = ExtResource("3_ggs1m")
 region = Rect2(112, 60, 112, 30)
 
+[sub_resource type="LabelSettings" id="LabelSettings_0nccn"]
+font = ExtResource("5_0ar6l")
+font_size = 13
+font_color = Color(0.00392157, 0.862745, 0.603922, 1)
+
 [node name="OptionsMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -64,17 +70,17 @@ script = ExtResource("1_y5tj4")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("1_3j81s")
+offset_right = 160.0
+offset_bottom = 186.0
+texture = ExtResource("2_xrihl")
 
 [node name="musicVolume" type="HSlider" parent="."]
 texture_filter = 1
 layout_mode = 0
 offset_left = 13.0
-offset_top = 154.0
-offset_right = 82.0
-offset_bottom = 170.0
+offset_top = 146.0
+offset_right = 72.0
+offset_bottom = 162.0
 theme_override_icons/grabber = SubResource("AtlasTexture_ul0ad")
 theme_override_icons/grabber_highlight = SubResource("AtlasTexture_ul0ad")
 theme_override_icons/grabber_disabled = SubResource("AtlasTexture_ul0ad")
@@ -88,10 +94,10 @@ value = 1.0
 [node name="sfXVolume" type="HSlider" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = 96.0
-offset_top = 154.0
-offset_right = 165.0
-offset_bottom = 170.0
+offset_left = 93.0
+offset_top = 146.0
+offset_right = 152.0
+offset_bottom = 163.0
 theme_override_icons/grabber = SubResource("AtlasTexture_ul0ad")
 theme_override_icons/grabber_highlight = SubResource("AtlasTexture_ul0ad")
 theme_override_icons/grabber_disabled = SubResource("AtlasTexture_ul0ad")
@@ -110,10 +116,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -53.0
-offset_top = -60.0
-offset_right = 59.0
-offset_bottom = -30.0
+offset_left = -67.0
+offset_top = -70.0
+offset_right = 45.0
+offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 2
 texture_normal = SubResource("AtlasTexture_2jxmc")
@@ -128,9 +134,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -53.0
-offset_top = -30.0
-offset_right = 59.0
+offset_left = -69.0
+offset_top = -40.0
+offset_right = 43.0
+offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 texture_normal = SubResource("AtlasTexture_jmya7")
@@ -145,14 +152,40 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -53.0
-offset_right = 59.0
-offset_bottom = 30.0
+offset_left = -67.0
+offset_top = -10.0
+offset_right = 45.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 texture_normal = SubResource("AtlasTexture_ukkqg")
 texture_pressed = SubResource("AtlasTexture_5equd")
 texture_hover = SubResource("AtlasTexture_7kfnw")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 9.0
+offset_right = 154.0
+offset_bottom = 30.0
+text = "Game Paused"
+label_settings = SubResource("LabelSettings_0nccn")
+
+[node name="Music" type="Label" parent="."]
+offset_left = 10.0
+offset_top = 122.0
+offset_right = 76.0
+offset_bottom = 143.0
+text = "Music"
+label_settings = SubResource("LabelSettings_0nccn")
+
+[node name="SFX" type="Label" parent="."]
+offset_left = 104.0
+offset_top = 122.0
+offset_right = 145.0
+offset_bottom = 143.0
+text = "SFX"
+label_settings = SubResource("LabelSettings_0nccn")
 
 [connection signal="value_changed" from="musicVolume" to="." method="_on_music_volume_value_changed"]
 [connection signal="value_changed" from="sfXVolume" to="." method="_on_sf_x_volume_value_changed"]
