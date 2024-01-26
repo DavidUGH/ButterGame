@@ -18,6 +18,8 @@ var _shake_amplitude = 2
 var _original_camera_position = Vector2(0, 0)
 
 var queue = []
+var possible_waves = [0]
+var napkin_flag = false
 
 func _ready():
 	for i in range(filas):
@@ -38,7 +40,7 @@ func _ready():
 	screen_size = get_viewport().content_scale_size
 
 func _process(delta):
-	timeline(timer.wait_time)
+	_set_level()
 	spawn_enemies_periodically()
 	_screen_shake(delta)
 	_count_napkins()
@@ -46,40 +48,62 @@ func _process(delta):
 	var minutes = floor(timer.time_left / 60)
 	var seconds = floor(timer.time_left - minutes * 60)
 	GUI.setConsole(str(minutes) + ":" + time_format(seconds))
-	if GUI.butterBar.value >= 70:
-		var set = [7, 8] # vertical or horizontal
+	spawn_napkin()
+
+func spawn_napkin():
+	if !napkin_flag:
+		var set = []
+		if GUI.butterBar.value >= 70:
+			set = [7, 8] # singula vertical or horizontal
+		elif GUI.butterBar.value >= 50:
+			set = [5, 6] # multiple vertical or horizontal
+		else:
+			return
 		var random_index = randi() % set.size()
 		queue.push_front(set[random_index])
-	elif GUI.butterBar.value >= 50:
-		var set = [5, 6] # vertical or horizontal
-		var random_index = randi() % set.size()
-		queue.push_front(set[random_index])
-	
+		napkin_flag = true
+		await get_tree().create_timer(6).timeout
+		napkin_flag = false
+
+
+var cursed_flag = 0
+
+func _set_level():
+	var t = floor(timer.time_left)
+	#print(t)
+	if t == 160 and cursed_flag == 0: # 180 - 161
+		possible_waves.append(1) # add random side butterboy
+		cursed_flag = 1
+	elif t == 140: # 160 - 131
+		time_counter = 3.5
+	elif t == 120 and cursed_flag == 1: # 130 - 120
+		cursed_flag = 2
+		possible_waves.append(2) # add cross waves v
+		possible_waves.append(3) # add cross waves h
+	elif t == 100:
+		time_counter = 3.0
+	elif t == 80 and cursed_flag == 2:
+		cursed_flag = 3
+		possible_waves.append(4) # add fatty
+	elif t == 60:
+		time_counter = 2.3
+	elif t == 40 and cursed_flag == 3:
+		cursed_flag = 4
+		possible_waves.pop_front() # remove skinny bitches
+	elif t == 20:
+		time_counter = 1.5
 
 func time_format(time):
 	if time < 10:
 		return "0" + str(time)
 	return str(time)
 
-func timeline(time):
-	match time:
-		180: #time_counter = 4
-			queue.push_back(0)
-			queue.push_back(0)
-			queue.push_back(0)
-			queue.push_back(0)
-			queue.push_back(1)
-			queue.push_back(0)
-			queue.push_back(1)
-			queue.push_back(0)
-		160:
-			queue.push_back(0)
-			queue.push_back(0)
-		120:
-			pass
-
 func spawn_enemies_periodically():
 	if spawn_flag:
+		var random_index = randi() % possible_waves.size()
+		queue.push_back(possible_waves[random_index])
+		print(possible_waves)
+		#print(queue)
 		var next = queue.pop_front()
 		spawn_wave(next)
 		spawn_flag = false
@@ -96,7 +120,7 @@ func spawn_wave(next):
 			spawn_passing_enemies_cross(butterboy, 0)
 		3: # passing cross left and right
 			spawn_passing_enemies_cross(butterboy, 1)
-		4: # spawn follower butterboy
+		4: # spawn follower fatty
 			spawn_one_follower(fattyBoy)
 		5: # passing napkin top to bottom
 			spawn_lone_top_to_bottom(napkin)
