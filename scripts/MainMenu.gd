@@ -4,24 +4,35 @@ extends Control
 
 var fondo : TextureRect
 var atlas : AtlasTexture
+var splash: TextureRect
 
 var timerAccumulator : float = 0
 var timerInterval = 0.07
+var songInterval = 3
 var iterator = 0
+var hasSplash = false
 
 func _ready():
 	fondo = $TextureRect
 	atlas = fondo.texture
+	splash = $Splash
 
 func _process(delta : float):
-	timerAccumulator = timerAccumulator + delta
-	if(timerAccumulator>=timerInterval):
-		if(iterator > 4):
-			iterator = 0
-		else: 
-			iterator = iterator +1
-		drawNextFrame()
-		timerAccumulator = 0
+	if(hasSplash):
+		timerAccumulator = timerAccumulator + delta
+		if(timerAccumulator>=timerInterval):
+			if(iterator > 4):
+				iterator = 0
+			else: 
+				iterator = iterator +1
+			drawNextFrame()
+			timerAccumulator = 0
+	else:
+		timerAccumulator = timerAccumulator + delta
+		if(timerAccumulator >= songInterval):
+			splash.visible = false
+			hasSplash = true
+			timerAccumulator = 0
 	
 
 func drawNextFrame():
