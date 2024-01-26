@@ -7,6 +7,14 @@
 atlas = ExtResource("1_0xyf0")
 region = Rect2(0, 0, 400, 300)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_iud7w"]
+atlas = ExtResource("1_0xyf0")
+region = Rect2(400, 0, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c34us"]
+atlas = ExtResource("1_0xyf0")
+region = Rect2(800, 0, 400, 300)
+
 [node name="Finals" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -46,7 +54,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("AtlasTexture_s8id8")
+texture = SubResource("AtlasTexture_iud7w")
 
 [node name="PerfectEnding" type="TextureRect" parent="."]
 visible = false
@@ -62,4 +70,4 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("AtlasTexture_s8id8")
+texture = SubResource("AtlasTexture_c34us")
