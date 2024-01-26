@@ -4,7 +4,6 @@ var life_label : Label
 var console_label: Label
 var pause_menu:Control
 var lifeBar:TextureProgressBar
-var staminaBar: TextureProgressBar
 var butterBar: TextureProgressBar
 var flag = false
 var i = 0
@@ -19,7 +18,6 @@ func _ready():
 	pause_menu.music_volume.value = BankManager.get_music_volume()
 	pause_menu.sfx_volume.value = BankManager.get_sfx_volume()
 	lifeBar = $LifeBar
-	staminaBar = $StaminaBar
 	butterBar = $ButterBar
 
 func _process(delta):
@@ -31,14 +29,14 @@ func _process(delta):
 
 func set_life(life):
 	lifeBar.value = life
-	staminaBar.value = life
 	life_label.text = "Life: " + str(life)+"%"
 
 func setConsole(msg):
 	console_label.text = msg
 
-func setButterProgress(v):
+func setButterProgress(v:int):
 	butterBar.value = v
+	$progressLabel.text = str(v)+"%"
 
 func _on_texture_button_pressed():
 	showPauseMenu()
