@@ -34,8 +34,7 @@ func _ready():
 	GUI = $GUI
 	player.gui = GUI
 	camera2d = $Camera2D
-	time_counter = 3.5
-	
+	time_counter = 3.0
 	screen_size = get_viewport().content_scale_size
 
 func _process(delta):

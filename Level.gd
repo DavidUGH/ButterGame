@@ -31,7 +31,8 @@ func set_player(p):
 	player = p
 
 func _game_over():
-	get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
+	Finals.percentage = GUI.butterBar.value
+	get_tree().change_scene_to_file("res://scenes/Finals.tscn")
 
 func have_won():
 	if(current_tiles>=tiles_to_win):
