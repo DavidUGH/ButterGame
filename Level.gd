@@ -98,11 +98,14 @@ func spawn_passing_enemy_at(enemy_scene, initial_position, end_position):
 	# Agregar la nueva instancia a la lista de enemigos
 	enemies_list.append(nueva_instancia)
 
-func _on_died(position_at_death):
+func _on_died(who, position_at_death):
+	var idx = enemies_list.find(who)
+	enemies_list.pop_at(idx)
 	var tile = tile_map.local_to_map(position_at_death)
 	draw_square(tile)
 	enemy_death_count += 1
 	last_death = position_at_death
+	GUI.setButterProgress((current_tiles/ tiles_to_win) * 100)
 	have_won()
 	spawn_powerups()
 

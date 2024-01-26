@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dye7un7bwbjih"]
+[gd_scene load_steps=20 format=3 uid="uid://dye7un7bwbjih"]
 
 [ext_resource type="Texture2D" uid="uid://dcyrdkfercaxp" path="res://sprites/enemies/butterboi-hort.png" id="1_0rrga"]
 [ext_resource type="Script" path="res://scripts/butterboy.gd" id="1_owlft"]
@@ -87,6 +87,12 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_08nmv"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ej5y"]
+bg_color = Color(0.242188, 0.164063, 0.0703125, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3kslf"]
+bg_color = Color(0.710938, 0.386719, 0, 1)
+
 [node name="Butterboy" type="CharacterBody2D"]
 z_index = 99
 collision_layer = 18
@@ -118,6 +124,18 @@ z_index = -2
 position = Vector2(0, 13)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("5_gp68d")
+
+[node name="lifeBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = -24.0
+offset_top = -25.0
+offset_right = 24.0
+offset_bottom = -17.0
+theme_override_styles/background = SubResource("StyleBoxFlat_8ej5y")
+theme_override_styles/fill = SubResource("StyleBoxFlat_3kslf")
+step = 1.0
+value = 100.0
+show_percentage = false
 
 [connection signal="animation_finished" from="ButterboySprite" to="." method="_on_butterboy_sprite_animation_finished"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
