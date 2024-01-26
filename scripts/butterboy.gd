@@ -50,3 +50,4 @@ func _on_butterboy_sprite_animation_finished():
 		STATE.stunned:
 			anim_state = STATE.moving
 			is_stunned = false
+			collision_mask = 0 #Can't crash against wall

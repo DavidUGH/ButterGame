@@ -5,6 +5,13 @@ var butterboy = preload("res://butterboy.tscn")
 var screen_size
 var timer : Timer
 var time_counter
+var physics_bounds : StaticBody2D
+
+var camera2d : Camera2D
+var _shake_timer = 0.0
+var _shake_duration = 0.2
+var _shake_amplitude = 2
+var _original_camera_position = Vector2(0, 0)
 
 func _ready():
 	for i in range(filas):
@@ -13,18 +20,21 @@ func _ready():
 			fila.append(0)
 		butter_matrix.append(fila)
 	player = $Player
+	player.hurt.connect(_on_player_hurt)
 	player.died.connect(_on_player_died)
+	player.special_kick.connect(_on_player_special_kick)
 	tile_map = $TileMap
 	timer = $Timer
 	GUI = $GUI
 	player.gui = GUI
-	player.camera2d = $Camera2D
+	camera2d = $Camera2D
 	time_counter = 3.0
 	
 	screen_size = get_viewport().content_scale_size
 
 func _process(delta):
 	spawn_enemies_periodically()
+	_screen_shake(delta)
 	var minutes = floor(timer.time_left / 60)
 	var seconds = floor(timer.time_left - minutes * 60)
 	GUI.setConsole(str(minutes) + ":" + time_format(seconds))
@@ -107,3 +117,28 @@ func _on_timer_timeout():
 
 func _on_player_died():
 	_game_over()
+
+func _on_player_hurt():
+	_start_screen_shake(0.2, 2)
+
+func _on_player_special_kick():
+	_start_screen_shake(0.2, 4)
+	
+func _screen_shake(delta):
+	if _shake_timer > 0:
+		# Generate a random offset for the camera position within the shake amplitude
+		var offset = Vector2(randf_range(-_shake_amplitude, _shake_amplitude), randf_range(-_shake_amplitude, _shake_amplitude))
+		
+		# Apply the offset to the camera position
+		camera2d.offset = offset
+
+		# Decrease the shake timer
+		_shake_timer -= delta
+	else:
+		# Reset the camera position when the shake is complete
+		camera2d.offset = _original_camera_position
+
+func _start_screen_shake(duration, amplitude):
+	_original_camera_position = camera2d.offset
+	_shake_timer = duration
+	_shake_amplitude = amplitude

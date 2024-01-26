@@ -10,6 +10,7 @@
 script = ExtResource("1_8cq0s")
 
 [node name="GUI" parent="." instance=ExtResource("2_v7qqs")]
+visible = false
 z_index = 10
 
 [node name="Player" parent="." instance=ExtResource("1_25avk")]
@@ -44,7 +45,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PackedVector2Array(45, 36, 340, 36, 339, 265, 46, 265, 45, 51, 39, 51, 39, 274, 347, 273, 347, 27, 39, 27, 39, 51, 45, 51)
+polygon = PackedVector2Array(38, 26, 348, 25, 348, 274, 38, 275, 37, 52, 28, 42, 30, 284, 356, 283, 358, 14, 28, 16, 28, 49, 38, 51)
 
 [node name="MusicEmitter" type="StudioEventEmitter2D" parent="."]
 play_event = 2
@@ -57,7 +58,8 @@ wait_time = 120.0
 autostart = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-collision_mask = 0
+collision_layer = 32
+collision_mask = 24
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PackedVector2Array(37, 25, 39, 274, 347, 273, 347, 27, 38, 25, 50, 39, 337, 40, 337, 264, 47, 264, 48, 38, 37, 25)

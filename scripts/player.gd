@@ -6,10 +6,13 @@ extends CharacterBody2D
 @export var powerup_sfx : EventAsset
 
 signal died
+signal special_kick
+signal hurt
 
 enum WEAPON { knife }
 
 var life : int
+var stamina : int
 var speed: int
 var attack_speed: float
 var damage: int
@@ -32,19 +35,17 @@ var _is_kicking: bool = false
 var gui
 var kick_knockback : float
 
-var camera2d : Camera2D
 var _weapon_sprite : Sprite2D
 var _collision_box: CollisionShape2D
 var _sprite: AnimatedSprite2D
 var _player_hitbox: Area2D
 var _player_hitbox_shape: CollisionShape2D
-var _animation_player: AnimationPlayer
+var _hurt_animation_player: AnimationPlayer
+var _charge_animation_player : AnimationPlayer
 var _has_played_walk_sfx = false
 
-var _original_camera_position = Vector2(0, 0)
-var _shake_timer = 0.0
-var _shake_duration = 0.2
 var hold_duration = 0
+const BASE_SPEED = 100
 
 func _ready():
 	#Instantiating child nodes
@@ -53,11 +54,13 @@ func _ready():
 	_player_hitbox = $PlayerHitbox
 	_player_hitbox_shape = $PlayerHitbox/PlayerHitboxShape
 	_weapon_sprite = $Pointer
-	_animation_player = $AnimationPlayer
+	_hurt_animation_player = $HurtAnimationPlayer
+	_charge_animation_player = $ChargeAnimationPlayer
 	is_hurting = false
 	#Attribute initialization
-	speed = 150
+	speed = 100
 	life = 100
+	stamina = 100
 	attack_speed = 0.2
 	damage = 2
 	kick_damage = 1
@@ -77,7 +80,6 @@ func _process(delta):
 	_follow_mouse_with_weapon()
 	_attack()
 	_kick(delta)
-	_screen_shake(delta)
 
 func get_hurt(damage):
 	if !is_hurting:
@@ -86,43 +88,27 @@ func get_hurt(damage):
 		if life <= 0:
 			gui.set_life(0)
 			_die()
-		_start_screen_shake()
+		hurt.emit()
+		#_start_screen_shake()
 		HitstopManager.hitstop_short()
-		_animation_player.play("hurt")
+		_hurt_animation_player.play("hurt")
 		FMODRuntime.play_one_shot(hurt_sfx)
 		is_hurting = true
 		_player_hitbox.set_deferred("monitorable", false)
 		await get_tree().create_timer(invis_frames).timeout
-		_animation_player.stop()
+		_hurt_animation_player.stop()
 		is_hurting = false
 		_player_hitbox.set_deferred("monitorable", true)
 		handle_collision_of_overlapping_areas()
 
-func _screen_shake(delta):
-	if _shake_timer > 0:
-		var _shake_amplitude = 2.0
-		# Generate a random offset for the camera position within the shake amplitude
-		var offset = Vector2(randf_range(-_shake_amplitude, _shake_amplitude), randf_range(-_shake_amplitude, _shake_amplitude))
-		
-		# Apply the offset to the camera position
-		camera2d.offset = offset
-
-		# Decrease the shake timer
-		_shake_timer -= delta
-	else:
-		# Reset the camera position when the shake is complete
-		camera2d.offset = _original_camera_position
-
-func _start_screen_shake():
-	_original_camera_position = camera2d.offset
-	_shake_timer = _shake_duration
-
 func handle_collision_of_overlapping_areas():
 	var overlapping = _player_hitbox.get_overlapping_areas()
 	if !overlapping.is_empty():
-		if overlapping[0].get_parent().name == "Butterboy":
+		var overlapper = overlapping[0].get_parent()
+		print(overlapper.name)
+		if overlapper.name == "Butterboy":
 			#No me gusta hacer esto pero ya que
-			get_hurt(overlapping[0].get_parent().damage)
+			get_hurt(overlapper.damage)
 
 func _play_walk_sfx():
 	if !_has_played_walk_sfx:
@@ -181,17 +167,26 @@ func _attack():
 		is_attacking = false
 
 func _kick(delta):
-	if Input.is_action_pressed("secondary_attack") and !_is_kicking:
+	if _is_kicking: return
+	if Input.is_action_pressed("secondary_attack"):
 		hold_duration += delta
-	if Input.is_action_just_released("secondary_attack") and !_is_kicking:
+		if hold_duration > 0.1:
+			_charge_animation_player.play("charging")
+			#speed = 0
+		if hold_duration >= 1:
+			_charge_animation_player.stop()
+			_sprite.self_modulate = Color(1, 6.51, 2.96)
+	if Input.is_action_just_released("secondary_attack"):
 		print(hold_duration)
+		speed = BASE_SPEED
+		_charge_animation_player.stop()
 		if hold_duration <= 0.3:
 			_spawn_kick()
 		elif hold_duration <= 0.5:
 			_spawn_kick(250, 0.5, 1.4)
-		elif hold_duration <= 0.8:
+		elif hold_duration < 0.8:
 			_spawn_kick(310, 0.6, 1.8)
-		elif hold_duration >= 1:
+		elif hold_duration >= 0.8:
 			_special_kick()
 		hold_duration = 0
 		
@@ -212,6 +207,7 @@ func _spawn_kick(new_knockback = 210, cooldown = 0.2, new_scale = 1):
 	_is_kicking = false
 
 func _special_kick():
+	special_kick.emit()
 	var kick_swing_spawn = special_kick_swing.instantiate()
 	kick_knockback = 400
 	add_child(kick_swing_spawn)

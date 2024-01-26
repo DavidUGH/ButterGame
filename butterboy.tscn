@@ -89,8 +89,8 @@ animations = [{
 
 [node name="Butterboy" type="CharacterBody2D"]
 z_index = 99
-collision_layer = 2
-collision_mask = 2
+collision_layer = 18
+collision_mask = 0
 platform_floor_layers = 4294901760
 script = ExtResource("1_owlft")
 hurt_sfx = ExtResource("2_4r40y")
@@ -99,12 +99,11 @@ die_sfx = ExtResource("3_vq0wb")
 [node name="ButterboyCollision" type="CollisionShape2D" parent="."]
 z_index = 1
 shape = SubResource("RectangleShape2D_admgk")
-disabled = true
 
 [node name="ButterboySprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_3deu5")
 sprite_frames = SubResource("SpriteFrames_g86t6")
-animation = &"stunned"
+animation = &"kicked"
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 2
