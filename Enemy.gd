@@ -112,7 +112,7 @@ func _get_hurt():
 
 func _get_kicked():
 	knockback_amount = player.kick_knockback
-	if knockback_amount >= 400:
+	if knockback_amount >= 400 and enemy_type != TYPE.N:
 		collision_mask = 32 #Can crash against wall
 	_flash_white()
 	anim_state = STATE.kicked

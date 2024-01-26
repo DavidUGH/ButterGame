@@ -4,7 +4,7 @@ func _ready():
 	speed = 60
 	life = 4
 	damage = 10
-	knockback_reduction = 100
+	knockback_reduction = -200
 	_is_flashing = false
 	_sprite = $NapkinSprite
 	_hurtbox = $Hurtbox

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bmvdru6ubwgb8"]
+[gd_scene load_steps=30 format=3 uid="uid://cbtw8ccypm7r7"]
 
 [ext_resource type="Script" path="res://Napkin.gd" id="1_gvthh"]
 [ext_resource type="Texture2D" uid="uid://bo8y6jqyo0h54" path="res://sprites/napkin.png" id="2_0etkn"]
@@ -14,17 +14,41 @@ resource_local_to_scene = true
 shader = ExtResource("2_0llc8")
 shader_parameter/flash = null
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sevy4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_pm3uj"]
 atlas = ExtResource("2_fgkwu")
 region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uskia"]
+atlas = ExtResource("2_fgkwu")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5cnv"]
+atlas = ExtResource("2_fgkwu")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_554pi"]
+atlas = ExtResource("2_fgkwu")
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gkc2g"]
 atlas = ExtResource("2_0etkn")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ob1k8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvhp1"]
 atlas = ExtResource("2_fgkwu")
 region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hgnnc"]
+atlas = ExtResource("2_fgkwu")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jj1up"]
+atlas = ExtResource("2_fgkwu")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uaxju"]
+atlas = ExtResource("2_fgkwu")
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ng0fe"]
 atlas = ExtResource("2_0etkn")
@@ -42,22 +66,31 @@ region = Rect2(64, 0, 32, 32)
 atlas = ExtResource("2_0etkn")
 region = Rect2(96, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bmprw"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_sevy4"]
 atlas = ExtResource("2_fgkwu")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5tumu"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sevy4")
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_pm3uj")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_uskia")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_b5cnv")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_554pi")
 }],
 "loop": false,
 "name": &"hurt",
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 2.5,
 "texture": SubResource("AtlasTexture_gkc2g")
 }],
 "loop": false,
@@ -65,8 +98,17 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ob1k8")
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_rvhp1")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_hgnnc")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_jj1up")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_uaxju")
 }],
 "loop": false,
 "name": &"kicked",
@@ -91,7 +133,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bmprw")
+"texture": SubResource("AtlasTexture_sevy4")
 }],
 "loop": false,
 "name": &"stunned",
@@ -133,7 +175,7 @@ die_sfx = ExtResource("3_gaws5")
 [node name="NapkinSprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_11x6h")
 sprite_frames = SubResource("SpriteFrames_5tumu")
-animation = &"jumping"
+animation = &"hurt"
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 z_index = -1
