@@ -1,9 +1,13 @@
 extends CharacterBody2D
 
+var chargeup_instance : EventInstance
+
 @export var walk_sfx : EventAsset
 @export var attack_sfx : EventAsset
 @export var hurt_sfx : EventAsset
 @export var powerup_sfx : EventAsset
+@export var chargeup_sfx : EventAsset
+@export var kick_sfx : EventAsset
 
 signal died
 signal special_kick
@@ -11,6 +15,7 @@ signal hurt
 
 enum WEAPON { knife }
 
+var is_charging = false
 var life : int
 var stamina : int
 var speed: int
@@ -49,6 +54,8 @@ var hold_duration = 0
 const BASE_SPEED = 100
 
 func _ready():
+	chargeup_instance = FMODRuntime.create_instance(chargeup_sfx)
+	
 	#Instantiating child nodes
 	_sprite = $PlayerAnimatedSprite
 	_shadow = $Sprite2D
@@ -176,12 +183,17 @@ func _kick(delta):
 		hold_duration += delta
 		if hold_duration > 0.1:
 			_charge_animation_player.play("charging")
+			if !is_charging:
+				is_charging = true
+				chargeup_instance.start()
 			#speed = 0
 		if hold_duration >= 1:
 			_charge_animation_player.stop()
 			_sprite.self_modulate = Color(1, 6.51, 2.96)
 	if Input.is_action_just_released("secondary_attack"):
 		print(hold_duration)
+		chargeup_instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_ALLOWFADEOUT)
+		FMODRuntime.play_one_shot(kick_sfx)
 		speed = BASE_SPEED
 		_charge_animation_player.stop()
 		if hold_duration <= 0.3:
@@ -191,9 +203,11 @@ func _kick(delta):
 		elif hold_duration < 0.8:
 			_spawn_kick(310, 0.6, 1.8)
 		elif hold_duration >= 0.8:
+			_charge_animation_player.stop()
 			_special_kick()
 		hold_duration = 0
-		
+		is_charging = false
+
 
 func _spawn_kick(new_knockback = 210, cooldown = 0.2, new_scale = 1):
 	var new_scale_v = Vector2(new_scale, new_scale)
@@ -227,7 +241,7 @@ func _special_kick():
 func _on_player_hitbox_area_entered(area):
 	var parent = area.get_parent()
 	if area.collision_layer == 256: # Si la collision layer tiene el bit 8 y solo el bit 8
-		FMODRuntime.play_one_shot(powerup_sfx)
+		#FMODRuntime.play_one_shot(powerup_sfx)
 		match parent.stat_type:
 			parent.TYPE.Damage:
 				damage += parent.pick_up()
@@ -240,3 +254,6 @@ func _on_player_hitbox_area_entered(area):
 				parent.queue_free()
 			_:
 				print("This shouldn't happen")
+			
+func _exit_tree():
+	chargeup_instance.release()
