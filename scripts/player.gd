@@ -4,6 +4,8 @@ extends CharacterBody2D
 @export var attack_sfx : EventAsset
 @export var hurt_sfx : EventAsset
 @export var powerup_sfx : EventAsset
+@export var chargeup_sfx : EventAsset
+@export var kick_sfx : EventAsset
 
 signal died
 signal special_kick
@@ -182,6 +184,7 @@ func _kick(delta):
 			_sprite.self_modulate = Color(1, 6.51, 2.96)
 	if Input.is_action_just_released("secondary_attack"):
 		print(hold_duration)
+		FMODRuntime.play_one_shot(kick_sfx)
 		speed = BASE_SPEED
 		_charge_animation_player.stop()
 		if hold_duration <= 0.3:
@@ -227,7 +230,7 @@ func _special_kick():
 func _on_player_hitbox_area_entered(area):
 	var parent = area.get_parent()
 	if area.collision_layer == 256: # Si la collision layer tiene el bit 8 y solo el bit 8
-		FMODRuntime.play_one_shot(powerup_sfx)
+		#FMODRuntime.play_one_shot(powerup_sfx)
 		match parent.stat_type:
 			parent.TYPE.Damage:
 				damage += parent.pick_up()

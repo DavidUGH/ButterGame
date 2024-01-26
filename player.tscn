@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://s6bmsorcy044"]
+[gd_scene load_steps=29 format=3 uid="uid://s6bmsorcy044"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ykyym"]
 [ext_resource type="EventAsset" uid="uid://b84qu5s2xfas8" path="res://addons/FMOD/editor/resources/events/{d7027700-8c2f-42e2-afc3-b6067e6b1d05}.tres" id="2_aiu6s"]
@@ -9,6 +9,21 @@
 [ext_resource type="Texture2D" uid="uid://b1dwvbncqlnrx" path="res://sprites/paltoman_indle_sprites.png" id="6_xaqec"]
 [ext_resource type="Texture2D" uid="uid://dftuhtdbme61b" path="res://sprites/paltoman_run_sprites.png" id="7_hc7is"]
 [ext_resource type="Texture2D" uid="uid://y0atjiy3nwye" path="res://sprites/pointer.png" id="11_or3xl"]
+
+[sub_resource type="EventAsset" id="EventAsset_vojn3"]
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/SFX/chargeAttack"
+guid = "{8eb586fb-eab1-4f92-b43b-f195f5f39b1c}"
+name = "chargeAttack"
+
+[sub_resource type="EventAsset" id="EventAsset_uukky"]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/SFX/kick"
+guid = "{2bcb06d0-3c2e-4e31-be5c-0b1478dd16c5}"
+name = "kick"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_olwyu"]
 radius = 3.99996
@@ -30,29 +45,29 @@ region = Rect2(64, 0, 32, 32)
 atlas = ExtResource("6_xaqec")
 region = Rect2(96, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1qwfq"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4xptu"]
 atlas = ExtResource("7_hc7is")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vxhu3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ekpxb"]
 atlas = ExtResource("7_hc7is")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mcdg4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_1moru"]
 atlas = ExtResource("7_hc7is")
 region = Rect2(64, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yk57m"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmwhj"]
 atlas = ExtResource("7_hc7is")
-region = Rect2(96, 0, 32, 32)
+region = Rect2(0, 32, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d8ftd"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ahqj"]
 atlas = ExtResource("7_hc7is")
-region = Rect2(128, 0, 32, 32)
+region = Rect2(32, 32, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lh7ui"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_syecj"]
 atlas = ExtResource("7_hc7is")
-region = Rect2(160, 0, 32, 32)
+region = Rect2(64, 32, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_w1i7l"]
 animations = [{
@@ -74,23 +89,23 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1qwfq")
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_4xptu")
 }, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vxhu3")
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_ekpxb")
 }, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mcdg4")
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_1moru")
 }, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yk57m")
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_gmwhj")
 }, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d8ftd")
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_0ahqj")
 }, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lh7ui")
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_syecj")
 }],
 "loop": true,
 "name": &"run",
@@ -145,15 +160,16 @@ _data = {
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 9
-collision_mask = 0
+collision_mask = 32
 script = ExtResource("1_ykyym")
 walk_sfx = ExtResource("2_aiu6s")
 attack_sfx = ExtResource("3_k33ay")
 hurt_sfx = ExtResource("4_jkl8g")
 powerup_sfx = ExtResource("5_7aajq")
+chargeup_sfx = SubResource("EventAsset_vojn3")
+kick_sfx = SubResource("EventAsset_uukky")
 
 [node name="PlayerShape" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, 13)
 rotation = -1.56649
 shape = SubResource("CapsuleShape2D_olwyu")
@@ -161,14 +177,13 @@ shape = SubResource("CapsuleShape2D_olwyu")
 [node name="PlayerAnimatedSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_w1i7l")
 animation = &"run"
-frame = 5
+frame_progress = 0.164437
 offset = Vector2(2, 0)
 
 [node name="PlayerHitbox" type="Area2D" parent="."]
-collision_mask = 256
+collision_mask = 258
 
 [node name="PlayerHitboxShape" type="CollisionShape2D" parent="PlayerHitbox"]
-visible = false
 shape = SubResource("CapsuleShape2D_bxaeh")
 
 [node name="ChargeAnimationPlayer" type="AnimationPlayer" parent="."]
