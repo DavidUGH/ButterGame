@@ -99,7 +99,7 @@ func spawn_passing_enemy_at(enemy_scene, initial_position, end_position):
 	enemies_list.append(nueva_instancia)
 
 func _on_died(who, position_at_death):
-	if who == "Napkin":
+	if who == Enemy.TYPE.N:
 		enemy_death_count += 1
 		last_death = position_at_death
 		return
@@ -132,13 +132,13 @@ func check_tile(vector:Array[Vector2i], v:Vector2i):
 			pass
 
 func clean_tile_check(v:Vector2i):
-	if(v.x>=8&&v.y>=7 && v.x<=39&&v.y<=30):#10,7 29,22
-		if(butter_matrix[v.x][v.y] == 0):
-			butter_matrix[v.x][v.y] = 1
-			current_tiles = current_tiles+1
+	if(v.x>=8&&v.y>=7 && v.x<=39&&v.y<=30):#10,7 29,22a
+		if(butter_matrix[v.x][v.y] == 1):
+			butter_matrix[v.x][v.y] = 0
+			current_tiles -= 1
 			tile_map.set_cell(2, Vector2i(v.x, v.y), 0, Vector2i(5,5))
-		else:
-			pass
+			have_won()
+			GUI.setButterProgress((current_tiles/ tiles_to_win) * 100)
 
 func draw_circle(v: Vector2i):
 	var x = v.x

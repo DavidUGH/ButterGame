@@ -11,6 +11,7 @@ func _ready():
 	lifeBar = $lifeBar
 	is_jumping = false
 	anim_state = STATE.moving
+	enemy_type = TYPE.N
 	
 func _physics_process(delta):
 	if !is_jumping:

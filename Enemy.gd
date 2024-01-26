@@ -6,6 +6,8 @@ extends CharacterBody2D
 
 signal died(who, position_at_death)
 
+enum TYPE {BB, SB, FB, N}
+var enemy_type : TYPE
 var speed: int
 var life: int
 var _sprite: AnimatedSprite2D
@@ -61,7 +63,7 @@ func _handle_animations():
 
 func _die():
 	FMODRuntime.play_one_shot(die_sfx)
-	died.emit(name, position)
+	died.emit(enemy_type, position)
 	queue_free()
 
 func _flash_white():

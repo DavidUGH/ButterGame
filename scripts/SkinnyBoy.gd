@@ -12,6 +12,7 @@ func _ready():
 	lifeBar.max_value = life
 	is_jumping = false
 	anim_state = STATE.moving
+	enemy_type = TYPE.SB
 	
 func _physics_process(delta):
 	if !is_jumping:

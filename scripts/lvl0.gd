@@ -46,12 +46,13 @@ func _process(delta):
 	GUI.setConsole(str(minutes) + ":" + time_format(seconds))
 	if timer.time_left <= 60:
 		time_counter = 1.5
+	#print(tile_map.local_to_map(get_viewport().get_mouse_position()))
 
 func _count_napkins():
 	for e in enemies_list:
 		if e == null:
 			enemies_list.erase(e)
-		elif e.name == "Napkin":
+		elif e.enemy_type == Enemy.TYPE.N:
 			napkins.append(e)
 
 func _clean_butter_below_napkins():
