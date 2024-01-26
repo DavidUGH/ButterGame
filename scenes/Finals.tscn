@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dpgrdlq0lyetm"]
+[gd_scene load_steps=6 format=3 uid="uid://dpgrdlq0lyetm"]
 
 [ext_resource type="Texture2D" uid="uid://blprxfikjj1g0" path="res://sprites/ui/finals.png" id="1_0xyf0"]
 [ext_resource type="Script" path="res://scripts/Finals.gd" id="1_mhxoc"]
@@ -6,6 +6,14 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_s8id8"]
 atlas = ExtResource("1_0xyf0")
 region = Rect2(0, 0, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iud7w"]
+atlas = ExtResource("1_0xyf0")
+region = Rect2(400, 0, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c34us"]
+atlas = ExtResource("1_0xyf0")
+region = Rect2(800, 0, 400, 300)
 
 [node name="Finals" type="Control"]
 layout_mode = 3
@@ -46,7 +54,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("AtlasTexture_s8id8")
+texture = SubResource("AtlasTexture_iud7w")
 
 [node name="PerfectEnding" type="TextureRect" parent="."]
 visible = false
@@ -62,4 +70,4 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("AtlasTexture_s8id8")
+texture = SubResource("AtlasTexture_c34us")
