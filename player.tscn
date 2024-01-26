@@ -113,6 +113,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bxaeh"]
+radius = 7.0
+height = 24.0
 
 [sub_resource type="Animation" id="Animation_a1rh3"]
 resource_name = "charging"

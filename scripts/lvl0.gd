@@ -17,6 +17,8 @@ var _shake_duration = 0.2
 var _shake_amplitude = 2
 var _original_camera_position = Vector2(0, 0)
 
+var queue = []
+
 func _ready():
 	for i in range(filas):
 		var fila: Array = []
@@ -32,11 +34,12 @@ func _ready():
 	GUI = $GUI
 	player.gui = GUI
 	camera2d = $Camera2D
-	time_counter = 3.0
+	time_counter = 3.5
 	
 	screen_size = get_viewport().content_scale_size
 
 func _process(delta):
+	timeline(timer.time)
 	spawn_enemies_periodically()
 	_screen_shake(delta)
 	_count_napkins()
@@ -44,45 +47,73 @@ func _process(delta):
 	var minutes = floor(timer.time_left / 60)
 	var seconds = floor(timer.time_left - minutes * 60)
 	GUI.setConsole(str(minutes) + ":" + time_format(seconds))
-	
-	if timer.time_left <= 60:
-		time_counter = 1.5
 
 func time_format(time):
 	if time < 10:
 		return "0" + str(time)
 	return str(time)
 
+func timeline(time):
+	if time == 0: #time_counter = 3
+		queue.push_back(0) # 0
+		queue.push_back(0) # 3
+		queue.push_back(0) # 6
+		queue.push_back(0) # 9
+		queue.push_back(1) # 12
+		queue.push_back(0) # 15
+		queue.push_back(1) # 18
+		queue.push_back(0) # 21
+	if time == 20:
+		queue.push_back(0)
+		queue.push_back(0)
 func spawn_enemies_periodically():
 	if spawn_flag:
-		random_spawn_pattern()
+		var next = queue.pop_front()
+		spawn_wave(next)
 		spawn_flag = false
 		await get_tree().create_timer(time_counter).timeout
 		spawn_flag = true
 
-func random_spawn_pattern():
-	var r = randi() % 6
+func spawn_wave(next):
+	match next:
+		0: # followers at random
+			spawn_followers_from_random_side()
+		1: # passing random side
+			spawn_passing_enemies_from_random_side()
+		2: # passing cross top and bottom
+			spawn_passing_enemies_cross(0)
+		3: # passing cross left and right
+			spawn_passing_enemies_cross(1)
+
+func spawn_passing_enemies_cross(side):
+	match side:
+		0: # vertical
+			spawn_passing_top_to_bottom()
+			spawn_passing_bottom_to_top()
+		1: # horizontal
+			spawn_passing_left_to_right()
+			spawn_passing_right_to_left()
+
+func spawn_passing_enemies_from_random_side():
+	var r = randi() % 4
 	match r:
 		0:
-			spawn_pattern_top_to_bottom()
+			spawn_passing_top_to_bottom()
 		1:
-			spawn_pattern_left_to_right()
+			spawn_passing_bottom_to_top()
 		2:
-			spawn_pattern_right_to_left()
+			spawn_passing_top_to_bottom()
 		3:
-			spawn_pattern_bottom_to_top()
-		4:
-			spawn_napkins_top_to_bottom()
-		_:
-			spawn_followers_from_random_side()
+			spawn_passing_top_to_bottom()
 
 func spawn_followers_from_random_side():
 	var screen_height = screen_size.y
 	var quarter_screen =  screen_size.y / 4
 	spawn_following_enemy_at(skinnyBoy, get_random_coord_at_random_side(screen_size))
-	spawn_following_enemy_at(fattyBoy, get_random_coord_at_random_side(screen_size))
 	spawn_following_enemy_at(skinnyBoy, get_random_coord_at_random_side(screen_size))
-	spawn_following_enemy_at(fattyBoy, get_random_coord_at_random_side(screen_size))
+	spawn_following_enemy_at(skinnyBoy, get_random_coord_at_random_side(screen_size))
+	spawn_following_enemy_at(skinnyBoy, get_random_coord_at_random_side(screen_size))
+	spawn_following_enemy_at(skinnyBoy, get_random_coord_at_random_side(screen_size))
 
 func spawn_napkins_top_to_bottom():
 	var screen_height = screen_size.y
@@ -92,7 +123,8 @@ func spawn_napkins_top_to_bottom():
 	spawn_passing_enemy_at(napkin, Vector2(quarter_screen*3, 0) , Vector2(quarter_screen*3, screen_height+20))
 	spawn_passing_enemy_at(napkin, Vector2(quarter_screen*4, 0) , Vector2(quarter_screen*4, screen_height+20))
 
-func spawn_pattern_top_to_bottom():
+
+func spawn_passing_top_to_bottom():
 	var screen_height = screen_size.y
 	var quarter_screen =  screen_size.y / 4
 	spawn_passing_enemy_at(fattyBoy, Vector2(quarter_screen, 0), Vector2(quarter_screen, screen_height+20))
@@ -100,7 +132,7 @@ func spawn_pattern_top_to_bottom():
 	spawn_passing_enemy_at(fattyBoy, Vector2(quarter_screen*3, 0) , Vector2(quarter_screen*3, screen_height+20))
 	spawn_passing_enemy_at(fattyBoy, Vector2(quarter_screen*4, 0) , Vector2(quarter_screen*4, screen_height+20))
 
-func spawn_pattern_bottom_to_top():
+func spawn_passing_bottom_to_top():
 	var screen_height = screen_size.y
 	var quarter_screen =  screen_size.y / 4
 	spawn_passing_enemy_at(butterboy, Vector2(quarter_screen, screen_height), Vector2(quarter_screen, -20))
@@ -108,7 +140,7 @@ func spawn_pattern_bottom_to_top():
 	spawn_passing_enemy_at(butterboy, Vector2(quarter_screen*3, screen_height) , Vector2(quarter_screen*3, -20))
 	spawn_passing_enemy_at(butterboy, Vector2(quarter_screen*4, screen_height) , Vector2(quarter_screen*4, -20))
 
-func spawn_pattern_left_to_right():
+func spawn_passing_left_to_right():
 	var screen_width = screen_size.x
 	var quarter_screen =  screen_size.y / 5
 	spawn_passing_enemy_at(butterboy, Vector2(0, quarter_screen), Vector2(screen_width+20, quarter_screen))
@@ -116,7 +148,7 @@ func spawn_pattern_left_to_right():
 	spawn_passing_enemy_at(butterboy, Vector2(0, quarter_screen*3) , Vector2(screen_width+20, quarter_screen*3))
 	spawn_passing_enemy_at(butterboy, Vector2(0, quarter_screen*4) , Vector2(screen_width+20, quarter_screen*4))
 
-func spawn_pattern_right_to_left():
+func spawn_passing_right_to_left():
 	var screen_width = screen_size.x
 	var quarter_screen =  screen_size.y / 5
 	spawn_passing_enemy_at(skinnyBoy, Vector2(screen_width, quarter_screen), Vector2(-20, quarter_screen))
