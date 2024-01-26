@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://2qgdlnfun0hq"]
+[gd_scene load_steps=13 format=3 uid="uid://2qgdlnfun0hq"]
 
 [ext_resource type="Texture2D" uid="uid://bvusycndcdyrf" path="res://sprites/knifehit.png" id="1_cx02a"]
 [ext_resource type="Script" path="res://attack_effect.gd" id="2_walbw"]
@@ -6,10 +6,6 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_fptnj"]
 atlas = ExtResource("1_cx02a")
 region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gcdf2"]
-atlas = ExtResource("1_cx02a")
-region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n1np8"]
 atlas = ExtResource("1_cx02a")
@@ -32,9 +28,6 @@ animations = [{
 "frames": [{
 "duration": 0.2,
 "texture": SubResource("AtlasTexture_fptnj")
-}, {
-"duration": 0.2,
-"texture": SubResource("AtlasTexture_gcdf2")
 }, {
 "duration": 0.2,
 "texture": SubResource("AtlasTexture_n1np8")
@@ -98,7 +91,7 @@ _data = {
 [node name="AttackEffect" type="AnimatedSprite2D"]
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_qa3du")
-frame = 3
+frame = 1
 script = ExtResource("2_walbw")
 
 [node name="Area2D" type="Area2D" parent="."]

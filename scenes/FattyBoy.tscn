@@ -1,0 +1,168 @@
+[gd_scene load_steps=24 format=3 uid="uid://c7rrqkg3qqlvc"]
+
+[ext_resource type="Script" path="res://scripts/FattyBoy.gd" id="1_52311"]
+[ext_resource type="Shader" path="res://butterboy.gdshader" id="1_b4nni"]
+[ext_resource type="EventAsset" uid="uid://cpoojfwou1hka" path="res://addons/FMOD/editor/resources/events/{ad049370-db7b-43b0-87b3-93f05ef9c65a}.tres" id="2_e8iq5"]
+[ext_resource type="Texture2D" uid="uid://bbptta554qrta" path="res://sprites/enemies/butterBoy.png" id="2_lvjk6"]
+[ext_resource type="Texture2D" uid="uid://dcyrdkfercaxp" path="res://sprites/enemies/butterboi-hort.png" id="3_ui66d"]
+[ext_resource type="EventAsset" uid="uid://djafn8e4yqdvn" path="res://addons/FMOD/editor/resources/events/{637b375b-7bf5-423d-996f-f562165430fc}.tres" id="3_vvt21"]
+[ext_resource type="Texture2D" uid="uid://dy1kwryrgmh56" path="res://sprites/enemies/placeHolderEnemie.png" id="4_4ev4j"]
+[ext_resource type="Texture2D" uid="uid://eyqn3ndyffad" path="res://sprites/shadow.png" id="4_bm74f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spdph"]
+bg_color = Color(0.242188, 0.164063, 0.0703125, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gqge1"]
+bg_color = Color(0.710938, 0.386719, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_admgk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3deu5"]
+resource_local_to_scene = true
+shader = ExtResource("1_b4nni")
+shader_parameter/flash = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gew8w"]
+atlas = ExtResource("2_lvjk6")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q4w4h"]
+atlas = ExtResource("2_lvjk6")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2qbjf"]
+atlas = ExtResource("2_lvjk6")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c2bj6"]
+atlas = ExtResource("2_lvjk6")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1d7ii"]
+atlas = ExtResource("4_4ev4j")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijy4y"]
+atlas = ExtResource("4_4ev4j")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7fevp"]
+atlas = ExtResource("3_ui66d")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m888n"]
+atlas = ExtResource("4_4ev4j")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_inv15"]
+atlas = ExtResource("4_4ev4j")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c30ye"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gew8w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q4w4h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2qbjf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c2bj6")
+}],
+"loop": false,
+"name": &"dying",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1d7ii")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.5,
+"texture": SubResource("AtlasTexture_ijy4y")
+}],
+"loop": false,
+"name": &"jumping",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7fevp")
+}],
+"loop": false,
+"name": &"kicked",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m888n")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_inv15")
+}],
+"loop": false,
+"name": &"stunned",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_08nmv"]
+
+[node name="FattyBoy" type="CharacterBody2D"]
+z_index = 99
+collision_layer = 18
+collision_mask = 0
+platform_floor_layers = 4294901760
+script = ExtResource("1_52311")
+hurt_sfx = ExtResource("2_e8iq5")
+die_sfx = ExtResource("3_vvt21")
+
+[node name="lifeBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = -24.0
+offset_top = -25.0
+offset_right = 24.0
+offset_bottom = -17.0
+theme_override_styles/background = SubResource("StyleBoxFlat_spdph")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gqge1")
+step = 1.0
+value = 100.0
+show_percentage = false
+
+[node name="ButterboyCollision" type="CollisionShape2D" parent="."]
+z_index = 1
+shape = SubResource("RectangleShape2D_admgk")
+
+[node name="ButterboySprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_3deu5")
+sprite_frames = SubResource("SpriteFrames_c30ye")
+animation = &"stunned"
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 261
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_08nmv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.556863)
+z_index = -2
+position = Vector2(0, 13)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("4_bm74f")
+
+[connection signal="animation_finished" from="ButterboySprite" to="." method="_on_butterboy_sprite_animation_finished" flags=18]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered" flags=18]

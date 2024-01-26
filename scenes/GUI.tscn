@@ -1,8 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bs7gr3h8tldn5"]
+[gd_scene load_steps=17 format=3 uid="uid://bs7gr3h8tldn5"]
 
 [ext_resource type="Script" path="res://scripts/GUI.gd" id="1_tudpf"]
 [ext_resource type="FontFile" uid="uid://lkrvfvmqjnlb" path="res://fonts/Daydream.ttf" id="2_s5xdx"]
 [ext_resource type="Texture2D" uid="uid://dn2c1kqmwi2gy" path="res://sprites/ui/PauseButton.png" id="3_tt2mp"]
+[ext_resource type="PackedScene" uid="uid://bcmal22f68ct" path="res://scenes/OptionsMenu.tscn" id="4_f2q2g"]
+[ext_resource type="Texture2D" uid="uid://bkedgw5itby1q" path="res://sprites/ui/progressBar.png" id="5_bpyd3"]
+[ext_resource type="Texture2D" uid="uid://c55rrvvsshnqs" path="res://sprites/ui/butterProgress.png" id="6_kdvfa"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_teo1u"]
 font = ExtResource("2_s5xdx")
@@ -20,6 +23,30 @@ region = Rect2(0, 50, 25, 25)
 atlas = ExtResource("3_tt2mp")
 region = Rect2(0, 25, 25, 25)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_vxo0w"]
+atlas = ExtResource("5_bpyd3")
+region = Rect2(0, 0, 170, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ko6b"]
+atlas = ExtResource("5_bpyd3")
+region = Rect2(56, 112, 110, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_58xyd"]
+atlas = ExtResource("5_bpyd3")
+region = Rect2(0, 0, 170, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6b7m4"]
+atlas = ExtResource("5_bpyd3")
+region = Rect2(56, 76, 70, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45t83"]
+atlas = ExtResource("6_kdvfa")
+region = Rect2(1, 4, 248, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6j74n"]
+atlas = ExtResource("6_kdvfa")
+region = Rect2(7, 61, 234, 30)
+
 [node name="GUI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -30,6 +57,7 @@ grow_vertical = 2
 script = ExtResource("1_tudpf")
 
 [node name="LifeLabel" type="Label" parent="."]
+visible = false
 layout_mode = 1
 offset_left = 8.0
 offset_top = 15.0
@@ -57,9 +85,47 @@ texture_hover = SubResource("AtlasTexture_rbjhx")
 
 [node name="ConsoleLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 145.0
-offset_top = 15.0
-offset_right = 224.0
-offset_bottom = 32.0
+offset_left = 194.0
+offset_top = 14.0
+offset_right = 273.0
+offset_bottom = 31.0
 text = "Mensaje"
 label_settings = SubResource("LabelSettings_teo1u")
+
+[node name="OptionsMenu" parent="." instance=ExtResource("4_f2q2g")]
+z_index = 200
+layout_mode = 1
+offset_left = 108.0
+offset_top = -220.0
+offset_right = -112.0
+offset_bottom = -320.0
+
+[node name="LifeBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+value = 100.0
+texture_under = SubResource("AtlasTexture_vxo0w")
+texture_progress = SubResource("AtlasTexture_0ko6b")
+texture_progress_offset = Vector2(56, 12)
+
+[node name="StaminaBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_right = 170.0
+offset_bottom = 46.0
+value = 100.0
+texture_under = SubResource("AtlasTexture_58xyd")
+texture_progress = SubResource("AtlasTexture_6b7m4")
+texture_progress_offset = Vector2(56, 26)
+
+[node name="ButterBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 248.0
+offset_right = 337.0
+offset_bottom = 292.0
+texture_under = SubResource("AtlasTexture_45t83")
+texture_progress = SubResource("AtlasTexture_6j74n")
+texture_progress_offset = Vector2(6, 7)
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

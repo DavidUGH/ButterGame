@@ -1,13 +1,17 @@
 class_name Level
 extends Node
 
+var powerup = preload("res://sprites/scenario/power_up.tscn")
+
 enum SIDE {Top, Bottom, Left, Right}
 
+var last_death = Vector2()
+var enemy_death_count = 0
 var enemies_list: Array = []
 var butter_matrix : Array = []
 var player
-var tiles_to_win = 32*24
-var current_tiles = 0
+var tiles_to_win : float = 32*24 
+var current_tiles : float = 0 
 const BREAD_LAYER = 0
 const BUTTER_LAYER = 2
 
@@ -16,6 +20,8 @@ var columnas = 32
 
 var tile_map : TileMap
 var GUI
+var _powerup_counter = 0
+var enemies_till_powerup = 10
 
 
 func set_tileset(t):
@@ -28,10 +34,20 @@ func _game_over():
 	get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
 
 func have_won():
-	GUI.setConsole("CURRENT TILES: "+ str(current_tiles)+"\nTILES TO WIN: "+ str(tiles_to_win))
 	if(current_tiles>=tiles_to_win):
 		GUI.setConsole("You Win!")
 		_game_over()
+
+func spawn_powerups():
+	if enemy_death_count % enemies_till_powerup == 0:
+		print("new powerup")
+		var new_powerup = powerup.instantiate()
+		new_powerup.set_type(_powerup_counter)
+		new_powerup.position = last_death
+		call_deferred("add_child", new_powerup)
+		_powerup_counter += 1
+		if _powerup_counter > 2:
+			_powerup_counter = 0
 
 func get_random_coord_at_random_side(square_size):
 	var sides = randi() % 4
@@ -82,10 +98,16 @@ func spawn_passing_enemy_at(enemy_scene, initial_position, end_position):
 	# Agregar la nueva instancia a la lista de enemigos
 	enemies_list.append(nueva_instancia)
 
-func _on_died(position_at_death):
+func _on_died(who, position_at_death):
+	var idx = enemies_list.find(who)
+	enemies_list.pop_at(idx)
 	var tile = tile_map.local_to_map(position_at_death)
 	draw_square(tile)
-	#have_won()
+	enemy_death_count += 1
+	last_death = position_at_death
+	GUI.setButterProgress((current_tiles/ tiles_to_win) * 100)
+	have_won()
+	spawn_powerups()
 
 func draw_cross(v: Vector2i):
 	var x = v.x
@@ -104,6 +126,15 @@ func check_tile(vector:Array[Vector2i], v:Vector2i):
 			butter_matrix[v.x][v.y] = 1
 			current_tiles = current_tiles+1
 			vector.append(Vector2i(v.x, v.y))
+		else:
+			pass
+
+func clean_tile_check(v:Vector2i):
+	if(v.x>=8&&v.y>=7 && v.x<=39&&v.y<=30):#10,7 29,22
+		if(butter_matrix[v.x][v.y] == 0):
+			butter_matrix[v.x][v.y] = 1
+			current_tiles = current_tiles+1
+			tile_map.set_cell(2, Vector2i(v.x, v.y))
 		else:
 			pass
 
