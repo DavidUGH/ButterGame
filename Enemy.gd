@@ -61,7 +61,7 @@ func _handle_animations():
 
 func _die():
 	FMODRuntime.play_one_shot(die_sfx)
-	died.emit(self, position)
+	died.emit(name, position)
 	queue_free()
 
 func _flash_white():

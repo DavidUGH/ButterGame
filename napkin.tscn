@@ -1,10 +1,18 @@
-[gd_scene load_steps=18 format=3 uid="uid://bmvdru6ubwgb8"]
+[gd_scene load_steps=24 format=3 uid="uid://bmvdru6ubwgb8"]
 
 [ext_resource type="Script" path="res://Napkin.gd" id="1_gvthh"]
 [ext_resource type="Texture2D" uid="uid://bo8y6jqyo0h54" path="res://sprites/napkin.png" id="2_0etkn"]
+[ext_resource type="Shader" path="res://napkin.gdshader" id="2_0llc8"]
+[ext_resource type="EventAsset" uid="uid://cpoojfwou1hka" path="res://addons/FMOD/editor/resources/events/{ad049370-db7b-43b0-87b3-93f05ef9c65a}.tres" id="2_cre6k"]
 [ext_resource type="Texture2D" uid="uid://dng70yy4oql7c" path="res://sprites/napkin_hort.png" id="2_fgkwu"]
 [ext_resource type="Texture2D" uid="uid://cnj5jd4fov5qr" path="res://sprites/twinkle.png" id="3_83pvf"]
+[ext_resource type="EventAsset" uid="uid://djafn8e4yqdvn" path="res://addons/FMOD/editor/resources/events/{637b375b-7bf5-423d-996f-f562165430fc}.tres" id="3_gaws5"]
 [ext_resource type="Texture2D" uid="uid://eyqn3ndyffad" path="res://sprites/shadow.png" id="4_be7n5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_11x6h"]
+resource_local_to_scene = true
+shader = ExtResource("2_0llc8")
+shader_parameter/flash = null
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sevy4"]
 atlas = ExtResource("2_fgkwu")
@@ -53,7 +61,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_gkc2g")
 }],
 "loop": false,
-"name": &"jumpíng",
+"name": &"jumping",
 "speed": 5.0
 }, {
 "frames": [{
@@ -85,7 +93,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bmprw")
 }],
-"loop": true,
+"loop": false,
 "name": &"stunned",
 "speed": 5.0
 }]
@@ -108,14 +116,24 @@ scale_max = 0.4
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kqcdc"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ab1nb"]
+bg_color = Color(0.242188, 0.164063, 0.0703125, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lmkpn"]
+bg_color = Color(0.710938, 0.386719, 0, 1)
+
 [node name="Napkin" type="CharacterBody2D"]
+z_index = 99
 collision_layer = 18
 collision_mask = 0
 script = ExtResource("1_gvthh")
+hurt_sfx = ExtResource("2_cre6k")
+die_sfx = ExtResource("3_gaws5")
 
 [node name="NapkinSprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_11x6h")
 sprite_frames = SubResource("SpriteFrames_5tumu")
-animation = &"stunned"
+animation = &"jumping"
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 z_index = -1
@@ -140,4 +158,17 @@ position = Vector2(0, 14)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("4_be7n5")
 
+[node name="lifeBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = -24.0
+offset_top = -25.0
+offset_right = 24.0
+offset_bottom = -17.0
+theme_override_styles/background = SubResource("StyleBoxFlat_ab1nb")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lmkpn")
+step = 1.0
+value = 100.0
+show_percentage = false
+
 [connection signal="animation_finished" from="NapkinSprite" to="." method="_on_napkin_sprite_animation_finished"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

@@ -5,6 +5,7 @@ var spawn_flag = true
 var butterboy = preload("res://butterboy.tscn")
 var fattyBoy = preload("res://scenes/FattyBoy.tscn")
 var skinnyBoy = preload("res://scenes/SkinnyBoy.tscn")
+var napkin = preload("res://napkin.tscn")
 var screen_size
 var timer : Timer
 var time_counter
@@ -38,8 +39,8 @@ func _ready():
 func _process(delta):
 	spawn_enemies_periodically()
 	_screen_shake(delta)
-	#_count_napkins()
-	#_clean_butter_below_napkins()
+	_count_napkins()
+	_clean_butter_below_napkins()
 	var minutes = floor(timer.time_left / 60)
 	var seconds = floor(timer.time_left - minutes * 60)
 	GUI.setConsole(str(minutes) + ":" + time_format(seconds))
@@ -48,12 +49,17 @@ func _process(delta):
 
 func _count_napkins():
 	for e in enemies_list:
-		if e.name == "Napkin":
+		if e == null:
+			enemies_list.erase(e)
+		elif e.name == "Napkin":
 			napkins.append(e)
 
 func _clean_butter_below_napkins():
 	for n in napkins:
-		_clean_butter(n.position)
+		if n == null:
+			napkins.erase(n)
+		else:
+			_clean_butter(n.position)
 
 func _clean_butter(pos):
 	var tile = tile_map.local_to_map(pos)
@@ -86,13 +92,13 @@ func random_spawn_pattern():
 	var r = randi() % 5
 	match r:
 		0:
-			spawn_pattern_left_to_right()
+			spawn_napkins_top_to_bottom()
 		1:
-			spawn_pattern_right_to_left()
+			spawn_napkins_top_to_bottom()
 		2:
-			spawn_pattern_top_to_bottom()
+			spawn_napkins_top_to_bottom()
 		3:
-			spawn_pattern_bottom_to_top()
+			spawn_napkins_top_to_bottom()
 		_:
 			spawn_followers_from_random_side()
 
@@ -103,6 +109,14 @@ func spawn_followers_from_random_side():
 	spawn_following_enemy_at(fattyBoy, get_random_coord_at_random_side(screen_size))
 	spawn_following_enemy_at(skinnyBoy, get_random_coord_at_random_side(screen_size))
 	spawn_following_enemy_at(fattyBoy, get_random_coord_at_random_side(screen_size))
+
+func spawn_napkins_top_to_bottom():
+	var screen_height = screen_size.y
+	var quarter_screen =  screen_size.y / 4
+	spawn_passing_enemy_at(napkin, Vector2(quarter_screen, 0), Vector2(quarter_screen, screen_height+20))
+	spawn_passing_enemy_at(napkin, Vector2(quarter_screen*2, 0) , Vector2(quarter_screen*2, screen_height+20))
+	spawn_passing_enemy_at(napkin, Vector2(quarter_screen*3, 0) , Vector2(quarter_screen*3, screen_height+20))
+	spawn_passing_enemy_at(napkin, Vector2(quarter_screen*4, 0) , Vector2(quarter_screen*4, screen_height+20))
 
 func spawn_pattern_top_to_bottom():
 	var screen_height = screen_size.y

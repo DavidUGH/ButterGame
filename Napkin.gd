@@ -4,9 +4,11 @@ func _ready():
 	speed = 60
 	life = 4
 	damage = 10
+	knockback_reduction = 100
 	_is_flashing = false
 	_sprite = $NapkinSprite
 	_hurtbox = $Hurtbox
+	lifeBar = $lifeBar
 	is_jumping = false
 	anim_state = STATE.moving
 	
