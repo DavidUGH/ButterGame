@@ -11,7 +11,8 @@ bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kxt21"]
 atlas = ExtResource("3_n7fmm")
-region = Rect2(0, 0, 320, 240)
+region = Rect2(0, 0, 400, 300)
+filter_clip = true
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c4vc7"]
 atlas = ExtResource("4_uxo02")

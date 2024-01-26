@@ -25,24 +25,7 @@ func _process(delta : float):
 	
 
 func drawNextFrame():
-	if(iterator == 0):
-		atlas.region.position.x = 0
-		atlas.region.position.y = 0
-	if(iterator == 1):
-		atlas.region.position.x = 320
-		atlas.region.position.y = 0
-	if(iterator == 2):
-		atlas.region.position.x = 640
-		atlas.region.position.y = 0
-	if(iterator == 3):
-		atlas.region.position.x = 0
-		atlas.region.position.y = 240
-	if(iterator == 4):
-		atlas.region.position.x = 320
-		atlas.region.position.y = 240
-	if(iterator == 5):
-		atlas.region.position.x = 640
-		atlas.region.position.y = 240
+	atlas.region.position.x = 400*iterator
 
 func _on_play_button_pressed():
 	
