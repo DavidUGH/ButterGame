@@ -1,8 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://dkpxsu5mqia5j"]
+[gd_scene load_steps=19 format=3 uid="uid://dkpxsu5mqia5j"]
 
-[ext_resource type="Texture2D" uid="uid://bjmc5aksumc2b" path="res://sprites/ui/menu.png" id="1_g20na"]
 [ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_x2u6e"]
 [ext_resource type="Texture2D" uid="uid://s3b1buy5j3oq" path="res://sprites/ui/playButton.png" id="2_6uifg"]
+[ext_resource type="Texture2D" uid="uid://0rtg1decjf6q" path="res://sprites/ui/animated_menu.png" id="3_n7fmm"]
 [ext_resource type="Texture2D" uid="uid://1ivl0g2822gj" path="res://sprites/ui/creditsButton.png" id="4_mch1r"]
 [ext_resource type="Texture2D" uid="uid://coxn4q21xbtsn" path="res://sprites/ui/exitButton.png" id="5_ut3y1"]
 [ext_resource type="EventAsset" uid="uid://bn73jubky80nr" path="res://addons/FMOD/editor/resources/events/{c6c438a9-66fb-4e79-81a1-5bf3b889ea50}.tres" id="10_8md70"]
@@ -10,6 +10,10 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3bg1p"]
 bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kxt21"]
+atlas = ExtResource("3_n7fmm")
+region = Rect2(0, 0, 320, 240)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c4vc7"]
 atlas = ExtResource("2_6uifg")
@@ -68,28 +72,10 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3bg1p")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -160.0
-offset_top = -120.0
-offset_right = 160.0
-offset_bottom = 120.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_g20na")
-
-[node name="ColorRect" type="ColorRect" parent="TextureRect"]
-z_index = -1
 layout_mode = 0
-offset_left = -40.0
-offset_top = -20.0
-offset_right = 360.0
-offset_bottom = 260.0
-color = Color(0.386719, 0.261719, 0.164063, 1)
+offset_right = 400.0
+offset_bottom = 300.0
+texture = SubResource("AtlasTexture_kxt21")
 
 [node name="PlayButton" type="TextureButton" parent="."]
 z_index = 3
