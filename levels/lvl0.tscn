@@ -54,7 +54,7 @@ event = ExtResource("2_by7eh")
 parameter_musicState = 1.0
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 300.0
+wait_time = 180.0
 autostart = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]

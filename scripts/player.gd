@@ -70,8 +70,8 @@ func _ready():
 	speed = 100
 	life = 100
 	stamina = 100
-	attack_speed = 0.2
-	damage = 3
+	attack_speed = 0.5
+	damage = 1
 	kick_damage = 2
 	kick_knockback = 180
 	knockback = 30
@@ -192,18 +192,21 @@ func _kick(delta):
 			_sprite.self_modulate = Color(1, 6.51, 2.96)
 	if Input.is_action_just_released("secondary_attack"):
 		print(hold_duration)
-		chargeup_instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_ALLOWFADEOUT)
 		FMODRuntime.play_one_shot(kick_sfx)
 		speed = BASE_SPEED
 		_charge_animation_player.stop()
 		if hold_duration <= 0.3:
 			_spawn_kick()
+			chargeup_instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_IMMEDIATE)
 		elif hold_duration <= 0.5:
 			_spawn_kick(250, 0.5, 1.4)
+			chargeup_instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_IMMEDIATE)
 		elif hold_duration < 0.8:
 			_spawn_kick(310, 0.6, 1.8)
+			chargeup_instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_IMMEDIATE)
 		elif hold_duration >= 0.8:
 			_charge_animation_player.stop()
+			chargeup_instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_ALLOWFADEOUT)
 			_special_kick()
 		hold_duration = 0
 		is_charging = false

@@ -29,6 +29,6 @@ func pick_up():
 		0:
 			return 1.0
 		1:
-			return 0.2
+			return 0.1
 		2:
 			return 10

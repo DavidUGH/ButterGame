@@ -21,7 +21,7 @@ var columnas = 32
 var tile_map : TileMap
 var GUI
 var _powerup_counter = 0
-var enemies_till_powerup = 2
+var enemies_till_powerup = 12
 
 
 func set_tileset(t):

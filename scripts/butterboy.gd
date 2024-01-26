@@ -2,7 +2,7 @@ extends Enemy
 
 func _ready():
 	speed = 50
-	life = 10
+	life = 20
 	damage = 10
 	_is_flashing = false
 	knockback_reduction = 50
