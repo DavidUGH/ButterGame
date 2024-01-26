@@ -1,0 +1,9 @@
+[gd_resource type="EventAsset" format=3 uid="uid://d4kl2rxt8nswp"]
+
+[resource]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/SFX/kick"
+guid = "{2bcb06d0-3c2e-4e31-be5c-0b1478dd16c5}"
+name = "kick"

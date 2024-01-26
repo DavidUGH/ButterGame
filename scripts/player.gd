@@ -226,14 +226,17 @@ func _special_kick():
 
 func _on_player_hitbox_area_entered(area):
 	var parent = area.get_parent()
-	if parent.name == "PowerUp":
+	if area.collision_layer == 256: # Si la collision layer tiene el bit 8 y solo el bit 8
 		FMODRuntime.play_one_shot(powerup_sfx)
 		match parent.stat_type:
 			parent.TYPE.Damage:
 				damage += parent.pick_up()
+				parent.queue_free()
 			parent.TYPE.AS:
 				attack_speed -= parent.pick_up()
+				parent.queue_free()
 			parent.TYPE.MS:
 				speed += parent.pick_up()
+				parent.queue_free()
 			_:
 				print("This shouldn't happen")

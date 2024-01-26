@@ -165,7 +165,7 @@ frame = 5
 offset = Vector2(2, 0)
 
 [node name="PlayerHitbox" type="Area2D" parent="."]
-collision_mask = 18
+collision_mask = 256
 
 [node name="PlayerHitboxShape" type="CollisionShape2D" parent="PlayerHitbox"]
 visible = false

@@ -1,0 +1,8 @@
+[gd_resource type="EventAsset" format=3 uid="uid://oc5d5v1dfk4s"]
+
+[resource]
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/SFX/chargeAttack"
+guid = "{8eb586fb-eab1-4f92-b43b-f195f5f39b1c}"
+name = "chargeAttack"
