@@ -43,7 +43,8 @@ func _move(destination = Vector2(0,0)):
 	velocity = direction * speed
 	if is_kicked or is_hurt:
 		direction = (player.position - position).normalized()
-		velocity = (direction * knockback_amount) * -1
+		var reduced_knockback_amount = knockback_amount * (1 - knockback_reduction / 100.0)
+		velocity = ((direction * reduced_knockback_amount) * -1)
 
 func _handle_animations():
 	match anim_state:
