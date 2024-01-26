@@ -1,18 +1,15 @@
 extends Enemy
 
 func _ready():
-	speed = 50
-	life = 10
+	speed = 60
+	life = 4
 	damage = 10
 	_is_flashing = false
-	knockback_reduction = 50
-	_sprite = $ButterboySprite
+	_sprite = $NapkinSprite
 	_hurtbox = $Hurtbox
-	lifeBar = $lifeBar
-	lifeBar.max_value = life
 	is_jumping = false
 	anim_state = STATE.moving
-
+	
 func _physics_process(delta):
 	if !is_jumping:
 		_move(destination)
@@ -34,8 +31,7 @@ func _on_hurtbox_area_entered(area):
 		"SpecialKickEffect":
 			_get_kicked()
 
-# no te preocupes por esto, copialo y ya
-func _on_butterboy_sprite_animation_finished():
+func _on_napkin_sprite_animation_finished():
 	match anim_state:
 		STATE.hurt:
 			anim_state = STATE.moving
@@ -53,4 +49,4 @@ func _on_butterboy_sprite_animation_finished():
 		STATE.stunned:
 			anim_state = STATE.moving
 			is_stunned = false
-			collision_mask = 0 #Can't crash against wall
+			collision_mask = 0 # Can't crash against wall

@@ -98,7 +98,9 @@ func spawn_passing_enemy_at(enemy_scene, initial_position, end_position):
 	# Agregar la nueva instancia a la lista de enemigos
 	enemies_list.append(nueva_instancia)
 
-func _on_died(position_at_death):
+func _on_died(who, position_at_death):
+	var idx = enemies_list.find(who)
+	enemies_list.pop_at(idx)
 	var tile = tile_map.local_to_map(position_at_death)
 	draw_square(tile)
 	enemy_death_count += 1
@@ -124,6 +126,15 @@ func check_tile(vector:Array[Vector2i], v:Vector2i):
 			butter_matrix[v.x][v.y] = 1
 			current_tiles = current_tiles+1
 			vector.append(Vector2i(v.x, v.y))
+		else:
+			pass
+
+func clean_tile_check(v:Vector2i):
+	if(v.x>=8&&v.y>=7 && v.x<=39&&v.y<=30):#10,7 29,22
+		if(butter_matrix[v.x][v.y] == 0):
+			butter_matrix[v.x][v.y] = 1
+			current_tiles = current_tiles+1
+			tile_map.set_cell(2, Vector2i(v.x, v.y))
 		else:
 			pass
 

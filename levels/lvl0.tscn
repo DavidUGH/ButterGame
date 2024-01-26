@@ -44,6 +44,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+visible = false
 polygon = PackedVector2Array(38, 26, 348, 25, 348, 274, 38, 275, 37, 52, 28, 42, 30, 284, 356, 283, 358, 14, 28, 16, 28, 49, 38, 51)
 
 [node name="MusicEmitter" type="StudioEventEmitter2D" parent="."]

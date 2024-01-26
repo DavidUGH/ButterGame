@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var hurt_sfx : EventAsset
 @export var die_sfx : EventAsset
 
-signal died(position_at_death)
+signal died(who, position_at_death)
 
 var speed: int
 var life: int
@@ -61,7 +61,7 @@ func _handle_animations():
 
 func _die():
 	FMODRuntime.play_one_shot(die_sfx)
-	died.emit(position)
+	died.emit(self, position)
 	queue_free()
 
 func _flash_white():
