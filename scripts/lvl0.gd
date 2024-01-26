@@ -89,15 +89,17 @@ func spawn_enemies_periodically():
 		spawn_flag = true
 
 func random_spawn_pattern():
-	var r = randi() % 5
+	var r = randi() % 6
 	match r:
 		0:
-			spawn_napkins_top_to_bottom()
+			spawn_pattern_top_to_bottom()
 		1:
-			spawn_napkins_top_to_bottom()
+			spawn_pattern_left_to_right()
 		2:
-			spawn_napkins_top_to_bottom()
+			spawn_pattern_right_to_left()
 		3:
+			spawn_pattern_bottom_to_top()
+		4:
 			spawn_napkins_top_to_bottom()
 		_:
 			spawn_followers_from_random_side()
