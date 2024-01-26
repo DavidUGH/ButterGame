@@ -38,7 +38,7 @@ func _ready():
 	screen_size = get_viewport().content_scale_size
 
 func _process(delta):
-	timeline(timer.wait_time)
+	timeline(timer.time_left)
 	spawn_enemies_periodically()
 	_screen_shake(delta)
 	_count_napkins()
@@ -61,22 +61,14 @@ func time_format(time):
 		return "0" + str(time)
 	return str(time)
 
-func timeline(time):
-	match time:
-		180: #time_counter = 4
-			queue.push_back(0)
-			queue.push_back(0)
-			queue.push_back(0)
-			queue.push_back(0)
-			queue.push_back(1)
-			queue.push_back(0)
-			queue.push_back(1)
-			queue.push_back(0)
-		160:
-			queue.push_back(0)
-			queue.push_back(0)
-		120:
-			pass
+func timeline(time : int):
+	#match time:
+	spawn_flag = true
+	if(spawn_flag):
+		if(Input.is_key_pressed(KEY_J)):
+			spawn_wave(0)
+		if(Input.is_key_pressed(KEY_K)):
+			spawn_wave(1)
 
 func spawn_enemies_periodically():
 	if spawn_flag:

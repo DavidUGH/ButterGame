@@ -37,8 +37,9 @@ func set_life(life):
 func setConsole(msg):
 	console_label.text = msg
 
-func setButterProgress(v):
+func setButterProgress(v:int):
 	butterBar.value = v
+	$progressLabel.text = str(v)+"%"
 
 func _on_texture_button_pressed():
 	showPauseMenu()
