@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bs7gr3h8tldn5"]
+[gd_scene load_steps=16 format=3 uid="uid://bs7gr3h8tldn5"]
 
 [ext_resource type="Script" path="res://scripts/GUI.gd" id="1_tudpf"]
 [ext_resource type="FontFile" uid="uid://lkrvfvmqjnlb" path="res://fonts/Daydream.ttf" id="2_s5xdx"]
@@ -37,19 +37,6 @@ region = Rect2(103, 0, 103, 18)
 [sub_resource type="AtlasTexture" id="AtlasTexture_0ko6b"]
 atlas = ExtResource("5_bpyd3")
 region = Rect2(208, 2, 99, 12)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_or5xs"]
-atlas = ExtResource("5_bpyd3")
-region = Rect2(43, 22, 59, 7)
-margin = Rect2(1, 1, 0, 0)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ivaxs"]
-atlas = ExtResource("5_bpyd3")
-region = Rect2(103, 21, 61, 11)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_avkbp"]
-atlas = ExtResource("5_bpyd3")
-region = Rect2(166, 22, 59, 7)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_45t83"]
 atlas = ExtResource("6_kdvfa")
@@ -96,6 +83,7 @@ texture_pressed = SubResource("AtlasTexture_udkkv")
 texture_hover = SubResource("AtlasTexture_2yi2w")
 
 [node name="progressLabel" type="Label" parent="."]
+layout_mode = 0
 offset_left = 18.0
 offset_top = 266.0
 offset_right = 85.0
@@ -132,18 +120,6 @@ texture_under = SubResource("AtlasTexture_vxo0w")
 texture_over = SubResource("AtlasTexture_3l1h4")
 texture_progress = SubResource("AtlasTexture_0ko6b")
 texture_progress_offset = Vector2(2, 2)
-
-[node name="StaminaBar" type="TextureProgressBar" parent="."]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 26.0
-offset_right = 70.0
-offset_bottom = 38.0
-value = 100.0
-texture_under = SubResource("AtlasTexture_or5xs")
-texture_over = SubResource("AtlasTexture_ivaxs")
-texture_progress = SubResource("AtlasTexture_avkbp")
-texture_progress_offset = Vector2(1, 1)
 
 [node name="ButterBar" type="TextureProgressBar" parent="."]
 layout_mode = 0
