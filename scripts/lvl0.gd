@@ -40,7 +40,7 @@ func _ready():
 	screen_size = get_viewport().content_scale_size
 
 func _process(delta):
-	timeline(timer.time_left)
+	_set_level()
 	spawn_enemies_periodically()
 	_screen_shake(delta)
 	_count_napkins()
