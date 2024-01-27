@@ -15,6 +15,8 @@ signal hurt
 
 enum WEAPON { knife }
 
+var labelPowerUp : Label
+
 var is_charging = false
 var life : int
 var stamina : int
@@ -54,10 +56,16 @@ var hold_duration = 0
 const BASE_SPEED = 100
 var hurt_animation_finished = true
 
+var timeInterval = 1.5
+var hasGetPowerUp = false
+var timeAccumulator = 0
+
+
 func _ready():
 	chargeup_instance = FMODRuntime.create_instance(chargeup_sfx)
 	
 	#Instantiating child nodes
+	labelPowerUp = $Label
 	_sprite = $PlayerAnimatedSprite
 	_shadow = $Sprite2D
 	_collision_box = $PlayerShape
@@ -84,6 +92,12 @@ func _ready():
 	special_kick_swing = load("res://special_kick_effect.tscn")
 
 func _process(delta):
+	if(hasGetPowerUp):
+		timeAccumulator = timeAccumulator+delta
+		if(timeAccumulator >= timeInterval):
+			labelPowerUp.visible = false
+			hasGetPowerUp = false
+			timeAccumulator = 0
 	_move()
 	if hurt_animation_finished:
 		_handle_animations()
@@ -252,12 +266,21 @@ func _on_player_hitbox_area_entered(area):
 		#FMODRuntime.play_one_shot(powerup_sfx)
 		match parent.stat_type:
 			parent.TYPE.Damage:
+				hasGetPowerUp = true
+				labelPowerUp.text = "DMG++"
+				labelPowerUp.visible = true
 				damage += parent.pick_up()
 				parent.queue_free()
 			parent.TYPE.AS:
+				hasGetPowerUp = true
+				labelPowerUp.text = "ATQ SPD++"
+				labelPowerUp.visible = true
 				attack_speed -= parent.pick_up()
 				parent.queue_free()
 			parent.TYPE.MS:
+				hasGetPowerUp = true
+				labelPowerUp.text = "SPD++"
+				labelPowerUp.visible = true
 				speed += parent.pick_up()
 				parent.queue_free()
 			_:

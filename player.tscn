@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b1dwvbncqlnrx" path="res://sprites/paltoman_indle_sprites.png" id="6_xaqec"]
 [ext_resource type="Texture2D" uid="uid://dpforv1d7dq73" path="res://sprites/paltoman_hit_sprites.png" id="7_87kuv"]
 [ext_resource type="Texture2D" uid="uid://dftuhtdbme61b" path="res://sprites/paltoman_run_sprites.png" id="7_hc7is"]
+[ext_resource type="FontFile" uid="uid://lkrvfvmqjnlb" path="res://fonts/Daydream.ttf" id="10_6a762"]
 [ext_resource type="Texture2D" uid="uid://y0atjiy3nwye" path="res://sprites/pointer.png" id="11_or3xl"]
 
 [sub_resource type="EventAsset" id="EventAsset_vojn3"]
@@ -228,6 +229,12 @@ _data = {
 "hurt": SubResource("Animation_8jkj3")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_lix4k"]
+font = ExtResource("10_6a762")
+font_size = 10
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 9
 collision_mask = 32
@@ -277,4 +284,14 @@ libraries = {
 }
 
 [connection signal="animation_finished" from="PlayerAnimatedSprite" to="." method="_on_player_animated_sprite_animation_finished"]
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -36.0
+offset_top = -38.0
+offset_right = 37.0
+offset_bottom = -16.0
+text = "DMG++"
+label_settings = SubResource("LabelSettings_lix4k")
+horizontal_alignment = 1
+vertical_alignment = 1
 [connection signal="area_entered" from="PlayerHitbox" to="." method="_on_player_hitbox_area_entered"]

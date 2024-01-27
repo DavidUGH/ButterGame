@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://duclsywflf2hb"]
+
+[ext_resource type="Script" path="res://scripts/Tuto.gd" id="1_32ao7"]
+[ext_resource type="Texture2D" uid="uid://dt7dhi5u2cdy6" path="res://sprites/scenario/tutora_screem.png" id="1_ywods"]
+[ext_resource type="Texture2D" uid="uid://dtsmpjotmaiv2" path="res://sprites/ui/buttons.png" id="2_ofcjb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukb27"]
+atlas = ExtResource("2_ofcjb")
+region = Rect2(0, 0, 82, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cgp20"]
+atlas = ExtResource("2_ofcjb")
+region = Rect2(164, 0, 82, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46upd"]
+atlas = ExtResource("2_ofcjb")
+region = Rect2(82, 0, 82, 32)
+
+[node name="Tuto" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_32ao7")
+
+[node name="fondo" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ywods")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+z_index = 4
+layout_mode = 0
+offset_left = 154.0
+offset_top = 258.0
+offset_right = 236.0
+offset_bottom = 290.0
+texture_normal = SubResource("AtlasTexture_ukb27")
+texture_pressed = SubResource("AtlasTexture_cgp20")
+texture_hover = SubResource("AtlasTexture_46upd")
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
