@@ -73,7 +73,7 @@ func _ready():
 	stamina = 100
 	attack_speed = 0.5
 	damage = 1
-	kick_damage = 2
+	kick_damage = 0
 	kick_knockback = 180
 	knockback = 30
 	weapon_kit = WEAPON.knife
@@ -192,7 +192,7 @@ func _kick(delta):
 				is_charging = true
 				chargeup_instance.start()
 			#speed = 0
-		if hold_duration >= 1:
+		if hold_duration >= 0.7:
 			_charge_animation_player.stop()
 			_sprite.self_modulate = Color(1, 6.51, 2.96)
 	if Input.is_action_just_released("secondary_attack"):
@@ -200,16 +200,16 @@ func _kick(delta):
 		FMODRuntime.play_one_shot(kick_sfx)
 		speed = BASE_SPEED
 		_charge_animation_player.stop()
-		if hold_duration <= 0.3:
+		if hold_duration <= 0.2:
 			_spawn_kick()
 			chargeup_instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_IMMEDIATE)
-		elif hold_duration <= 0.5:
-			_spawn_kick(250, 0.5, 1.4)
+		elif hold_duration <= 0.3:
+			_spawn_kick(330, 0.5, 1.4)
 			chargeup_instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_IMMEDIATE)
-		elif hold_duration < 0.8:
-			_spawn_kick(310, 0.6, 1.8)
+		elif hold_duration < 0.5:
+			_spawn_kick(400, 0.6, 1.8)
 			chargeup_instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_IMMEDIATE)
-		elif hold_duration >= 0.8:
+		elif hold_duration >= 0.7:
 			_charge_animation_player.stop()
 			chargeup_instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_ALLOWFADEOUT)
 			_special_kick()
@@ -217,7 +217,7 @@ func _kick(delta):
 		is_charging = false
 
 
-func _spawn_kick(new_knockback = 210, cooldown = 0.2, new_scale = 1):
+func _spawn_kick(new_knockback = 280, cooldown = 0.2, new_scale = 1):
 	var new_scale_v = Vector2(new_scale, new_scale)
 	var kick_swing_spawn = kick_swing.instantiate()
 	kick_knockback = new_knockback
@@ -235,7 +235,7 @@ func _spawn_kick(new_knockback = 210, cooldown = 0.2, new_scale = 1):
 func _special_kick():
 	special_kick.emit()
 	var kick_swing_spawn = special_kick_swing.instantiate()
-	kick_knockback = 400
+	kick_knockback = 450
 	add_child(kick_swing_spawn)
 	var x = _weapon_sprite.position.x
 	var y = _weapon_sprite.position.y

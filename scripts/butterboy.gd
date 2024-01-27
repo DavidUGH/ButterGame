@@ -5,7 +5,7 @@ func _ready():
 	life = 20
 	damage = 10
 	_is_flashing = false
-	knockback_reduction = 50
+	knockback_reduction = 20
 	_sprite = $ButterboySprite
 	_hurtbox = $Hurtbox
 	lifeBar = $lifeBar

@@ -9,31 +9,18 @@
 [ext_resource type="EventAsset" uid="uid://bn73jubky80nr" path="res://addons/FMOD/editor/resources/events/{c6c438a9-66fb-4e79-81a1-5bf3b889ea50}.tres" id="7_xgjba"]
 [ext_resource type="EventAsset" uid="uid://c8hqeknlrf5ri" path="res://addons/FMOD/editor/resources/events/{4d6ceebb-de21-43e1-ad3a-3aadf3779466}.tres" id="8_icmmg"]
 [ext_resource type="EventAsset" uid="uid://b84qu5s2xfas8" path="res://addons/FMOD/editor/resources/events/{d7027700-8c2f-42e2-afc3-b6067e6b1d05}.tres" id="9_12u4x"]
+[ext_resource type="EventAsset" uid="uid://oc5d5v1dfk4s" path="res://addons/FMOD/editor/resources/events/{8eb586fb-eab1-4f92-b43b-f195f5f39b1c}.tres" id="9_xd8gy"]
 [ext_resource type="EventAsset" uid="uid://djafn8e4yqdvn" path="res://addons/FMOD/editor/resources/events/{637b375b-7bf5-423d-996f-f562165430fc}.tres" id="9_xmerp"]
 [ext_resource type="EventAsset" uid="uid://blthxsjuwcatw" path="res://addons/FMOD/editor/resources/events/{08167721-a8c8-45ce-8b8c-4302979df2a7}.tres" id="10_06w6b"]
 [ext_resource type="EventAsset" uid="uid://cpoojfwou1hka" path="res://addons/FMOD/editor/resources/events/{ad049370-db7b-43b0-87b3-93f05ef9c65a}.tres" id="10_lpfoh"]
 [ext_resource type="EventAsset" uid="uid://ct3k52lnmd3m6" path="res://addons/FMOD/editor/resources/events/{ddc7b3d0-e2ef-4e1b-876c-dd6a6f4969f0}.tres" id="11_j1tlr"]
 [ext_resource type="ParameterAsset" uid="uid://pgowo0s4drm4" path="res://addons/FMOD/editor/resources/parameters/{9b41376c-f560-4dd0-9691-461069217d79}.tres" id="11_n718f"]
 [ext_resource type="EventAsset" uid="uid://ccqosuo5gvy6p" path="res://addons/FMOD/editor/resources/events/{728f4fe2-40f0-4fde-b144-d4198de83aa4}.tres" id="12_2mnd8"]
+[ext_resource type="EventAsset" uid="uid://d4kl2rxt8nswp" path="res://addons/FMOD/editor/resources/events/{2bcb06d0-3c2e-4e31-be5c-0b1478dd16c5}.tres" id="12_ofk8d"]
 [ext_resource type="ParameterAsset" uid="uid://bhlgwt3c1awo3" path="res://addons/FMOD/editor/resources/parameters/{79d50be0-5bef-4d61-96ee-bf9513dbc6f8}.tres" id="12_ryxqy"]
 [ext_resource type="EventAsset" uid="uid://cgxhljjj05s6j" path="res://addons/FMOD/editor/resources/events/{b619927b-5d3f-4f14-9dbe-8f7b5d2e4a44}.tres" id="13_xpet5"]
 [ext_resource type="EventAsset" uid="uid://c0xruqkfjb5db" path="res://addons/FMOD/editor/resources/events/{8c83ee47-8bfb-4441-9fdc-efe887bd3033}.tres" id="14_yaqb1"]
 [ext_resource type="ParameterAsset" uid="uid://2tb67f0clvkb" path="res://addons/FMOD/editor/resources/parameters/{9769553d-c1b8-4fd2-8382-bc4ee1c385b7}.tres" id="18_0wc6j"]
-
-[sub_resource type="EventAsset" id="EventAsset_vojn3"]
-min_distance = 1.0
-max_distance = 20.0
-path = "event:/SFX/chargeAttack"
-guid = "{8eb586fb-eab1-4f92-b43b-f195f5f39b1c}"
-name = "chargeAttack"
-
-[sub_resource type="EventAsset" id="EventAsset_uukky"]
-is_oneshot = true
-min_distance = 1.0
-max_distance = 20.0
-path = "event:/SFX/kick"
-guid = "{2bcb06d0-3c2e-4e31-be5c-0b1478dd16c5}"
-name = "kick"
 
 [resource]
 banks = {
@@ -44,12 +31,12 @@ banks = {
 }
 events = {
 "{08167721-a8c8-45ce-8b8c-4302979df2a7}": ExtResource("10_06w6b"),
-"{2bcb06d0-3c2e-4e31-be5c-0b1478dd16c5}": SubResource("EventAsset_uukky"),
+"{2bcb06d0-3c2e-4e31-be5c-0b1478dd16c5}": ExtResource("12_ofk8d"),
 "{4d6ceebb-de21-43e1-ad3a-3aadf3779466}": ExtResource("8_icmmg"),
 "{637b375b-7bf5-423d-996f-f562165430fc}": ExtResource("9_xmerp"),
 "{728f4fe2-40f0-4fde-b144-d4198de83aa4}": ExtResource("12_2mnd8"),
 "{8c83ee47-8bfb-4441-9fdc-efe887bd3033}": ExtResource("14_yaqb1"),
-"{8eb586fb-eab1-4f92-b43b-f195f5f39b1c}": SubResource("EventAsset_vojn3"),
+"{8eb586fb-eab1-4f92-b43b-f195f5f39b1c}": ExtResource("9_xd8gy"),
 "{ad049370-db7b-43b0-87b3-93f05ef9c65a}": ExtResource("10_lpfoh"),
 "{b619927b-5d3f-4f14-9dbe-8f7b5d2e4a44}": ExtResource("13_xpet5"),
 "{c6c438a9-66fb-4e79-81a1-5bf3b889ea50}": ExtResource("7_xgjba"),
@@ -114,7 +101,7 @@ event_tree = [{
 "item_type": 1,
 "node_name": "chargeAttack",
 "path": "event:/SFX/chargeAttack",
-"resource": SubResource("EventAsset_vojn3")
+"resource": ExtResource("9_xd8gy")
 }, {
 "children": [],
 "item_type": 1,
@@ -132,7 +119,7 @@ event_tree = [{
 "item_type": 1,
 "node_name": "kick",
 "path": "event:/SFX/kick",
-"resource": SubResource("EventAsset_uukky")
+"resource": ExtResource("12_ofk8d")
 }, {
 "children": [],
 "item_type": 1,

@@ -1,18 +1,18 @@
 [gd_resource type="ParameterAsset" load_steps=3 format=3 uid="uid://pgowo0s4drm4"]
 
-[sub_resource type="FMOD_STUDIO_PARAMETER_ID" id="FMOD_STUDIO_PARAMETER_ID_d7jw1"]
+[sub_resource type="FMOD_STUDIO_PARAMETER_ID" id="FMOD_STUDIO_PARAMETER_ID_si0gr"]
 data1 = 3604502955
 data2 = 734426052
 
-[sub_resource type="FMOD_STUDIO_PARAMETER_DESCRIPTION" id="FMOD_STUDIO_PARAMETER_DESCRIPTION_ea61e"]
-name = " Gëÿ"
-id = SubResource("FMOD_STUDIO_PARAMETER_ID_d7jw1")
+[sub_resource type="FMOD_STUDIO_PARAMETER_DESCRIPTION" id="FMOD_STUDIO_PARAMETER_DESCRIPTION_x8xdo"]
+name = "effectsVolume"
+id = SubResource("FMOD_STUDIO_PARAMETER_ID_si0gr")
 maximum = 1.0
 flags = 4
 guid = "{9b41376c-f560-4dd0-9691-461069217d79}"
 
 [resource]
-parameter_description = SubResource("FMOD_STUDIO_PARAMETER_DESCRIPTION_ea61e")
+parameter_description = SubResource("FMOD_STUDIO_PARAMETER_DESCRIPTION_x8xdo")
 path = "parameter:/effectsVolume"
 guid = "{9b41376c-f560-4dd0-9691-461069217d79}"
 name = "effectsVolume"
