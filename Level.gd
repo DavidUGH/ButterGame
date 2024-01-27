@@ -118,7 +118,7 @@ func draw_stain(type : Enemy.TYPE, tile):
 		Enemy.TYPE.SB:
 			draw_square(tile)
 		Enemy.TYPE.BB:
-			draw_square(tile)
+			draw_big_square(tile)
 		Enemy.TYPE.FB:
 			draw_big_rectangle(tile)
 
@@ -131,6 +131,26 @@ func draw_square(tile):
 			draw_square_2(tile)
 		_:
 			draw_square_0(tile)
+
+func draw_big_square(v : Vector2i):
+	var x = v.x
+	var y = v.y
+	var vector: Array[Vector2i]
+	check_tile(vector, Vector2i(x, y))
+	check_tile(vector, Vector2i(x+1, y))
+	check_tile(vector, Vector2i(x, y+1))
+	check_tile(vector, Vector2i(x-1, y))
+	check_tile(vector, Vector2i(x-2, y))
+	check_tile(vector, Vector2i(x, y-1))
+	check_tile(vector, Vector2i(x+1, y-1))
+	check_tile(vector, Vector2i(x+1, y+1))
+	check_tile(vector, Vector2i(x-1, y+1))
+	check_tile(vector, Vector2i(x-1, y-1))
+	check_tile(vector, Vector2i(x, y-2))
+	check_tile(vector, Vector2i(x-2, y))
+	check_tile(vector, Vector2i(x-2, y-1))
+	check_tile(vector, Vector2i(x+2, y))
+	tile_map.set_cells_terrain_connect(BUTTER_LAYER, vector, 0, 0, true)
 
 func draw_cross(v: Vector2i):
 	var x = v.x

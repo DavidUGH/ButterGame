@@ -18,7 +18,7 @@ var _shake_amplitude = 2
 var _original_camera_position = Vector2(0, 0)
 
 var queue = []
-var possible_waves = [0]
+var possible_waves = [-1]
 var napkin_flag = false
 
 var last_wave = 0
@@ -74,6 +74,8 @@ func _set_level():
 	var t = floor(timer.time_left)
 	#print(t)
 	if t == 160 and cursed_flag == 0: # 180 - 161
+		possible_waves.pop_front() # remove line skinny bitch
+		possible_waves.append(0)
 		possible_waves.append(1) # add random side butterboy
 		cursed_flag = 1
 	elif t == 140: # 160 - 131
@@ -91,7 +93,6 @@ func _set_level():
 		time_counter = 2.3
 	elif t == 40 and cursed_flag == 3:
 		cursed_flag = 4
-		possible_waves.pop_front() # remove skinny bitches
 	elif t == 20:
 		time_counter = 1.5
 
@@ -119,6 +120,8 @@ func spawn_enemies_periodically():
 
 func spawn_wave(next):
 	match next:
+		-1:
+			spawn_one_follower(skinnyBoy)
 		0: # followers at random
 			spawn_followers_from_random_side(skinnyBoy)
 		1: # passing random side
@@ -162,8 +165,6 @@ func spawn_lone_bottom_to_top(enemy):
 	var screen_height = screen_size.y
 	var half_screen =  screen_size.y / 2
 	spawn_passing_enemy_at(enemy, Vector2(half_screen, screen_height) , Vector2(half_screen, -20))
-
-
 
 func spawn_passing_enemies_cross(enemy, side):
 	match side:

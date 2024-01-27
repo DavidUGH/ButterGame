@@ -27,7 +27,7 @@ func set_type(type_stat):
 func pick_up():
 	match stat:
 		0:
-			return 1.0
+			return 2
 		1:
 			return 0.1
 		2:

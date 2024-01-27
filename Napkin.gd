@@ -1,7 +1,7 @@
 extends Enemy
 
 func _ready():
-	speed = 45
+	speed = 55
 	life = 4
 	damage = 10
 	knockback_reduction = -500
