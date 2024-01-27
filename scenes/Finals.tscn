@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dpgrdlq0lyetm"]
+[gd_scene load_steps=7 format=3 uid="uid://dpgrdlq0lyetm"]
 
 [ext_resource type="Texture2D" uid="uid://blprxfikjj1g0" path="res://sprites/ui/finals.png" id="1_0xyf0"]
 [ext_resource type="Script" path="res://scripts/Finals.gd" id="1_mhxoc"]
+[ext_resource type="EventAsset" uid="uid://bn73jubky80nr" path="res://addons/FMOD/editor/resources/events/{c6c438a9-66fb-4e79-81a1-5bf3b889ea50}.tres" id="3_4lsby"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s8id8"]
 atlas = ExtResource("1_0xyf0")
@@ -71,3 +72,9 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AtlasTexture_c34us")
+
+[node name="StudioEventEmitter2D" type="StudioEventEmitter2D" parent="."]
+play_event = 2
+stop_event = 3
+event = ExtResource("3_4lsby")
+parameter_musicState = 3.0

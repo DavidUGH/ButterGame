@@ -37,6 +37,8 @@ func _ready():
 	timer = $Timer
 	GUI = $GUI
 	player.gui = GUI
+	GUI.lifeBar.max_value = player.life
+	GUI.lifeBar.value = player.life
 	camera2d = $Camera2D
 	time_counter = 4.0
 	screen_size = get_viewport().content_scale_size
@@ -79,22 +81,22 @@ func _set_level():
 		possible_waves.append(1) # add random side butterboy
 		cursed_flag = 1
 	elif t == 140: # 160 - 131
-		time_counter = 3.5
+		time_counter = 3
 	elif t == 120 and cursed_flag == 1: # 130 - 120
 		cursed_flag = 2
 		possible_waves.append(2) # add cross waves v
 		possible_waves.append(3) # add cross waves h
 	elif t == 100:
-		time_counter = 3.0
+		time_counter = 2.5
 	elif t == 80 and cursed_flag == 2:
 		cursed_flag = 3
 		possible_waves.append(4) # add fatty
 	elif t == 60:
-		time_counter = 2.3
+		time_counter = 2
 	elif t == 40 and cursed_flag == 3:
 		cursed_flag = 4
 	elif t == 20:
-		time_counter = 1.5
+		time_counter = 1
 
 func time_format(time):
 	if time < 10:

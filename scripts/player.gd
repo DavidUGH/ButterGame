@@ -77,7 +77,7 @@ func _ready():
 	is_hurting = false
 	#Attribute initialization
 	speed = 100
-	life = 100
+	life = 150
 	stamina = 100
 	attack_speed = 0.5
 	damage = 1
