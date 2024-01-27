@@ -1,10 +1,10 @@
 extends Enemy
 
 func _ready():
-	speed = 60
-	life = 2
+	speed = 45
+	life = 4
 	damage = 10
-	knockback_reduction = -200
+	knockback_reduction = -500
 	_is_flashing = false
 	_sprite = $NapkinSprite
 	_hurtbox = $Hurtbox

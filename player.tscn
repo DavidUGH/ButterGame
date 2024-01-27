@@ -1,12 +1,14 @@
-[gd_scene load_steps=29 format=3 uid="uid://s6bmsorcy044"]
+[gd_scene load_steps=39 format=3 uid="uid://s6bmsorcy044"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ykyym"]
 [ext_resource type="EventAsset" uid="uid://b84qu5s2xfas8" path="res://addons/FMOD/editor/resources/events/{d7027700-8c2f-42e2-afc3-b6067e6b1d05}.tres" id="2_aiu6s"]
 [ext_resource type="EventAsset" uid="uid://ct3k52lnmd3m6" path="res://addons/FMOD/editor/resources/events/{ddc7b3d0-e2ef-4e1b-876c-dd6a6f4969f0}.tres" id="3_k33ay"]
 [ext_resource type="EventAsset" uid="uid://cgxhljjj05s6j" path="res://addons/FMOD/editor/resources/events/{b619927b-5d3f-4f14-9dbe-8f7b5d2e4a44}.tres" id="4_jkl8g"]
 [ext_resource type="EventAsset" uid="uid://c0xruqkfjb5db" path="res://addons/FMOD/editor/resources/events/{8c83ee47-8bfb-4441-9fdc-efe887bd3033}.tres" id="5_7aajq"]
+[ext_resource type="Texture2D" uid="uid://d2ffr20vh7big" path="res://sprites/paltoman_ded_sprites.png" id="6_8tl1j"]
 [ext_resource type="Texture2D" uid="uid://eyqn3ndyffad" path="res://sprites/shadow.png" id="6_qnwfy"]
 [ext_resource type="Texture2D" uid="uid://b1dwvbncqlnrx" path="res://sprites/paltoman_indle_sprites.png" id="6_xaqec"]
+[ext_resource type="Texture2D" uid="uid://dpforv1d7dq73" path="res://sprites/paltoman_hit_sprites.png" id="7_87kuv"]
 [ext_resource type="Texture2D" uid="uid://dftuhtdbme61b" path="res://sprites/paltoman_run_sprites.png" id="7_hc7is"]
 [ext_resource type="Texture2D" uid="uid://y0atjiy3nwye" path="res://sprites/pointer.png" id="11_or3xl"]
 
@@ -28,6 +30,38 @@ name = "kick"
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_olwyu"]
 radius = 3.99996
 height = 19.9998
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3nc4u"]
+atlas = ExtResource("6_8tl1j")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vrphd"]
+atlas = ExtResource("6_8tl1j")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dv1c4"]
+atlas = ExtResource("6_8tl1j")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3p0xx"]
+atlas = ExtResource("6_8tl1j")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2qfwe"]
+atlas = ExtResource("6_8tl1j")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axro4"]
+atlas = ExtResource("7_87kuv")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qu75c"]
+atlas = ExtResource("7_87kuv")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ir0p8"]
+atlas = ExtResource("7_87kuv")
+region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hoe7q"]
 atlas = ExtResource("6_xaqec")
@@ -71,6 +105,40 @@ region = Rect2(64, 32, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_w1i7l"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3nc4u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vrphd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dv1c4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3p0xx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2qfwe")
+}],
+"loop": false,
+"name": &"die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_axro4")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_qu75c")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_ir0p8")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hoe7q")
@@ -178,8 +246,7 @@ shape = SubResource("CapsuleShape2D_olwyu")
 
 [node name="PlayerAnimatedSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_w1i7l")
-animation = &"run"
-frame_progress = 0.164437
+animation = &"hurt"
 offset = Vector2(2, 0)
 
 [node name="PlayerHitbox" type="Area2D" parent="."]
@@ -209,4 +276,5 @@ libraries = {
 "": SubResource("AnimationLibrary_b5ro4")
 }
 
+[connection signal="animation_finished" from="PlayerAnimatedSprite" to="." method="_on_player_animated_sprite_animation_finished"]
 [connection signal="area_entered" from="PlayerHitbox" to="." method="_on_player_hitbox_area_entered"]

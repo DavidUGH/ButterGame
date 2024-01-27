@@ -21,6 +21,8 @@ var queue = []
 var possible_waves = [0]
 var napkin_flag = false
 
+var last_wave = 0
+
 func _ready():
 	for i in range(filas):
 		var fila: Array = []
@@ -40,7 +42,7 @@ func _ready():
 	screen_size = get_viewport().content_scale_size
 
 func _process(delta):
-	timeline(timer.time_left)
+	_set_level()
 	spawn_enemies_periodically()
 	_screen_shake(delta)
 	_count_napkins()
@@ -54,9 +56,9 @@ func spawn_napkin():
 	if !napkin_flag:
 		var set = []
 		if GUI.butterBar.value >= 70:
-			set = [7, 8] # singula vertical or horizontal
+			set = [9, 10] # multiple vertical or horizontal
 		elif GUI.butterBar.value >= 50:
-			set = [5, 6] # multiple vertical or horizontal
+			set = [5, 6, 7, 8] # singular vertical or horizontal
 		else:
 			return
 		var random_index = randi() % set.size()
@@ -100,7 +102,12 @@ func time_format(time):
 
 func spawn_enemies_periodically():
 	if spawn_flag:
-		var random_index = randi() % possible_waves.size()
+		var random_index = 0
+		if possible_waves.size() > 1:
+			random_index = randi() % possible_waves.size()
+			while possible_waves[random_index] == last_wave:
+				random_index = randi() % possible_waves.size()
+		last_wave = possible_waves[random_index]
 		queue.push_back(possible_waves[random_index])
 		print(possible_waves)
 		#print(queue)
@@ -126,9 +133,13 @@ func spawn_wave(next):
 			spawn_lone_top_to_bottom(napkin)
 		6: # passing napkin left to right
 			spawn_lone_left_to_right(napkin)
-		7: # 4 passing napkins top to bottom
+		7: # passing napkin left to right
+			spawn_lone_bottom_to_top(napkin)
+		8:
+			spawn_lone_right_to_left(napkin)
+		9: # 4 passing napkins top to bottom
 			spawn_passing_top_to_bottom(napkin)
-		8: # 4 passing napkins left to right
+		10: # 4 passing napkins left to right
 			spawn_passing_left_to_right(napkin)
 
 
@@ -141,6 +152,18 @@ func spawn_lone_top_to_bottom(enemy):
 	var screen_height = screen_size.y
 	var half_screen =  screen_size.y / 2
 	spawn_passing_enemy_at(enemy, Vector2(half_screen, 0), Vector2(half_screen, screen_height+20))
+
+func spawn_lone_right_to_left(enemy):
+	var screen_width = screen_size.x
+	var half_screen =  screen_size.x / 2
+	spawn_passing_enemy_at(enemy, Vector2(screen_width, half_screen), Vector2(-20, half_screen))
+
+func spawn_lone_bottom_to_top(enemy):
+	var screen_height = screen_size.y
+	var half_screen =  screen_size.y / 2
+	spawn_passing_enemy_at(enemy, Vector2(half_screen, screen_height) , Vector2(half_screen, -20))
+
+
 
 func spawn_passing_enemies_cross(enemy, side):
 	match side:

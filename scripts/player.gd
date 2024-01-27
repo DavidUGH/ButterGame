@@ -52,6 +52,7 @@ var _has_played_walk_sfx = false
 
 var hold_duration = 0
 const BASE_SPEED = 100
+var hurt_animation_finished = true
 
 func _ready():
 	chargeup_instance = FMODRuntime.create_instance(chargeup_sfx)
@@ -84,7 +85,8 @@ func _ready():
 
 func _process(delta):
 	_move()
-	_handle_animations()
+	if hurt_animation_finished:
+		_handle_animations()
 	move_and_slide()
 	_follow_mouse_with_weapon()
 	_attack()
@@ -103,6 +105,8 @@ func get_hurt(damage):
 		_hurt_animation_player.play("hurt")
 		FMODRuntime.play_one_shot(hurt_sfx)
 		is_hurting = true
+		hurt_animation_finished = false
+		_sprite.play("hurt")
 		_player_hitbox.set_deferred("monitorable", false)
 		await get_tree().create_timer(invis_frames).timeout
 		_hurt_animation_player.stop()
@@ -157,6 +161,7 @@ func _is_falling():
 	
 func _die():
 	print("I'm dead")
+	_sprite.play("die")
 	died.emit()
 
 func _follow_mouse_with_weapon():
@@ -260,3 +265,8 @@ func _on_player_hitbox_area_entered(area):
 			
 func _exit_tree():
 	chargeup_instance.release()
+
+
+func _on_player_animated_sprite_animation_finished():
+	if hurt_animation_finished == false:
+		hurt_animation_finished = true
