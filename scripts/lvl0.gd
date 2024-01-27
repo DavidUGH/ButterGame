@@ -234,10 +234,10 @@ func _on_area_2d_area_entered(area):
 	enemy.jump()
 
 func _on_timer_timeout():
-	_game_over()
+	_game_over(true)
 
 func _on_player_died():
-	_game_over()
+	_game_over(false)
 
 func _on_player_hurt():
 	_start_screen_shake(0.2, 2)

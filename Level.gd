@@ -30,14 +30,17 @@ func set_tileset(t):
 func set_player(p):
 	player = p
 
-func _game_over():
-	Finals.percentage = GUI.butterBar.value
+func _game_over(flag):
+	if(flag):
+		Finals.percentage = GUI.butterBar.value
+	else:
+		Finals.percentage = 0
 	get_tree().change_scene_to_file("res://scenes/Finals.tscn")
 
 func have_won():
 	if(current_tiles>=tiles_to_win):
 		GUI.setConsole("You Win!")
-		_game_over()
+		_game_over(true)
 
 func spawn_powerups():
 	if enemy_death_count % enemies_till_powerup == 0:
