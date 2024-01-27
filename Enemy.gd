@@ -6,6 +6,8 @@ extends CharacterBody2D
 
 signal died(who, position_at_death)
 
+enum TYPE {BB, SB, FB, N}
+var enemy_type : TYPE
 var speed: int
 var life: int
 var _sprite: AnimatedSprite2D
@@ -61,7 +63,7 @@ func _handle_animations():
 
 func _die():
 	FMODRuntime.play_one_shot(die_sfx)
-	died.emit(self, position)
+	died.emit(enemy_type, position)
 	queue_free()
 
 func _flash_white():
@@ -110,7 +112,7 @@ func _get_hurt():
 
 func _get_kicked():
 	knockback_amount = player.kick_knockback
-	if knockback_amount >= 400:
+	if knockback_amount >= 400 and enemy_type != TYPE.N:
 		collision_mask = 32 #Can crash against wall
 	_flash_white()
 	anim_state = STATE.kicked

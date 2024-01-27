@@ -1,9 +1,13 @@
 extends CharacterBody2D
 
+var chargeup_instance : EventInstance
+
 @export var walk_sfx : EventAsset
 @export var attack_sfx : EventAsset
 @export var hurt_sfx : EventAsset
 @export var powerup_sfx : EventAsset
+@export var chargeup_sfx : EventAsset
+@export var kick_sfx : EventAsset
 
 signal died
 signal special_kick
@@ -11,6 +15,9 @@ signal hurt
 
 enum WEAPON { knife }
 
+var labelPowerUp : Label
+
+var is_charging = false
 var life : int
 var stamina : int
 var speed: int
@@ -38,6 +45,7 @@ var kick_knockback : float
 var _weapon_sprite : Sprite2D
 var _collision_box: CollisionShape2D
 var _sprite: AnimatedSprite2D
+var _shadow: Sprite2D
 var _player_hitbox: Area2D
 var _player_hitbox_shape: CollisionShape2D
 var _hurt_animation_player: AnimationPlayer
@@ -46,10 +54,20 @@ var _has_played_walk_sfx = false
 
 var hold_duration = 0
 const BASE_SPEED = 100
+var hurt_animation_finished = true
+
+var timeInterval = 1.5
+var hasGetPowerUp = false
+var timeAccumulator = 0
+
 
 func _ready():
+	chargeup_instance = FMODRuntime.create_instance(chargeup_sfx)
+	
 	#Instantiating child nodes
+	labelPowerUp = $Label
 	_sprite = $PlayerAnimatedSprite
+	_shadow = $Sprite2D
 	_collision_box = $PlayerShape
 	_player_hitbox = $PlayerHitbox
 	_player_hitbox_shape = $PlayerHitbox/PlayerHitboxShape
@@ -61,9 +79,9 @@ func _ready():
 	speed = 100
 	life = 100
 	stamina = 100
-	attack_speed = 0.2
-	damage = 3
-	kick_damage = 2
+	attack_speed = 0.5
+	damage = 1
+	kick_damage = 0
 	kick_knockback = 180
 	knockback = 30
 	weapon_kit = WEAPON.knife
@@ -74,8 +92,15 @@ func _ready():
 	special_kick_swing = load("res://special_kick_effect.tscn")
 
 func _process(delta):
+	if(hasGetPowerUp):
+		timeAccumulator = timeAccumulator+delta
+		if(timeAccumulator >= timeInterval):
+			labelPowerUp.visible = false
+			hasGetPowerUp = false
+			timeAccumulator = 0
 	_move()
-	_handle_animations()
+	if hurt_animation_finished:
+		_handle_animations()
 	move_and_slide()
 	_follow_mouse_with_weapon()
 	_attack()
@@ -94,6 +119,8 @@ func get_hurt(damage):
 		_hurt_animation_player.play("hurt")
 		FMODRuntime.play_one_shot(hurt_sfx)
 		is_hurting = true
+		hurt_animation_finished = false
+		_sprite.play("hurt")
 		_player_hitbox.set_deferred("monitorable", false)
 		await get_tree().create_timer(invis_frames).timeout
 		_hurt_animation_player.stop()
@@ -121,10 +148,12 @@ func _move():
 	velocity = Vector2()
 	if Input.is_action_pressed("right"):
 		_sprite.scale.x = 1
+		_shadow.scale.x = _shadow.scale.x * -1
 		_play_walk_sfx()
 		velocity.x += 1
 	if Input.is_action_pressed("left"):
 		_sprite.scale.x = -1
+		_shadow.scale.x = _shadow.scale.x * -1
 		velocity.x -= 1
 		_play_walk_sfx()
 	if Input.is_action_pressed("down"):
@@ -146,6 +175,7 @@ func _is_falling():
 	
 func _die():
 	print("I'm dead")
+	_sprite.play("die")
 	died.emit()
 
 func _follow_mouse_with_weapon():
@@ -172,26 +202,36 @@ func _kick(delta):
 		hold_duration += delta
 		if hold_duration > 0.1:
 			_charge_animation_player.play("charging")
+			if !is_charging:
+				is_charging = true
+				chargeup_instance.start()
 			#speed = 0
-		if hold_duration >= 1:
+		if hold_duration >= 0.7:
 			_charge_animation_player.stop()
 			_sprite.self_modulate = Color(1, 6.51, 2.96)
 	if Input.is_action_just_released("secondary_attack"):
 		print(hold_duration)
+		FMODRuntime.play_one_shot(kick_sfx)
 		speed = BASE_SPEED
 		_charge_animation_player.stop()
-		if hold_duration <= 0.3:
+		if hold_duration <= 0.2:
 			_spawn_kick()
-		elif hold_duration <= 0.5:
-			_spawn_kick(250, 0.5, 1.4)
-		elif hold_duration < 0.8:
-			_spawn_kick(310, 0.6, 1.8)
-		elif hold_duration >= 0.8:
+			chargeup_instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_IMMEDIATE)
+		elif hold_duration <= 0.3:
+			_spawn_kick(330, 0.5, 1.4)
+			chargeup_instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_IMMEDIATE)
+		elif hold_duration < 0.5:
+			_spawn_kick(400, 0.6, 1.8)
+			chargeup_instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_IMMEDIATE)
+		elif hold_duration >= 0.7:
+			_charge_animation_player.stop()
+			chargeup_instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_ALLOWFADEOUT)
 			_special_kick()
 		hold_duration = 0
-		
+		is_charging = false
 
-func _spawn_kick(new_knockback = 210, cooldown = 0.2, new_scale = 1):
+
+func _spawn_kick(new_knockback = 280, cooldown = 0.2, new_scale = 1):
 	var new_scale_v = Vector2(new_scale, new_scale)
 	var kick_swing_spawn = kick_swing.instantiate()
 	kick_knockback = new_knockback
@@ -209,7 +249,7 @@ func _spawn_kick(new_knockback = 210, cooldown = 0.2, new_scale = 1):
 func _special_kick():
 	special_kick.emit()
 	var kick_swing_spawn = special_kick_swing.instantiate()
-	kick_knockback = 400
+	kick_knockback = 450
 	add_child(kick_swing_spawn)
 	var x = _weapon_sprite.position.x
 	var y = _weapon_sprite.position.y
@@ -222,14 +262,34 @@ func _special_kick():
 
 func _on_player_hitbox_area_entered(area):
 	var parent = area.get_parent()
-	if parent.name == "PowerUp":
-		FMODRuntime.play_one_shot(powerup_sfx)
+	if area.collision_layer == 256: # Si la collision layer tiene el bit 8 y solo el bit 8
+		#FMODRuntime.play_one_shot(powerup_sfx)
 		match parent.stat_type:
 			parent.TYPE.Damage:
+				hasGetPowerUp = true
+				labelPowerUp.text = "DMG++"
+				labelPowerUp.visible = true
 				damage += parent.pick_up()
+				parent.queue_free()
 			parent.TYPE.AS:
+				hasGetPowerUp = true
+				labelPowerUp.text = "ATQ SPD++"
+				labelPowerUp.visible = true
 				attack_speed -= parent.pick_up()
+				parent.queue_free()
 			parent.TYPE.MS:
+				hasGetPowerUp = true
+				labelPowerUp.text = "SPD++"
+				labelPowerUp.visible = true
 				speed += parent.pick_up()
+				parent.queue_free()
 			_:
 				print("This shouldn't happen")
+			
+func _exit_tree():
+	chargeup_instance.release()
+
+
+func _on_player_animated_sprite_animation_finished():
+	if hurt_animation_finished == false:
+		hurt_animation_finished = true

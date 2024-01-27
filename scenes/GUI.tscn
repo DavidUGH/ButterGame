@@ -1,51 +1,50 @@
-[gd_scene load_steps=17 format=3 uid="uid://bs7gr3h8tldn5"]
+[gd_scene load_steps=16 format=3 uid="uid://bs7gr3h8tldn5"]
 
 [ext_resource type="Script" path="res://scripts/GUI.gd" id="1_tudpf"]
 [ext_resource type="FontFile" uid="uid://lkrvfvmqjnlb" path="res://fonts/Daydream.ttf" id="2_s5xdx"]
 [ext_resource type="Texture2D" uid="uid://dn2c1kqmwi2gy" path="res://sprites/ui/PauseButton.png" id="3_tt2mp"]
-[ext_resource type="PackedScene" path="res://scenes/OptionsMenu.tscn" id="4_f2q2g"]
+[ext_resource type="PackedScene" uid="uid://bcmal22f68ct" path="res://scenes/OptionsMenu.tscn" id="4_f2q2g"]
 [ext_resource type="Texture2D" uid="uid://bkedgw5itby1q" path="res://sprites/ui/progressBar.png" id="5_bpyd3"]
 [ext_resource type="Texture2D" uid="uid://c55rrvvsshnqs" path="res://sprites/ui/butterProgress.png" id="6_kdvfa"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_teo1u"]
 font = ExtResource("2_s5xdx")
-font_size = 10
+font_color = Color(0.901961, 0.992157, 0.392157, 1)
+outline_size = 7
+outline_color = Color(0.0784314, 0.458824, 0.329412, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cbdi6"]
 atlas = ExtResource("3_tt2mp")
-region = Rect2(0, 0, 25, 25)
+region = Rect2(0, 0, 26, 26)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mmrua"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_udkkv"]
 atlas = ExtResource("3_tt2mp")
-region = Rect2(0, 50, 25, 25)
+region = Rect2(58, 0, 26, 26)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rbjhx"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yi2w"]
 atlas = ExtResource("3_tt2mp")
-region = Rect2(0, 25, 25, 25)
+region = Rect2(29, 0, 26, 26)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vxo0w"]
 atlas = ExtResource("5_bpyd3")
-region = Rect2(0, 0, 170, 46)
+region = Rect2(2, 2, 99, 12)
+margin = Rect2(2, 2, 0, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3l1h4"]
+atlas = ExtResource("5_bpyd3")
+region = Rect2(103, 0, 103, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0ko6b"]
 atlas = ExtResource("5_bpyd3")
-region = Rect2(56, 112, 110, 12)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_58xyd"]
-atlas = ExtResource("5_bpyd3")
-region = Rect2(0, 0, 170, 46)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6b7m4"]
-atlas = ExtResource("5_bpyd3")
-region = Rect2(56, 76, 70, 10)
+region = Rect2(208, 2, 99, 12)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_45t83"]
 atlas = ExtResource("6_kdvfa")
-region = Rect2(1, 4, 248, 44)
+region = Rect2(1, 3, 248, 30)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6j74n"]
 atlas = ExtResource("6_kdvfa")
-region = Rect2(7, 61, 234, 30)
+region = Rect2(7, 43, 234, 20)
 
 [node name="GUI" type="Control"]
 layout_mode = 3
@@ -80,8 +79,18 @@ offset_bottom = -10.0
 grow_horizontal = 0
 grow_vertical = 0
 texture_normal = SubResource("AtlasTexture_cbdi6")
-texture_pressed = SubResource("AtlasTexture_mmrua")
-texture_hover = SubResource("AtlasTexture_rbjhx")
+texture_pressed = SubResource("AtlasTexture_udkkv")
+texture_hover = SubResource("AtlasTexture_2yi2w")
+
+[node name="progressLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 266.0
+offset_right = 85.0
+offset_bottom = 293.0
+text = "0%"
+label_settings = SubResource("LabelSettings_teo1u")
+horizontal_alignment = 1
 
 [node name="ConsoleLabel" type="Label" parent="."]
 layout_mode = 0
@@ -102,30 +111,24 @@ offset_bottom = -320.0
 
 [node name="LifeBar" type="TextureProgressBar" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 8.0
+offset_top = 7.0
+offset_right = 112.0
+offset_bottom = 26.0
 value = 100.0
 texture_under = SubResource("AtlasTexture_vxo0w")
+texture_over = SubResource("AtlasTexture_3l1h4")
 texture_progress = SubResource("AtlasTexture_0ko6b")
-texture_progress_offset = Vector2(56, 12)
-
-[node name="StaminaBar" type="TextureProgressBar" parent="."]
-layout_mode = 0
-offset_right = 170.0
-offset_bottom = 46.0
-value = 100.0
-texture_under = SubResource("AtlasTexture_58xyd")
-texture_progress = SubResource("AtlasTexture_6b7m4")
-texture_progress_offset = Vector2(56, 26)
+texture_progress_offset = Vector2(2, 2)
 
 [node name="ButterBar" type="TextureProgressBar" parent="."]
 layout_mode = 0
-offset_left = 89.0
-offset_top = 248.0
-offset_right = 337.0
-offset_bottom = 292.0
+offset_left = 90.0
+offset_top = 264.0
+offset_right = 338.0
+offset_bottom = 296.0
 texture_under = SubResource("AtlasTexture_45t83")
 texture_progress = SubResource("AtlasTexture_6j74n")
-texture_progress_offset = Vector2(6, 7)
+texture_progress_offset = Vector2(6, 5)
 
 [connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

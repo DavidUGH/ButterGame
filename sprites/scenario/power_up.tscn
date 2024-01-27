@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://chki5odbg45dx"]
+[gd_scene load_steps=7 format=3 uid="uid://crohkr138uhrm"]
 
 [ext_resource type="Texture2D" uid="uid://dbac1ubtik0mv" path="res://sprites/powerup.png" id="1_ceic2"]
 [ext_resource type="Script" path="res://scripts/power_up.gd" id="2_yrdb3"]
@@ -46,8 +46,9 @@ texture = ExtResource("1_ceic2")
 randomness = 0.55
 
 [node name="gainbox" type="Area2D" parent="."]
-collision_layer = 16
+collision_layer = 256
 collision_mask = 0
+input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="gainbox"]
 shape = SubResource("CircleShape2D_7e0dj")

@@ -1,14 +1,17 @@
 extends Enemy
 
 func _ready():
-	speed = 60
+	speed = 55
 	life = 4
 	damage = 10
+	knockback_reduction = -500
 	_is_flashing = false
 	_sprite = $NapkinSprite
 	_hurtbox = $Hurtbox
+	lifeBar = $lifeBar
 	is_jumping = false
 	anim_state = STATE.moving
+	enemy_type = TYPE.N
 	
 func _physics_process(delta):
 	if !is_jumping:

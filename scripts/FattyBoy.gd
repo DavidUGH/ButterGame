@@ -2,7 +2,7 @@ extends Enemy
 
 func _ready():
 	speed = 35
-	life = 15
+	life = 25
 	damage = 25
 	_is_flashing = false
 	knockback_reduction = 85
@@ -12,6 +12,7 @@ func _ready():
 	lifeBar.max_value = life
 	is_jumping = false
 	anim_state = STATE.moving
+	enemy_type = TYPE.FB
 	
 func _physics_process(delta):
 	if !is_jumping:

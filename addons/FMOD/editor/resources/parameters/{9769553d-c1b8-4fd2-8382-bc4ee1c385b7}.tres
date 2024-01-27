@@ -1,18 +1,18 @@
 [gd_resource type="ParameterAsset" load_steps=3 format=3 uid="uid://2tb67f0clvkb"]
 
-[sub_resource type="FMOD_STUDIO_PARAMETER_ID" id="FMOD_STUDIO_PARAMETER_ID_4h6ua"]
+[sub_resource type="FMOD_STUDIO_PARAMETER_ID" id="FMOD_STUDIO_PARAMETER_ID_g7en8"]
 data1 = 497932876
 data2 = 71823915
 
-[sub_resource type="FMOD_STUDIO_PARAMETER_DESCRIPTION" id="FMOD_STUDIO_PARAMETER_DESCRIPTION_1rduq"]
+[sub_resource type="FMOD_STUDIO_PARAMETER_DESCRIPTION" id="FMOD_STUDIO_PARAMETER_DESCRIPTION_w0i22"]
 name = "musicPause"
-id = SubResource("FMOD_STUDIO_PARAMETER_ID_4h6ua")
+id = SubResource("FMOD_STUDIO_PARAMETER_ID_g7en8")
 maximum = 1.0
 flags = 12
 guid = "{9769553d-c1b8-4fd2-8382-bc4ee1c385b7}"
 
 [resource]
-parameter_description = SubResource("FMOD_STUDIO_PARAMETER_DESCRIPTION_1rduq")
+parameter_description = SubResource("FMOD_STUDIO_PARAMETER_DESCRIPTION_w0i22")
 path = "parameter:/musicPause"
 guid = "{9769553d-c1b8-4fd2-8382-bc4ee1c385b7}"
 name = "musicPause"

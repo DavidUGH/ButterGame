@@ -2,7 +2,7 @@ extends Sprite2D
 
 enum TYPE {Damage, AS, MS}
 var stat_type : TYPE
-var stat = 0.0
+var stat = 0
 
 func set_type(type_stat):
 	stat = type_stat
@@ -25,11 +25,10 @@ func set_type(type_stat):
 			print("This shouldn't happen")
 
 func pick_up():
-	queue_free()
 	match stat:
 		0:
-			return 1.0
+			return 2
 		1:
-			return 0.2
+			return 0.1
 		2:
-			return 10
+			return 20
